@@ -1,0 +1,63 @@
+<svelte:head>
+  <title>Admin | Home Control</title>
+</svelte:head>
+
+<div class="form-group">
+  <label for="query">DB query (single SQL statement only)</label>
+  <textarea
+    bind:value="query"
+    id="query"
+    class="textarea w100 mono"
+    rows="10"
+  />
+</div>
+
+{#if msg}
+  <div class="alert alert-error">
+    <strong>ERROR:</strong>{' '}{msg}
+  </div>
+{/if}
+
+<div class="form-group">
+  <button class="button" type="button" on:click="handleQuery()">
+    Run DB Query
+  </button>
+
+  <button class="button button-clear button-reset red3" type="button" on:click="handleReset()">
+    Reset DB
+  </button>
+</div>
+
+<script>
+  export default {
+    data: () => ({
+      query: 'SELECT rowid, * FROM devices;',
+      msg: '',
+    }),
+    methods: {
+      handleQuery() {
+        const { query } = this.get();
+
+        try {
+          this.store.dbQuery(query);
+        } catch (err) {
+          // FIXME: It never gets to here
+          this.set({ msg: err.message });
+        }
+      },
+
+      handleReset() {
+        /* eslint-disable-next-line */
+        if (confirm('Reset will drop all tables and load fresh initial data. This cannot be undone. Continue?')) {
+          this.store.dbReset();
+        }
+      },
+    },
+  };
+</script>
+
+<style type="text/postcss">
+  .button-reset {
+    float: right;
+  }
+</style>

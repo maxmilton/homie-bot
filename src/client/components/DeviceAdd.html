@@ -1,0 +1,51 @@
+<form class="card pa3 mv3" on:submit="handleSubmit(event)">
+  <h3 class="mt0 mb2">Add new device</h3>
+
+  <div class="form-group">
+    <label class="label" for="name">Name</label>
+    <input bind:value="name" id="name" class="input" type="text">
+  </div>
+
+  <div class="form-group">
+    <label class="label" for="type">Type</label>
+    <!-- TODO: Make the device types come from the backend -->
+    <MinnaSelect
+      bind:value="type"
+      id="type"
+      items="{[{ id: '1', text: 'YeeLight Colour' }]}"
+      filterable="{false}"
+    />
+  </div>
+
+  <div class="form-group">
+    <label class="label" for="ip">IP Address</label>
+    <input bind:value="ip" id="ip" class="input" type="text">
+  </div>
+
+  <button class="button" type="submit">Add Device</button>
+  <button class="button button-clear" type="button" on:click="fire('close')">Cancel</button>
+</form>
+
+<script>
+  import MinnaSelect from '@minna-ui/select';
+
+  export default {
+    components: {
+      MinnaSelect,
+    },
+    data: () => ({
+      ip: '192.168.0.100',
+      name: 'My Light',
+      type: '1',
+    }),
+    methods: {
+      handleSubmit(event) {
+        event.preventDefault();
+
+        const data = this.get();
+        this.store.devicePut(data);
+        this.fire('close');
+      },
+    },
+  };
+</script>

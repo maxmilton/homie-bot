@@ -1,0 +1,7 @@
+*.lerna_backup
+*.log
+/test/coverage/
+dist/
+node_modules/
+package-lock.json*
+.stylelintcache

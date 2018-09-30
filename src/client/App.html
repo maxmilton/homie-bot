@@ -1,0 +1,38 @@
+<Nav/>
+
+<main class="con">
+  <svelte:component this="{route}"/>
+</main>
+
+<footer class="footer tc">
+  © <a href="https://maxmilton.com" class="inherit">Max Milton</a>
+</footer>
+
+<script>
+  import navaid from 'navaid';
+  import Nav from './components/Nav.html';
+  import Home from './routes/home.html';
+  import Admin from './routes/admin.html';
+  import Error from './routes/error.html';
+  // const Home = import('./routes/home.html');
+  // const Admin = import('./routes/admin.html');
+  // const Error = import('./routes/error.html');
+
+  export default {
+    data: () => ({
+      route: Home,
+    }),
+    components: {
+      Nav,
+    },
+    oncreate() {
+      // set up routing
+      const router = navaid('/', () => { this.set({ route: Error }); });
+
+      router
+        .on('/', () => { this.set({ route: Home }); })
+        .on('/admin', () => { this.set({ route: Admin }); })
+        .listen();
+    },
+  };
+</script>

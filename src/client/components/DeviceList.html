@@ -1,0 +1,75 @@
+<button
+  class="button"
+  type="button"
+  on:click="set({ showAddDevice: !showAddDevice})"
+>
+  ➕ New Device
+</button>
+
+<button
+  class="button"
+  type="button"
+  on:click="$deviceGet()"
+>
+  🔁 Refresh
+</button>
+
+{#if showAddDevice}
+  <DeviceAdd on:close="set({ showAddDevice: false })" />
+{/if}
+
+<div class="dg grid ns-x2 mt4">
+  {#each $devices as device}
+    <div class="card card-hover card-has-button card-device">
+      <div class="card-body">
+        <MinnaSwitch
+          bind:value="device.state.on"
+          on:change="handleSwitch(event, device)"
+        />
+
+        <h3 class="mv1">{device.name}</h3>
+
+        <div class="muted">{device.ip}</div>
+      </div>
+      <a href="/device/{device.rowid}" class="card-button">
+        Edit
+      </a>
+    </div>
+  {:else}
+    <p class="w2 lead">😢 You have no registered devices.</p>
+  {/each}
+</div>
+
+<script>
+  import MinnaSwitch from '@minna-ui/switch';
+  import DeviceAdd from './DeviceAdd.html';
+
+  export default {
+    components: {
+      DeviceAdd,
+      MinnaSwitch,
+    },
+    data: () => ({
+      showAddDevice: false,
+    }),
+    oncreate() {
+      this.store.deviceGet();
+    },
+    methods: {
+      // TODO: Put this into the store once it's used somewhere else
+      handleSwitch(event, device) {
+        const data = Object.assign({}, device);
+        data.state.on = event;
+        this.store.devicePut(data);
+      },
+    },
+  };
+</script>
+
+<style type="text/postcss">
+  /* @import "import.css"; */
+
+  :global(.card-device) .switch {
+    float: right;
+  }
+</style>

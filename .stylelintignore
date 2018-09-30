@@ -1,0 +1,4 @@
+/utils/jest-config/fixtures/styles-bad-syntax.css
+/test/coverage/
+dist/
+node_modules/

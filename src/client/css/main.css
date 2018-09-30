@@ -1,0 +1,71 @@
+@import "import.css";
+@import "@minna-ui/css/src";
+
+body {
+  text-rendering: optimizeLegibility;
+}
+
+.icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+/* Buttons */
+
+.button,
+.card-button {
+  font-weight: $text-weight-heavy;
+  text-transform: uppercase;
+}
+
+.button + .button {
+  margin-left: 1rem;
+}
+
+.button-dark,
+.button-main,
+.button-action {
+  color: $white;
+}
+
+.button-dark {
+  background-color: $dark-gray3;
+
+  &:hover,
+  &:focus {
+    background-color: $dark-gray1;
+  }
+
+  &:active {
+    background-color: $gray1;
+  }
+}
+
+.button-main {
+  background-color: $intent-primary;
+
+  &:hover,
+  &:focus {
+    background-color: $blue2;
+  }
+
+  &:active {
+    background-color: $blue1;
+  }
+}
+
+.button-action {
+  background-color: $intent-success;
+
+  &:hover,
+  &:focus {
+    background-color: $green2;
+  }
+
+  &:active {
+    background-color: $green1;
+  }
+}
