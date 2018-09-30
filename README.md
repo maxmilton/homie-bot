@@ -3,6 +3,7 @@
 [![Build status](https://img.shields.io/circleci/project/github/MaxMilton/home-control.svg)](https://circleci.com/gh/MaxMilton/home-control)
 [![Coverage status](https://img.shields.io/codecov/c/github/MaxMilton/home-control.svg)](https://codecov.io/gh/MaxMilton/home-control)
 [![Licence](https://img.shields.io/github/license/MaxMilton/home-control.svg)](https://github.com/MaxMilton/home-control/blob/master/LICENCE)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 # Home Control
 
