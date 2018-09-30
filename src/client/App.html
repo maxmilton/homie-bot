@@ -12,11 +12,9 @@
   import navaid from 'navaid';
   import Nav from './components/Nav.html';
   import Home from './routes/home.html';
+  import Device from './routes/device.html';
   import Admin from './routes/admin.html';
   import Error from './routes/error.html';
-  // const Home = import('./routes/home.html');
-  // const Admin = import('./routes/admin.html');
-  // const Error = import('./routes/error.html');
 
   export default {
     data: () => ({
@@ -31,6 +29,7 @@
 
       router
         .on('/', () => { this.set({ route: Home }); })
+        .on('/device/:id', (params) => { console.log('@@ NAV PARAMS', params); this.set({ route: Device }); })
         .on('/admin', () => { this.set({ route: Admin }); })
         .listen();
     },

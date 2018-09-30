@@ -5,6 +5,8 @@ import { parse, log } from './middleware.js';
 import * as routes from './routes.js';
 import db from './db.js';
 
+import * as yeelight from './plugins/yeelight.js';
+
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 
@@ -31,6 +33,13 @@ polka({ onNoMatch })
   .delete('/api/device/:id', routes.deleteDevice)
   .post('/api/query', routes.postQuery)
   .get('/api/reset', routes.getDbReset)
+
+  .get('/api/toggle', yeelight.toggle)
+  .get('/api/command', yeelight.command)
+  .get('/api/red', yeelight.red)
+  .get('/api/blue', yeelight.blue)
+  .get('/api/dim', yeelight.dim)
+  .get('/api/bright', yeelight.bright)
 
   // start server
   .listen(port, (err) => {

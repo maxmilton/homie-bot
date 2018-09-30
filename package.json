@@ -23,7 +23,8 @@
     "colorette": "1.0.5",
     "navaid": "1.0.0",
     "polka": "0.5.1",
-    "sirv": "0.2.2"
+    "sirv": "0.2.2",
+    "yeelight-awesome": "1.0.7"
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.7.3",
