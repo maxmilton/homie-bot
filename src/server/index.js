@@ -1,11 +1,9 @@
 import sirv from 'sirv';
 import polka from 'polka';
 import * as colors from 'colorette';
-import { parse, log } from './middleware.js';
+import { log, parse } from './middleware.js';
 import * as routes from './routes.js';
 import db from './db.js';
-
-import * as yeelight from './plugins/yeelight.js';
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
@@ -28,18 +26,13 @@ polka({ onNoMatch })
   .use(log, serve, parse)
 
   // set up routes
+  .all('/api/command', routes.command)
+  .get('/api/discover', routes.discover)
   .get('/api/device/:id?', routes.getDevice)
   .put('/api/device/:id?', routes.putDevice)
   .delete('/api/device/:id', routes.deleteDevice)
   .post('/api/query', routes.postQuery)
-  .get('/api/reset', routes.getDbReset)
-
-  .get('/api/toggle', yeelight.toggle)
-  .get('/api/command', yeelight.command)
-  .get('/api/red', yeelight.red)
-  .get('/api/blue', yeelight.blue)
-  .get('/api/dim', yeelight.dim)
-  .get('/api/bright', yeelight.bright)
+  .get('/api/reset', routes.getReset)
 
   // start server
   .listen(port, (err) => {

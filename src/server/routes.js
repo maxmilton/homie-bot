@@ -1,4 +1,15 @@
 import * as dbMethods from './db.js';
+import * as yeelight from './plugins/yeelight.js';
+
+/**
+ * Run a command against a device.
+ */
+export function command(req, res) {}
+
+/**
+ * Find devices on the local network.
+ */
+export function discover(req, res) {}
 
 /**
  * Get a device or a list of all devices.
@@ -44,7 +55,7 @@ export function postQuery(req, res) {
 /**
  * Reset the database.
  */
-export function getDbReset(req, res) {
+export function getReset(req, res) {
   dbMethods.reset();
   res.end('OK');
 }
