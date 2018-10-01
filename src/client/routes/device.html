@@ -6,6 +6,7 @@
   <button class="button" type="button" on:click="toggle()">TOGGLE</button>
   <button class="button" type="button" on:click="brightness()">SET BRIGHTNESS</button>
   <button class="button" type="button" on:click="colour()">SET COLOUR</button>
+  <button class="button" type="button" on:click="getDeviceInfo()">DEVICE INFO</button>
 </div>
 <div class="form-group">
   <button class="button red3" type="button" on:click="red()">RED</button>
@@ -46,16 +47,16 @@
     let hex = color[0] === '#' ? color.slice(1) : color;
     let c;
 
-    // // expand the short hex by doubling each character, fc0 -> ffcc00
-    // if (hex.length !== 6) {
-    //   hex = ((() => {
-    //     const result = [];
-    //     for (c of Array.from(hex)) { // eslint-disable-line no-restricted-syntax
-    //       result.push(`${c}${c}`);
-    //     }
-    //     return result;
-    //   })()).join('');
-    // }
+    // expand the short hex by doubling each character, fc0 -> ffcc00
+    if (hex.length !== 6) {
+      hex = ((() => {
+        const result = [];
+        for (c of Array.from(hex)) { // eslint-disable-line no-restricted-syntax
+          result.push(`${c}${c}`);
+        }
+        return result;
+      })()).join('');
+    }
     const colorStr = hex.match(/#?(.{2})(.{2})(.{2})/).slice(1);
     const rgb = colorStr.map(col => parseInt(col, 16));
     rgb.push(1);
@@ -105,15 +106,23 @@
       colour: '#ff0000',
     }),
     methods: {
+      async getDeviceInfo() {
+        const res = await fetch('/api/device/info');
+        if (!res.ok) throw new Error(res.statusText);
+        console.info('@@ DEVICE INFO', await res.json());
+      },
+
       async toggle() {
         const res = await fetch('/api/command?action=toggle');
         if (!res.ok) throw new Error(res.statusText);
       },
+
       async brightness() {
         const { brightness } = this.get();
         const res = await fetch(`/api/command?action=brightness&value=${brightness}`);
         if (!res.ok) throw new Error(res.statusText);
       },
+
       async colour() {
         const { colour } = this.get();
         const rgb = hexToRgb(colour);
@@ -121,18 +130,22 @@
         const res = await fetch(`/api/command?action=color&hue=${hue}&saturation=${saturation}`);
         if (!res.ok) throw new Error(res.statusText);
       },
+
       async red() {
         const res = await fetch('/api/command?action=color&hue=0');
         if (!res.ok) throw new Error(res.statusText);
       },
+
       async green() {
         const res = await fetch('/api/command?action=color&hue=120');
         if (!res.ok) throw new Error(res.statusText);
       },
+
       async blue() {
         const res = await fetch('/api/command?action=color&hue=240');
         if (!res.ok) throw new Error(res.statusText);
       },
+
       async white() {
         const res = await fetch('/api/command?action=color&hue=0&saturation=0');
         if (!res.ok) throw new Error(res.statusText);
