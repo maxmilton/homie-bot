@@ -28,6 +28,8 @@ polka({ onNoMatch })
   // set up routes
   .all('/api/command', routes.command)
   .get('/api/discover', routes.discover)
+  // .get('/api/device/info/:id', routes.getDeviceInfo) // TODO: Use this form where the id is mandatory
+  .get('/api/device/info/:id?', routes.getDeviceInfo)
   .get('/api/device/:id?', routes.getDevice)
   .put('/api/device/:id?', routes.putDevice)
   .delete('/api/device/:id', routes.deleteDevice)
@@ -35,7 +37,7 @@ polka({ onNoMatch })
   .get('/api/reset', routes.getReset)
 
   // start server
-  .listen(port, (err) => {
+  .listen(port, err => {
     if (err) console.error('Error', err);
     console.log(`Server listening on port ${port}`);
   });

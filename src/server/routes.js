@@ -41,6 +41,15 @@ export function discover(req, res) {
 }
 
 /**
+ * Get info directly from a device.
+ */
+export async function getDeviceInfo(req, res) {
+  const result = await yeelight.getInfo();
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(result));
+}
+
+/**
  * Get a device or a list of all devices.
  */
 export function getDevice(req, res) {

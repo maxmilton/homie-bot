@@ -44,6 +44,14 @@ export async function oneShotCommand(cb) {
 }
 
 /**
+ * Get device info.
+ * @returns {object}
+ */
+export function getInfo() {
+  return device;
+}
+
+/**
  * Toggle the device on or off.
  */
 export function toggle() {
