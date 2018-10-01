@@ -1,4 +1,8 @@
+// https://github.com/samuraitruong/yeelight/blob/master/src/yeelight.ts
+
 import yl from 'yeelight-awesome';
+
+const TRANSITION_SPEED = 1000;
 
 function getDevice() {
   return new Promise((resolve) => {
@@ -18,7 +22,11 @@ function getDevice() {
 
 const device = getDevice();
 
-export async function toggle(req, res) {
+/**
+ * Run a one-shot command on a device; connect, run a command, then disconnect.
+ * @param {Function} cb Callback function to run on the device.
+ */
+export async function oneShotCommand(cb) {
   const light = await device;
 
   const yeelight = new yl.Yeelight({
@@ -27,121 +35,52 @@ export async function toggle(req, res) {
   });
 
   yeelight.on('connected', () => {
+    yeelight.on('commandSuccess', yeelight.disconnect);
+
+    cb(yeelight);
+  });
+
+  yeelight.connect();
+}
+
+/**
+ * Toggle the device on or off.
+ */
+export function toggle() {
+  oneShotCommand((yeelight) => {
     yeelight.toggle();
-
-    yeelight.on('commandSuccess', () => {
-      yeelight.disconnect();
-      res.end();
-    });
   });
-
-  yeelight.connect();
 }
 
-export async function command(req, res) {
-  const light = await device;
-  console.log('## LIGHT', light);
+/**
+ * Set the device brightness.
+ * @param {number} value Brightness value from 1 to 100.
+ * @param {number=} speed Time in ms for transition speed,
+ */
+export function brightness(value, speed = TRANSITION_SPEED) {
+  // FIXME: This is not working
+  oneShotCommand((yeelight) => {
+    // console.log('## DEVICE', device);
+    // console.log('## BRIGHTNESS', value, 'smooth', speed);
 
-  const yeelight = new yl.Yeelight({
-    lightIp: light.host,
-    lightPort: light.port,
+    // yeelight.on('set_bright', yeelight.disconnect);
+    yeelight.setBright(value, 'smooth', speed);
   });
-
-  yeelight.on('connected', () => {
-    yeelight.startColorFlow([
-      new yl.FlowState(2000, 2, 2700, 100),
-      new yl.FlowState(2000, 1, 255, 50),
-      new yl.FlowState(2000, 7, 1500, 30),
-      new yl.FlowState(2000, 2, 5000, 45),
-      new yl.FlowState(2000, 2, 3000, 25),
-    ], yl.StartFlowAction.LED_STAY);
-
-    yeelight.on('commandSuccess', () => {
-      yeelight.disconnect();
-      res.end();
-    });
-  });
-
-  yeelight.connect();
 }
 
-export async function red(req, res) {
-  const light = await device;
+/**
+ * Set the device hue colour.
+ * @param {number} hue Colour value from 0 to 359.
+ * @param {number=} saturation Saturation value from 0 to 100.
+ * @param {number=} speed Time in ms for transition speed,
+ */
+export function color(hue, saturation = 100, speed = TRANSITION_SPEED) {
+  // FIXME: This is not working
+  oneShotCommand((yeelight) => {
+    // console.log('## DEVICE', device);
+    // console.log('## COLOR', hue, saturation, 'smooth', speed);
 
-  const yeelight = new yl.Yeelight({
-    lightIp: light.host,
-    lightPort: light.port,
+    // yeelight.on('set_hsv', yeelight.disconnect);
+    yeelight.setHSV(hue, saturation, 'smooth', speed);
   });
-
-  yeelight.on('connected', () => {
-    // yeelight.setRGB(new yl.Color(255, 0, 0), 'smooth', 1000);
-    yeelight.setHSV(0, 100, 'smooth', 1000);
-
-    yeelight.on('commandSuccess', () => {
-      yeelight.disconnect();
-      res.end();
-    });
-  });
-
-  yeelight.connect();
-}
-
-export async function blue(req, res) {
-  const light = await device;
-
-  const yeelight = new yl.Yeelight({
-    lightIp: light.host,
-    lightPort: light.port,
-  });
-
-  yeelight.on('connected', () => {
-    yeelight.setRGB(new yl.Color(0, 0, 255), 'smooth', 1000);
-
-    yeelight.on('commandSuccess', () => {
-      yeelight.disconnect();
-      res.end();
-    });
-  });
-
-  yeelight.connect();
-}
-
-export async function dim(req, res) {
-  const light = await device;
-
-  const yeelight = new yl.Yeelight({
-    lightIp: light.host,
-    lightPort: light.port,
-  });
-
-  yeelight.on('connected', () => {
-    yeelight.setBright(3, 'smooth', 1000);
-
-    yeelight.on('commandSuccess', () => {
-      yeelight.disconnect();
-      res.end();
-    });
-  });
-
-  yeelight.connect();
-}
-
-export async function bright(req, res) {
-  const light = await device;
-
-  const yeelight = new yl.Yeelight({
-    lightIp: light.host,
-    lightPort: light.port,
-  });
-
-  yeelight.on('connected', () => {
-    yeelight.setBright(100, 'smooth', 1000);
-
-    yeelight.on('commandSuccess', () => {
-      yeelight.disconnect();
-      res.end();
-    });
-  });
-
-  yeelight.connect();
 }

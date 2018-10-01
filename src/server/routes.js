@@ -4,12 +4,41 @@ import * as yeelight from './plugins/yeelight.js';
 /**
  * Run a command against a device.
  */
-export function command(req, res) {}
+export function command(req, res) {
+  switch (req.query.action) {
+    case 'toggle':
+      yeelight.toggle();
+      break;
+
+    case 'brightness':
+      yeelight.brightness(req.query.value, req.query.speed);
+      break;
+
+    case 'color':
+      yeelight.color(req.query.hue, req.query.saturation, req.query.speed);
+      break;
+
+    default:
+      break;
+  }
+
+  // FIXME: Use the yeelight package for this; remove mock data
+  const result = { ok: true };
+
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(result));
+}
 
 /**
  * Find devices on the local network.
  */
-export function discover(req, res) {}
+export function discover(req, res) {
+  // FIXME: Use the yeelight package for this; remove mock data
+  const result = [];
+
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(result));
+}
 
 /**
  * Get a device or a list of all devices.
