@@ -1,6 +1,6 @@
 // https://github.com/samuraitruong/yeelight/blob/master/src/yeelight.ts
 
-import yl from 'yeelight-awesome';
+import * as yl from 'yeelight-awesome';
 
 const TRANSITION_SPEED = 1000;
 
@@ -66,13 +66,8 @@ export function toggle() {
  * @param {number=} speed Time in ms for transition speed,
  */
 export function brightness(value, speed = TRANSITION_SPEED) {
-  // FIXME: This is not working
   oneShotCommand((yeelight) => {
-    // console.log('## DEVICE', device);
-    // console.log('## BRIGHTNESS', value, 'smooth', speed);
-
-    // yeelight.on('set_bright', yeelight.disconnect);
-    yeelight.setBright(value, 'smooth', speed);
+    yeelight.setBright(+value, 'smooth', +speed);
   });
 }
 
@@ -83,12 +78,7 @@ export function brightness(value, speed = TRANSITION_SPEED) {
  * @param {number=} speed Time in ms for transition speed,
  */
 export function color(hue, saturation = 100, speed = TRANSITION_SPEED) {
-  // FIXME: This is not working
   oneShotCommand((yeelight) => {
-    // console.log('## DEVICE', device);
-    // console.log('## COLOR', hue, saturation, 'smooth', speed);
-
-    // yeelight.on('set_hsv', yeelight.disconnect);
-    yeelight.setHSV(hue, saturation, 'smooth', speed);
+    yeelight.setHSV(+hue, +saturation, 'smooth', +speed);
   });
 }
