@@ -2,12 +2,17 @@
   <title>{name} | Home Control</title>
 </svelte:head>
 
-<button class="button" type="button" on:click="toggle()">TOGGLE</button>
-<button class="button" type="button" on:click="brightness()">SET BRIGHTNESS</button>
-<button class="button" type="button" on:click="colour()">SET COLOUR</button>
-<button class="button red3" type="button" on:click="red()">RED</button>
-<button class="button blue3" type="button" on:click="blue()">BLUE</button>
-<button class="button" type="button" on:click="white()">WHITE</button>
+<div class="form-group">
+  <button class="button" type="button" on:click="toggle()">TOGGLE</button>
+  <button class="button" type="button" on:click="brightness()">SET BRIGHTNESS</button>
+  <button class="button" type="button" on:click="colour()">SET COLOUR</button>
+</div>
+<div class="form-group">
+  <button class="button red3" type="button" on:click="red()">RED</button>
+  <button class="button green3" type="button" on:click="green()">GREEN</button>
+  <button class="button blue3" type="button" on:click="blue()">BLUE</button>
+  <button class="button" type="button" on:click="white()">WHITE</button>
+</div>
 
 <div class="form-group mt4">
   <datalist id="tickmarks">
@@ -118,6 +123,10 @@
       },
       async red() {
         const res = await fetch('/api/command?action=color&hue=0');
+        if (!res.ok) throw new Error(res.statusText);
+      },
+      async green() {
+        const res = await fetch('/api/command?action=color&hue=120');
         if (!res.ok) throw new Error(res.statusText);
       },
       async blue() {
