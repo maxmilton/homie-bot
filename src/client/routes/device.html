@@ -3,40 +3,137 @@
 </svelte:head>
 
 <button class="button" type="button" on:click="toggle()">TOGGLE</button>
-<button class="button" type="button" on:click="command()">COMMAND</button>
+<button class="button" type="button" on:click="brightness()">SET BRIGHTNESS</button>
+<button class="button" type="button" on:click="colour()">SET COLOUR</button>
 <button class="button red3" type="button" on:click="red()">RED</button>
 <button class="button blue3" type="button" on:click="blue()">BLUE</button>
-<button class="button" type="button" on:click="dim()">DIM</button>
-<button class="button" type="button" on:click="bright()">BRIGHT</button>
+<button class="button" type="button" on:click="white()">WHITE</button>
+
+<div class="form-group mt4">
+  <datalist id="tickmarks">
+    <option value="1" label="1%">
+    <option value="10">
+    <option value="20">
+    <option value="30">
+    <option value="40">
+    <option value="50" label="50%">
+    <option value="60">
+    <option value="70">
+    <option value="80">
+    <option value="90">
+    <option value="100" label="100%">
+  </datalist>
+
+  <label class="label" for="brightness">Brightness</label>
+  <input bind:value="brightness" class="range" type="range" list="tickmarks">
+  <input bind:value="brightness" id="brightness" class="input" type="number">
+</div>
+
+<div class="form-group mt4">
+  <label class="label" for="colour">Colour</label>
+  <input bind:value="colour" class="color" type="color" id="colour">
+  {colour}
+</div>
 
 <script>
+  /* eslint-disable id-length, no-nested-ternary */
+  function hexToRgb(color) {
+    let hex = color[0] === '#' ? color.slice(1) : color;
+    let c;
+
+    // // expand the short hex by doubling each character, fc0 -> ffcc00
+    // if (hex.length !== 6) {
+    //   hex = ((() => {
+    //     const result = [];
+    //     for (c of Array.from(hex)) { // eslint-disable-line no-restricted-syntax
+    //       result.push(`${c}${c}`);
+    //     }
+    //     return result;
+    //   })()).join('');
+    // }
+    const colorStr = hex.match(/#?(.{2})(.{2})(.{2})/).slice(1);
+    const rgb = colorStr.map(col => parseInt(col, 16));
+    rgb.push(1);
+    return rgb;
+  }
+
+  function rgbToHsl(rgb) {
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    const diff = max - min;
+    const add = max + min;
+
+    const hue = min === max
+      ? 0
+      : r === max
+        ? (((60 * (g - b)) / diff) + 360) % 360
+        : g === max
+          ? ((60 * (b - r)) / diff) + 120
+          : ((60 * (r - g)) / diff) + 240;
+
+    const lum = 0.5 * add;
+
+    const sat = lum === 0
+      ? 0
+      : lum === 1
+        ? 1
+        : lum <= 0.5
+          ? diff / add
+          : diff / (2 - add);
+
+    const h = Math.round(hue);
+    const s = Math.round(sat * 100);
+    const l = Math.round(lum * 100);
+    const a = rgb[3] || 1;
+
+    return [h, s, l, a];
+  }
+  /* eslint-enable */
+
   export default {
-    data: () => ({}),
+    data: () => ({
+      brightness: 1,
+      colour: '#ff0000',
+    }),
     methods: {
       async toggle() {
-        const res = await fetch('/api/toggle');
+        const res = await fetch('/api/command?action=toggle');
         if (!res.ok) throw new Error(res.statusText);
       },
-      async command() {
-        const res = await fetch('/api/command');
+      async brightness() {
+        const { brightness } = this.get();
+        const res = await fetch(`/api/command?action=brightness&value=${brightness}`);
+        if (!res.ok) throw new Error(res.statusText);
+      },
+      async colour() {
+        const { colour } = this.get();
+        const rgb = hexToRgb(colour);
+        const [hue, saturation] = rgbToHsl(rgb);
+        const res = await fetch(`/api/command?action=color&hue=${hue}&saturation=${saturation}`);
         if (!res.ok) throw new Error(res.statusText);
       },
       async red() {
-        const res = await fetch('/api/red');
+        const res = await fetch('/api/command?action=color&hue=0');
         if (!res.ok) throw new Error(res.statusText);
       },
       async blue() {
-        const res = await fetch('/api/blue');
+        const res = await fetch('/api/command?action=color&hue=240');
         if (!res.ok) throw new Error(res.statusText);
       },
-      async dim() {
-        const res = await fetch('/api/dim');
-        if (!res.ok) throw new Error(res.statusText);
-      },
-      async bright() {
-        const res = await fetch('/api/bright');
+      async white() {
+        const res = await fetch('/api/command?action=color&hue=0&saturation=0');
         if (!res.ok) throw new Error(res.statusText);
       },
     },
   };
 </script>
+
+<style type="text/postcss">
+  .range {
+    width: 16rem;
+  }
+</style>
