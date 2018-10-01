@@ -4,15 +4,15 @@
 
 <div class="form-group">
   <button class="button" type="button" on:click="toggle()">TOGGLE</button>
-  <button class="button" type="button" on:click="brightness()">SET BRIGHTNESS</button>
-  <button class="button" type="button" on:click="colour()">SET COLOUR</button>
+  <button class="button" type="button" on:click="setBrightness()">SET BRIGHTNESS</button>
+  <button class="button" type="button" on:click="setColour()">SET COLOUR</button>
   <button class="button" type="button" on:click="getDeviceInfo()">DEVICE INFO</button>
 </div>
 <div class="form-group">
-  <button class="button red3" type="button" on:click="red()">RED</button>
-  <button class="button green3" type="button" on:click="green()">GREEN</button>
-  <button class="button blue3" type="button" on:click="blue()">BLUE</button>
-  <button class="button" type="button" on:click="white()">WHITE</button>
+  <button class="button red3" type="button" on:click="setColorSimple(0)">RED</button>
+  <button class="button green3" type="button" on:click="setColorSimple(120)">GREEN</button>
+  <button class="button blue3" type="button" on:click="setColorSimple(240)">BLUE</button>
+  <button class="button" type="button" on:click="setColorSimple(0, 0)">WHITE</button>
 </div>
 
 <div class="form-group mt4">
@@ -44,19 +44,20 @@
 <script>
   /* eslint-disable id-length, no-nested-ternary */
   function hexToRgb(color) {
-    let hex = color[0] === '#' ? color.slice(1) : color;
-    let c;
+    // let hex = color[0] === '#' ? color.slice(1) : color;
+    // let c;
+    const hex = color[0] === '#' ? color.slice(1) : color;
 
-    // expand the short hex by doubling each character, fc0 -> ffcc00
-    if (hex.length !== 6) {
-      hex = ((() => {
-        const result = [];
-        for (c of Array.from(hex)) { // eslint-disable-line no-restricted-syntax
-          result.push(`${c}${c}`);
-        }
-        return result;
-      })()).join('');
-    }
+    // // expand the short hex by doubling each character, fc0 -> ffcc00
+    // if (hex.length !== 6) {
+    //   hex = ((() => {
+    //     const result = [];
+    //     for (c of Array.from(hex)) { // eslint-disable-line no-restricted-syntax
+    //       result.push(`${c}${c}`);
+    //     }
+    //     return result;
+    //   })()).join('');
+    // }
     const colorStr = hex.match(/#?(.{2})(.{2})(.{2})/).slice(1);
     const rgb = colorStr.map(col => parseInt(col, 16));
     rgb.push(1);
@@ -117,13 +118,13 @@
         if (!res.ok) throw new Error(res.statusText);
       },
 
-      async brightness() {
+      async setBrightness() {
         const { brightness } = this.get();
         const res = await fetch(`/api/command?action=brightness&value=${brightness}`);
         if (!res.ok) throw new Error(res.statusText);
       },
 
-      async colour() {
+      async setColour() {
         const { colour } = this.get();
         const rgb = hexToRgb(colour);
         const [hue, saturation] = rgbToHsl(rgb);
@@ -131,23 +132,8 @@
         if (!res.ok) throw new Error(res.statusText);
       },
 
-      async red() {
-        const res = await fetch('/api/command?action=color&hue=0');
-        if (!res.ok) throw new Error(res.statusText);
-      },
-
-      async green() {
-        const res = await fetch('/api/command?action=color&hue=120');
-        if (!res.ok) throw new Error(res.statusText);
-      },
-
-      async blue() {
-        const res = await fetch('/api/command?action=color&hue=240');
-        if (!res.ok) throw new Error(res.statusText);
-      },
-
-      async white() {
-        const res = await fetch('/api/command?action=color&hue=0&saturation=0');
+      async setColorSimple(hue, saturation = 100) {
+        const res = await fetch(`/api/command?action=color&hue=${hue}&saturation=${saturation}`);
         if (!res.ok) throw new Error(res.statusText);
       },
     },
@@ -157,5 +143,9 @@
 <style type="text/postcss">
   .range {
     width: 16rem;
+  }
+
+  .color {
+    width: 8rem;
   }
 </style>
