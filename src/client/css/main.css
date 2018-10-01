@@ -69,3 +69,35 @@ body {
     background-color: $green1;
   }
 }
+
+/* Loading state spinner */
+/* TODO: Consider moving this into minna-ui */
+
+$spinner-size: 24px;
+$spinner-size-offset: calc(-1 * ($spinner-size / 2));
+$spinner-color: $intent-primary;
+$spinner-background-color: $gray5;
+$spinner-animate-speed: 0.8s;
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading { /* stylelint-disable-line selector-max-id */
+  display: inline-block;
+  width: $spinner-size;
+  height: $spinner-size;
+
+  &::before { /* stylelint-disable-line selector-max-id */
+    position: absolute;
+    width: $spinner-size;
+    height: $spinner-size;
+    content: "";
+    border: 3px solid $spinner-background-color;
+    border-top-color: $spinner-color;
+    border-radius: 50%;
+    animation: spinner $spinner-animate-speed linear infinite;
+  }
+}

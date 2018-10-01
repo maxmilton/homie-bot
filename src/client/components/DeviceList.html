@@ -1,9 +1,17 @@
 <button
   class="button"
   type="button"
+  on:click="set({ showDiscover: !showDiscover})"
+>
+  ✨ Auto-discover
+</button>
+
+<button
+  class="button"
+  type="button"
   on:click="set({ showAddDevice: !showAddDevice})"
 >
-  ➕ New Device
+  ➕ New
 </button>
 
 <button
@@ -13,6 +21,11 @@
 >
   🔁 Refresh
 </button>
+
+{#if showDiscover}
+  <!-- <DeviceDiscover on:close="set({ showAddDevice: false })" /> -->
+  <DeviceDiscover />
+{/if}
 
 {#if showAddDevice}
   <DeviceAdd on:close="set({ showAddDevice: false })" />
@@ -42,20 +55,29 @@
 
 <script>
   import MinnaSwitch from '@minna-ui/switch';
+  import DeviceDiscover from './DeviceDiscover.html';
   import DeviceAdd from './DeviceAdd.html';
 
   export default {
     components: {
       DeviceAdd,
+      DeviceDiscover,
       MinnaSwitch,
     },
     data: () => ({
       showAddDevice: false,
+      showDiscover: false,
     }),
     oncreate() {
       this.store.deviceGet();
     },
     methods: {
+      // TODO: Should this also be in the store?
+      async handleDiscover() {
+        const res = await fetch('/api/discover');
+        if (!res.ok) throw new Error(res.statusText);
+      },
+
       // TODO: Put this into the store once it's used somewhere else
       handleSwitch(event, device) {
         const data = Object.assign({}, device);

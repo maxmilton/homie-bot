@@ -1,0 +1,46 @@
+{#await result}
+  <p class="lead"><span class="loading mr3" /> 🔭 Searching for devices...</p>
+{:then devices}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>IP</th>
+        <th>State</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each devices as device}
+        <tr>
+          <td>{device.name}</td>
+          <td>{device.type}</td>
+          <td>{device.ip}</td>
+          <td>{device.state}</td>
+        </tr>
+      {:else}
+        <tr>
+          <td colspan="5" class="tc">🤷 No devices found on your local network.</td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+{:catch err}
+  <div class="alert alert-error">
+    <strong>ERROR:</strong> {err}
+  </div>
+{/await}
+
+<script>
+  export default {
+    data: () => ({
+      // result: new Promise((fulfil) => {
+      //   setTimeout(() => fulfil([]), 3000);
+      // }),
+      result: fetch('/api/discover').then((res) => {
+        if (!res.ok) throw new Error(res.statusText);
+        return res.json();
+      }),
+    }),
+  };
+</script>
