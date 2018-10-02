@@ -80,7 +80,7 @@ export function deleteDevice(req, res) {
 /**
  * Run an SQL query against the database.
  */
-export function postQuery(req, res) {
+export function postDbQuery(req, res) {
   if (req.body && req.body.sql) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(dbMethods.query(req.body.sql)));
@@ -93,7 +93,7 @@ export function postQuery(req, res) {
 /**
  * Reset the database.
  */
-export function getReset(req, res) {
+export function getDbReset(req, res) {
   dbMethods.reset();
   res.end('OK');
 }

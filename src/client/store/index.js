@@ -51,7 +51,7 @@ class AppStore extends Store {
   }
 
   async dbQuery(sql) {
-    const res = await fetch('/api/query', {
+    const res = await fetch('/api/db/query', {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -67,7 +67,7 @@ class AppStore extends Store {
   }
 
   async dbReset() {
-    const res = await fetch('/api/reset');
+    const res = await fetch('/api/db/reset');
 
     if (!res.ok) throw new Error(res.statusText);
 

@@ -33,11 +33,11 @@ polka({ onNoMatch })
   .get('/api/device/:id?', routes.getDevice)
   .put('/api/device/:id?', routes.putDevice)
   .delete('/api/device/:id', routes.deleteDevice)
-  .post('/api/query', routes.postQuery)
-  .get('/api/reset', routes.getReset)
+  .post('/api/db/query', routes.postDbQuery)
+  .get('/api/db/reset', routes.getDbReset)
 
   // start server
-  .listen(port, err => {
+  .listen(port, (err) => {
     if (err) console.error('Error', err);
     console.log(`Server listening on port ${port}`);
   });
