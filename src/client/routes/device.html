@@ -42,20 +42,19 @@
 <script>
   /* eslint-disable id-length, no-nested-ternary */
   function hexToRgb(color) {
-    // let hex = color[0] === '#' ? color.slice(1) : color;
-    // let c;
-    const hex = color[0] === '#' ? color.slice(1) : color;
+    let hex = color[0] === '#' ? color.slice(1) : color;
+    let c;
 
-    // // expand the short hex by doubling each character, fc0 -> ffcc00
-    // if (hex.length !== 6) {
-    //   hex = ((() => {
-    //     const result = [];
-    //     for (c of Array.from(hex)) { // eslint-disable-line no-restricted-syntax
-    //       result.push(`${c}${c}`);
-    //     }
-    //     return result;
-    //   })()).join('');
-    // }
+    // expand the short hex by doubling each character, fc0 -> ffcc00
+    if (hex.length !== 6) {
+      hex = ((() => {
+        const result = [];
+        for (c of Array.from(hex)) { // eslint-disable-line no-restricted-syntax
+          result.push(`${c}${c}`);
+        }
+        return result;
+      })()).join('');
+    }
     const colorStr = hex.match(/#?(.{2})(.{2})(.{2})/).slice(1);
     const rgb = colorStr.map(col => parseInt(col, 16));
     rgb.push(1);
