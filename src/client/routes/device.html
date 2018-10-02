@@ -4,15 +4,13 @@
 
 <div class="form-group">
   <button class="button" type="button" on:click="toggle()">TOGGLE</button>
-  <button class="button" type="button" on:click="setBrightness()">SET BRIGHTNESS</button>
-  <button class="button" type="button" on:click="setColour()">SET COLOUR</button>
   <button class="button" type="button" on:click="getDeviceInfo()">DEVICE INFO</button>
 </div>
 <div class="form-group">
-  <button class="button red3" type="button" on:click="setColorSimple(0)">RED</button>
-  <button class="button green3" type="button" on:click="setColorSimple(120)">GREEN</button>
-  <button class="button blue3" type="button" on:click="setColorSimple(240)">BLUE</button>
-  <button class="button" type="button" on:click="setColorSimple(0, 0)">WHITE</button>
+  <button class="button red3" type="button" on:click="setColor(0)">RED</button>
+  <button class="button green3" type="button" on:click="setColor(120)">GREEN</button>
+  <button class="button blue3" type="button" on:click="setColor(240)">BLUE</button>
+  <button class="button" type="button" on:click="setColor(0, 0)">WHITE</button>
 </div>
 
 <div class="form-group mt4">
@@ -31,13 +29,13 @@
   </datalist>
 
   <label class="label" for="brightness">Brightness</label>
-  <input bind:value="brightness" class="range" type="range" list="tickmarks">
+  <input bind:value="brightness" class="range" type="range" list="tickmarks" on:change="setBrightness()">
   <input bind:value="brightness" id="brightness" class="input" type="number">
 </div>
 
 <div class="form-group mt4">
   <label class="label" for="colour">Colour</label>
-  <input bind:value="colour" class="color" type="color" id="colour">
+  <input bind:value="colour" class="color" type="color" id="colour" on:change="setColourRGB()">
   {colour}
 </div>
 
