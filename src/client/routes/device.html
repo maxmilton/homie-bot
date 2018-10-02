@@ -13,6 +13,10 @@
   <button class="button" type="button" on:click="setColor(0, 0)">WHITE</button>
 </div>
 
+<div class="form-group">
+  <MinnaSwitch bind:value="on" on:change="toggle()" />
+</div>
+
 <div class="form-group mt4">
   <datalist id="tickmarks">
     <option value="1" label="1%">
@@ -39,7 +43,13 @@
   {colour}
 </div>
 
+<div>
+  location: {location}
+</div>
+
 <script>
+  import MinnaSwitch from '@minna-ui/switch';
+
   /* eslint-disable id-length, no-nested-ternary */
   function hexToRgb(color) {
     let hex = color[0] === '#' ? color.slice(1) : color;
@@ -99,15 +109,30 @@
   /* eslint-enable */
 
   export default {
+    components: {
+      MinnaSwitch,
+    },
     data: () => ({
       brightness: 1,
       colour: '#ff0000',
+      location: '',
+      on: false,
     }),
+    oncreate() {
+      this.getDeviceInfo();
+    },
     methods: {
       async getDeviceInfo() {
         const res = await fetch('/api/device/info');
         if (!res.ok) throw new Error(res.statusText);
-        console.info('@@ DEVICE INFO', await res.json());
+        const info = await res.json();
+        console.debug('[DEVICE INFO]', info);
+        this.set({
+          brightness: info.bright,
+          // colour: info.rgb,
+          location: info.location,
+          on: info.status === 'on',
+        });
       },
 
       async toggle() {
