@@ -9,7 +9,8 @@ const dev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   syntax: 'postcss-scss',
+  map: dev,
   plugins: [
-    minnaUi({ verbose: dev }),
+    minnaUi({ debug: dev }),
   ],
 };
