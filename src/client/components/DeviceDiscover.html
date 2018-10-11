@@ -4,19 +4,27 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>IP</th>
-        <th>State</th>
+        <!-- <th>Name</th> -->
+        <!-- <th>Type</th> -->
+        <!-- <th>IP</th> -->
+        <!-- <th>State</th> -->
+        <th>Location</th>
+        <th>Host</th>
+        <th>Status</th>
+        <th>Raw Data</th>
       </tr>
     </thead>
     <tbody>
       {#each devices as device}
         <tr>
-          <td>{device.name}</td>
-          <td>{device.type}</td>
-          <td>{device.ip}</td>
-          <td>{device.state}</td>
+          <!-- <td>{device.name}</td> -->
+          <!-- <td>{device.type}</td> -->
+          <!-- <td>{device.ip}</td> -->
+          <!-- <td>{device.state}</td> -->
+          <td>{device.location}</td>
+          <td>{device.host}</td>
+          <td>{device.status}</td>
+          <td>{JSON.stringify(device, null, 2)}</td>
         </tr>
       {:else}
         <tr>
@@ -34,9 +42,6 @@
 <script>
   export default {
     data: () => ({
-      // result: new Promise((fulfil) => {
-      //   setTimeout(() => fulfil([]), 3000);
-      // }),
       result: fetch('/api/discover').then((res) => {
         if (!res.ok) throw new Error(res.statusText);
         return res.json();

@@ -3,6 +3,7 @@ import path from 'path';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 import commonjs from 'rollup-plugin-commonjs';
+import typescript from 'rollup-plugin-typescript';
 import svelte from 'rollup-plugin-svelte';
 import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
 import preprocessStyle from '@minna-ui/svelte-preprocess-style';
@@ -19,7 +20,7 @@ export default [
   // client
   {
     watch,
-    input: 'src/client/index.js',
+    input: 'src/client/index.ts',
     output: {
       sourcemap: dev,
       format: 'esm',
@@ -37,10 +38,8 @@ export default [
       svelte({
         dev,
         preprocess: {
-          ...(dev ? {} : { markup: preprocessMarkup({
-            unsafeWhitespace: true,
-            unsafe: true,
-          }) }),
+          // TODO: Change level `3` to `4` once minna-ui components support it
+          markup: preprocessMarkup({ level: dev ? 0 : 3 }),
           style: preprocessStyle(),
         },
         // FIXME: Enable this
@@ -48,13 +47,16 @@ export default [
       }),
       resolve(),
       commonjs(),
+      typescript({
+        typescript: require('typescript'), // eslint-disable-line global-require
+      }),
 
       !dev && compiler({
         externs: 'externs.js',
         charset: 'UTF-8',
         compilation_level: 'ADVANCED',
-        // formatting: 'PRETTY_PRINT',
         // debug: true,
+        // formatting: 'PRETTY_PRINT',
       }),
 
       makeHtml({
@@ -67,18 +69,12 @@ export default [
 
     // temporary, pending Rollup 1.0
     experimentalCodeSplitting: true,
-
-    shimMissingExports: true,
-    treeshake: {
-      pureExternalModules: true,
-      propertyReadSideEffects: false,
-    },
   },
 
   // server
   {
     watch,
-    input: 'src/server/index.js',
+    input: 'src/server/index.ts',
     output: {
       sourcemap: dev,
       format: 'cjs',
@@ -87,6 +83,9 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
+      typescript({
+        typescript: require('typescript'), // eslint-disable-line global-require
+      }),
 
       !dev && compiler(),
     ],

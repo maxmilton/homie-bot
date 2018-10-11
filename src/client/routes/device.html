@@ -34,7 +34,7 @@
 
   <label class="label" for="brightness">Brightness</label>
   <input bind:value="brightness" class="range" type="range" list="tickmarks" on:change="setBrightness()">
-  <input bind:value="brightness" id="brightness" class="input" type="number">
+  <MinnaInputNumber bind:value="brightness" id="brightness" on:change="setBrightness()" />
 </div>
 
 <div class="form-group mt4">
@@ -49,6 +49,7 @@
 
 <script>
   import MinnaSwitch from '@minna-ui/switch';
+  import MinnaInputNumber from '../components/MinnaInputNumber.html';
 
   /* eslint-disable id-length, no-nested-ternary */
   function hexToRgb(color) {
@@ -111,6 +112,7 @@
   export default {
     components: {
       MinnaSwitch,
+      MinnaInputNumber,
     },
     data: () => ({
       brightness: 1,

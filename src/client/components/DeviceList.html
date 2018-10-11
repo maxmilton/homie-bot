@@ -23,7 +23,7 @@
 </button>
 
 {#if showDiscover}
-  <!-- <DeviceDiscover on:close="set({ showAddDevice: false })" /> -->
+  <!-- <DeviceDiscover on:close="set({ showDiscover: false })" /> -->
   <DeviceDiscover />
 {/if}
 
@@ -72,13 +72,7 @@
       this.store.deviceGet();
     },
     methods: {
-      // TODO: Should this also be in the store?
-      async handleDiscover() {
-        const res = await fetch('/api/discover');
-        if (!res.ok) throw new Error(res.statusText);
-      },
-
-      // TODO: Put this into the store once it's used somewhere else
+      // TODO: Put this into the store
       handleSwitch(event, device) {
         const data = Object.assign({}, device);
         data.state.on = event;
