@@ -5,7 +5,6 @@ import * as colors from 'colorette';
 import { log, parse } from './server/middleware.js';
 import * as store from './store';
 import * as sapper from '../__sapper__/server.js';
-import * as routes from './server/routes.js';
 import db from './server/db.js';
 
 const { PORT, NODE_ENV } = process.env;
@@ -16,24 +15,11 @@ polka()
     log,
     compression({ threshold: 0 }),
     sirv('static', { dev }),
+    parse,
     sapper.middleware({
       store: store.server,
     }),
-    parse,
   )
-
-  // set up routes
-  .all('/api/command', routes.command)
-  .get('/api/discover', routes.discover)
-  // .get('/api/device/info/:id', routes.getDeviceInfo) // TODO: Use this form where the id is mandatory
-  .get('/api/device/info/:id?', routes.getDeviceInfo)
-  .get('/api/device/:id?', routes.getDevice)
-  .put('/api/device/:id?', routes.putDevice)
-  .delete('/api/device/:id', routes.deleteDevice)
-  .post('/api/db/query', routes.postDbQuery)
-  .get('/api/db/reset', routes.getDbReset)
-
-  // start server
   .listen(PORT, (err) => {
     if (err) console.log('error', err);
   });

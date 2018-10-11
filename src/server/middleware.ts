@@ -34,7 +34,7 @@ export function parse(req: Req, res: Res, next: Next) {
     if (req.headers['content-type']
       && req.headers['content-type'].indexOf('application/json') !== -1
       && data
-      && data.indexOf('{') !== -1
+      && (data.indexOf('{') === 0 || data.indexOf('[') === 0)
     ) {
       req.body = JSON.parse(data);
     }
