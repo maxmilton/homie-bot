@@ -7,7 +7,7 @@ class AppStore extends Store {
     if (!res.ok) throw new Error(res.statusText);
 
     // console.log('@@ DISCOVER', await res.json());
-    this.set({ discovered: await res.json()})
+    this.set({ discovered: await res.json() });
   }
 
   async deviceGet(id) {
@@ -85,37 +85,12 @@ class AppStore extends Store {
   }
 }
 
-const store = new AppStore({
+const initialState = {
   discovered: [],
   devices: [],
   result: '',
-});
+};
 
-// store.on('state', ({ changed, current, previous }) => {
-//   // console.log('## ON STATE', { changed, current, previous });
+export const server = req => new AppStore(initialState);
 
-//   if (!previous.devices.length) return;
-//   console.log('## ON STATE', current.devices[0].state, previous.devices[0].state);
-
-//   if (changed.devices) {
-//     current.devices.forEach((device, index) => {
-//       const curr = JSON.stringify(device);
-//       const prev = JSON.stringify(previous.devices[index]);
-//       console.log('!! !==', curr !== prev);
-//       console.log('@@ CURR', device.state);
-//       console.log('@@ PREV', previous.devices[index] && previous.devices[index].state);
-//       console.log('!! CURR', curr);
-//       console.log('!! PREV', prev);
-
-//       if (curr !== prev) {
-//         console.log('!! HIT HIT HIT');
-//         // console.log('!! CURR', curr);
-//         // console.log('!! PREV', prev);
-
-//         store.devicePut(device);
-//       }
-//     });
-//   }
-// });
-
-export default store;
+export const client = data => new AppStore(data);

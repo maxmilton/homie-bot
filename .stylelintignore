@@ -1,4 +1,3 @@
-/utils/jest-config/fixtures/styles-bad-syntax.css
+/__sapper__/
+/static/global.css*
 /test/coverage/
-dist/
-node_modules/

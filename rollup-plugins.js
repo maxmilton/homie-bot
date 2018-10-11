@@ -36,8 +36,7 @@ export function makeCss({
       if (!filter(id)) return null;
 
       try {
-        // const ctx = Object.assign({ from: id, to: id, map: true }, context);
-        const ctx = Object.assign({ from: id, to: id, map: false }, context);
+        const ctx = Object.assign({ from: id, to: id, map: true }, context);
         const { plugins, options } = await postcssrc(ctx);
         const result = await postcss(plugins).process(source, options);
 

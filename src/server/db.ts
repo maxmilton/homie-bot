@@ -21,7 +21,7 @@ export function dbInit() {
 
   if (!hasTables) {
     console.log('WARNING: Database appears empty, initialising it.');
-    const sql = fs.readFileSync(path.join(__dirname, './base-data.sql'), 'utf8');
+    const sql = fs.readFileSync(path.join(process.cwd(), './static/base-data.sql'), 'utf8');
     db.exec(sql);
   }
 }

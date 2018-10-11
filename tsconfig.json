@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": true,
-    "pretty": true,
+    // "pretty": true,
 
     "strict": true,
     "noUnusedLocals": true,
@@ -22,7 +22,7 @@
     "baseUrl": "."
   },
   "exclude": [
-    "dist",
+    "__sapper__",
     "node_modules"
   ],
   "typeAcquisition": {

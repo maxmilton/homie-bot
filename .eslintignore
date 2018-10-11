@@ -1,4 +1,2 @@
+/__sapper__/
 /test/coverage/
-/utils/*/cli/index.js
-dist/
-node_modules/

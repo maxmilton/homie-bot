@@ -3,12 +3,18 @@
     <a href="/" id="logo">Home Control</a>
 
     <!-- Menu items -->
-    <a href="/" class="nav-item">Home</a>
-    <a href="/admin" class="nav-item">Admin</a>
+    <a href="." class="nav-item{segment === undefined ? ' active' : ''}">Home</a>
+    <a href="admin" class="nav-item{segment === 'admin' ? ' active' : ''}">Admin</a>
   </nav>
 </header>
 
 <style type="text/postcss">
+  @import "import.css";
+
+  header {
+    border-bottom: 1px solid color-mod($black alpha(0.1));
+  }
+
   .nav {
     justify-content: flex-end;
   }

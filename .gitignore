@@ -1,7 +1,9 @@
-*.lerna_backup
-*.log
+node_modules
+/__sapper__/
+/static/global.css*
 /test/coverage/
-dist/
-node_modules/
 package-lock.json*
+yarn-error.log
 .stylelintcache
+*.bak
+*.PRIVATE.*
