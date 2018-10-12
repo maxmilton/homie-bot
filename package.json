@@ -39,7 +39,7 @@
     "@wearegenki/renovate-config": "1.0.0",
     "chokidar": "2.0.4",
     "codecov": "3.1.0",
-    "eslint": "5.6.1",
+    "eslint": "5.7.0",
     "jest": "23.6.0",
     "navaid": "1.0.0",
     "npm-run-all": "4.1.3",
