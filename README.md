@@ -1,11 +1,11 @@
 <!-- markdownlint-disable first-line-h1 no-inline-html -->
 
-[![Build status](https://img.shields.io/circleci/project/github/MaxMilton/home-control.svg)](https://circleci.com/gh/MaxMilton/home-control)
-[![Coverage status](https://img.shields.io/codecov/c/github/MaxMilton/home-control.svg)](https://codecov.io/gh/MaxMilton/home-control)
-[![Licence](https://img.shields.io/github/license/MaxMilton/home-control.svg)](https://github.com/MaxMilton/home-control/blob/master/LICENCE)
+[![Build status](https://img.shields.io/circleci/project/github/MaxMilton/homie-bot.svg)](https://circleci.com/gh/MaxMilton/homie-bot)
+[![Coverage status](https://img.shields.io/codecov/c/github/MaxMilton/homie-bot.svg)](https://codecov.io/gh/MaxMilton/homie-bot)
+[![Licence](https://img.shields.io/github/license/MaxMilton/homie-bot.svg)](https://github.com/MaxMilton/homie-bot/blob/master/LICENCE)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-# Home Control
+# Homie Bot
 
 TODO: Write me.
 
@@ -13,7 +13,7 @@ My setup involves running this on a raspberry pi 3 with an Alpine Linux OS. See 
 
 ## Licence
 
-`Home Control` is an MIT licensed open source project. See [LICENCE](https://github.com/MaxMilton/home-control/blob/master/LICENCE).
+`Homie Bot` is an MIT licensed open source project. See [LICENCE](https://github.com/MaxMilton/homie-bot/blob/master/LICENCE).
 
 -----
 
