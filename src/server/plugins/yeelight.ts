@@ -3,14 +3,15 @@
 import * as yl from 'yeelight-awesome';
 import convert from 'color-convert';
 import * as dbMethods from '../db';
-// import { Device } from '../types';
 
 const TRANSITION_SPEED = 1000;
 
 export function discover() {
   return new Promise((resolve, reject) => {
-    // const discover = new yl.Discover({ port: 1982, debug: true });
-    const discover = new yl.Discover({ port: 1982 });
+    const discover = new yl.Discover({
+      port: 1982,
+      // debug: true,
+    });
 
     discover
       .start()
@@ -86,10 +87,14 @@ export async function toggle(id: string) {
 /**
  * Set the device brightness.
  */
-export async function brightness(id: string, value: number, speed = TRANSITION_SPEED) {
+export async function brightness(
+  id: string,
+  value: number|string,
+  speed: number|string = TRANSITION_SPEED,
+) {
   try {
     const { yeelight } = await oneShotCommand(id);
-    return yeelight.setBright(value, 'smooth', speed);
+    return yeelight.setBright(+value, 'smooth', +speed);
   } catch (err) {
     console.error('Error', err);
   }
@@ -98,11 +103,15 @@ export async function brightness(id: string, value: number, speed = TRANSITION_S
 /**
  * Set the device hue colour.
  */
-export async function color(id: string, value: string, speed = TRANSITION_SPEED) {
+export async function color(
+  id: string,
+  value: string,
+  speed: number|string = TRANSITION_SPEED,
+) {
   try {
     const [hue, saturation] = convert.hex.hsv(value);
     const { yeelight } = await oneShotCommand(id);
-    return yeelight.setHSV(hue, saturation, 'smooth', speed);
+    return yeelight.setHSV(hue, saturation, 'smooth', +speed);
   } catch (err) {
     console.error('Error', err);
   }

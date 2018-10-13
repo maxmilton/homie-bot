@@ -15,11 +15,11 @@ function all(req: Req, res: Res) {
       break;
 
     case 'brightness':
-      result = yeelight.brightness(id, +value, +speed);
+      result = yeelight.brightness(id, value, speed);
       break;
 
     case 'color':
-      result = yeelight.color(id, value, +speed);
+      result = yeelight.color(id, value, speed);
       break;
 
     default:
