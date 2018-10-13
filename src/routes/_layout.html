@@ -15,5 +15,12 @@
     components: {
       Nav,
     },
+
+    oncreate() {
+      if (process.env.NODE_ENV === 'development') {
+        // allow access to store via devtools; e.g. run `store.get()` in console
+        self.store = this.store;
+      }
+    },
   };
 </script>
