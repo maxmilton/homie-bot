@@ -1,9 +1,11 @@
 node_modules
 /__sapper__/
-/static/global.css*
+/dist/
 /test/coverage/
+*.bak
+.stylelintcache
+homie-bot.db
+homie-bot.db-shm
+homie-bot.db-wal
 package-lock.json*
 yarn-error.log
-.stylelintcache
-*.bak
-*.PRIVATE.*
