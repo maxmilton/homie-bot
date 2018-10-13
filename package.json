@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "sapper dev",
-    "build": "sapper build",
-    "serve": "node __sapper__/build",
+    "build": "NODE_ENV=production sapper build",
+    "serve": "NODE_ENV=production node __sapper__/build",
     "export": "sapper export",
     "_run": "yarn build && yarn serve",
     "lint": "yarn lint:css && yarn lint:js",
