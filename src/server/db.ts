@@ -5,8 +5,8 @@ import path from 'path';
 import Database from 'better-sqlite3';
 import { Device } from './types';
 
-const DB_PATH = process.env.DB_PATH || 'home-control.db';
-const db = new Database(path.join(__dirname, DB_PATH));
+const DB_PATH = process.env.DB_PATH || path.join(process.cwd(), 'homie-bot.db');
+const db = new Database(DB_PATH);
 
 // use write-ahead logging mode for better performance
 db.pragma('journal_mode = WAL');
