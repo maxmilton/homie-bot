@@ -7,4 +7,8 @@ module.exports = {
   extends: [
     '@minna-ui/eslint-config',
   ],
+  rules: {
+    // Svelte components are in devDeps
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+  },
 };
