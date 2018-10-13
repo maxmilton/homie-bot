@@ -25,10 +25,10 @@ export { ServerResponse };
 export type Next = () => void;
 
 export type Device = {
-  rowid: string;
-  host: string;
-  port: number;
-  name: string;
-  type: number;
-  state: object;
+  rowid?: string;
+  host?: string;
+  port?: number;
+  name?: string;
+  type?: number;
+  state?: object|string;
 };

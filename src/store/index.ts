@@ -1,4 +1,4 @@
-import { Store } from 'svelte/store.js'; // eslint-disable-line import/no-extraneous-dependencies
+import { Store } from 'svelte/store.js';
 import { Device, Req } from '../server/types';
 
 class AppStore extends Store {
@@ -15,7 +15,7 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
-    const devices = (await res.json()).map((device) => {
+    const devices = (await res.json()).map((device: Device) => {
       /* eslint-disable-next-line no-param-reassign */
       device.state = JSON.parse(device.state);
       return device;
@@ -24,7 +24,7 @@ class AppStore extends Store {
     this.set({ devices });
   }
 
-  async devicePut(id: string|null, data: Device) {
+  async devicePut(id: string | null, data: Device) {
     // inject default data
     const device = Object.assign({}, data, {
       state: data.state || {},
@@ -91,6 +91,6 @@ const initialState = {
   result: '',
 };
 
-export const server = req: Req => new AppStore(initialState);
+export const server = (req: Req) => new AppStore(initialState);
 
 export const client = data => new AppStore(data);

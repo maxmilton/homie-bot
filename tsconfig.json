@@ -13,11 +13,11 @@
 
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
+    // "noUnusedParameters": true,
+    // "noImplicitReturns": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "strictNullChecks": true,
+    // "strictPropertyInitialization": true,
 
     "baseUrl": ".",
 
