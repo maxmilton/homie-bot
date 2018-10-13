@@ -19,6 +19,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
+      - run: yarn run build # build to avoid lint issues with missing files
       - run: yarn run lint
       - run: yarn run test-ci
       - run: yarn codecov
