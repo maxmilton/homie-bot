@@ -67,7 +67,7 @@ const devicePutStmt = db.prepare(`
   )
 `);
 
-export function devicePut(rowid: string, { host, port, name, state, type }: Device) {
+export function devicePut(rowid: string|null, { host, port, name, state, type }: Device) {
   return devicePutStmt.run({ rowid, host, port, name, state: JSON.stringify(state), type });
 }
 

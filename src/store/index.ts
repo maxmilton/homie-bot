@@ -1,4 +1,5 @@
 import { Store } from 'svelte/store.js'; // eslint-disable-line import/no-extraneous-dependencies
+import { Device, Req } from '../server/types';
 
 class AppStore extends Store {
   async discover() {
@@ -9,7 +10,7 @@ class AppStore extends Store {
     this.set({ discovered: await res.json() });
   }
 
-  async deviceGet(id) {
+  async deviceGet(id?: string) {
     const res = await fetch(`/api/device${id ? `/${id}` : ''}`);
 
     if (!res.ok) throw new Error(res.statusText);
@@ -23,7 +24,7 @@ class AppStore extends Store {
     this.set({ devices });
   }
 
-  async devicePut(id, data) {
+  async devicePut(id: string|null, data: Device) {
     // inject default data
     const device = Object.assign({}, data, {
       state: data.state || {},
@@ -47,7 +48,7 @@ class AppStore extends Store {
     this.deviceGet();
   }
 
-  async deviceDelete(id) {
+  async deviceDelete(id: string) {
     const res = await fetch(`/api/device/${id}`, {
       method: 'DELETE',
     });
@@ -58,7 +59,7 @@ class AppStore extends Store {
     this.deviceGet();
   }
 
-  async dbQuery(sql) {
+  async dbQuery(sql: string) {
     const res = await fetch('/api/db/query', {
       headers: {
         'Content-Type': 'application/json',
@@ -90,6 +91,6 @@ const initialState = {
   result: '',
 };
 
-export const server = req => new AppStore(initialState);
+export const server = req: Req => new AppStore(initialState);
 
 export const client = data => new AppStore(data);

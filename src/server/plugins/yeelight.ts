@@ -3,7 +3,7 @@
 import * as yl from 'yeelight-awesome';
 import convert from 'color-convert';
 import * as dbMethods from '../db';
-import { Device } from '../types';
+// import { Device } from '../types';
 
 const TRANSITION_SPEED = 1000;
 
@@ -24,7 +24,7 @@ export function discover() {
  */
 export function oneShotCommand(id: string): Promise<yl.IDevice> {
   return new Promise((resolve, reject) => {
-    let yeelight;
+    let yeelight: yl.IDevice;
     try {
       const device = dbMethods.deviceGet(id);
       yeelight = new yl.Yeelight({
