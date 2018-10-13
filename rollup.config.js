@@ -29,8 +29,7 @@ export default {
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
-      // makeCss({ include: 'src/client/css/**/*.css' }),
-      makeCss(),
+      makeCss({ include: 'src/css/**/*.css' }),
       svelte({
         dev,
         preprocess,
@@ -43,7 +42,7 @@ export default {
         typescript: require('typescript'), // eslint-disable-line global-require
       }),
 
-      !dev && terser({ module: true	}),
+      !dev && terser({ module: true }),
       // !dev && compiler({
       //   externs: [
       //     require.resolve('google-closure-compiler/contrib/externs/svg.js'),
@@ -80,8 +79,7 @@ export default {
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
-      // makeCss({ include: 'src/css/**/*.css' }),
-      makeCss(),
+      makeCss({ include: 'src/css/**/*.css' }),
       svelte({
         dev,
         preprocess,
