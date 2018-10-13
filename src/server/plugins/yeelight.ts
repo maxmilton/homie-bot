@@ -1,14 +1,16 @@
 // https://github.com/samuraitruong/yeelight/blob/master/src/yeelight.ts
 
 import * as yl from 'yeelight-awesome';
+import convert from 'color-convert';
+import * as dbMethods from '../db';
+import { Device } from '../types';
 
 const TRANSITION_SPEED = 1000;
 
 export function discover() {
   return new Promise((resolve, reject) => {
-    const discover = new yl.Discover({ port: 1982 });
+    const discover = new yl.Discover({ port: 1982, debug: true });
 
-    // FIXME: Returns duplicate devices
     discover
       .start()
       .then(resolve, reject)
@@ -16,65 +18,91 @@ export function discover() {
   });
 }
 
-// const devices = discover();
-
 /**
  * Run a one-shot command on a device; connect, run a command, then disconnect.
- * @param {Function} cb Callback function to run on the device.
  */
-export async function oneShotCommand(device, cb: Function): yl.IDevice {
-  // const light = await device;
+export function oneShotCommand(id: string): Promise<yl.IDevice> {
+  return new Promise((resolve, reject) => {
+    let yeelight;
+    try {
+      const device = dbMethods.deviceGet(id);
+      yeelight = new yl.Yeelight({
+        lightIp: device.host,
+        lightPort: device.port,
+      });
 
-  const yeelight = new yl.Yeelight({
-    lightIp: device.host,
-    lightPort: device.port,
+      yeelight.on('connected', () => {
+        yeelight.on('commandSuccess', yeelight.disconnect);
+
+        resolve({ yeelight, device });
+      });
+
+      yeelight.connect();
+    } catch (err) {
+      yeelight.disconnect();
+      reject(err);
+    }
   });
-
-  yeelight.on('connected', () => {
-    yeelight.on('commandSuccess', yeelight.disconnect);
-
-    cb(yeelight);
-  });
-
-  yeelight.connect();
 }
 
 /**
  * Get device info.
- * @returns {object}
  */
-export function getInfo() {
-  // return device;
+export async function getInfo(id: string) {
+  try {
+    const { yeelight, device } = await oneShotCommand(id);
+    const cmd = await yeelight.getProperty([
+      yl.DevicePropery.POWER,
+      yl.DevicePropery.BRIGHT,
+      yl.DevicePropery.HUE,
+      yl.DevicePropery.SAT,
+    ]);
+    const { result } = cmd.result;
+
+    return {
+      ...device,
+      brightness: result[1],
+      color: `#${convert.hsv.hex([result[2], result[3], 100])}`,
+      on: result[0] === 'on',
+    };
+  } catch (err) {
+    console.error('Error', err);
+  }
 }
 
 /**
  * Toggle the device on or off.
  */
-export function toggle() {
-  oneShotCommand((yeelight) => {
-    yeelight.toggle();
-  });
+export async function toggle(id: string) {
+  try {
+    const { yeelight } = await oneShotCommand(id);
+    return yeelight.toggle();
+  } catch (err) {
+    console.error('Error', err);
+  }
 }
 
 /**
  * Set the device brightness.
- * @param {number} value Brightness value from 1 to 100.
- * @param {number=} speed Time in ms for transition speed,
  */
-export function brightness(value, speed = TRANSITION_SPEED) {
-  oneShotCommand((yeelight) => {
-    yeelight.setBright(+value, 'smooth', speed);
-  });
+export async function brightness(id: string, value: number, speed = TRANSITION_SPEED) {
+  try {
+    const { yeelight } = await oneShotCommand(id);
+    return yeelight.setBright(value, 'smooth', speed);
+  } catch (err) {
+    console.error('Error', err);
+  }
 }
 
 /**
  * Set the device hue colour.
- * @param {number} hue Colour value from 0 to 359.
- * @param {number=} saturation Saturation value from 0 to 100.
- * @param {number=} speed Time in ms for transition speed,
  */
-export function color(hue: number, saturation = 100, speed = TRANSITION_SPEED) {
-  oneShotCommand((yeelight) => {
-    yeelight.setHSV(hue, saturation, 'smooth', speed);
-  });
+export async function color(id: string, value: string, speed = TRANSITION_SPEED) {
+  try {
+    const [hue, saturation] = convert.hex.hsv(value);
+    const { yeelight } = await oneShotCommand(id);
+    return yeelight.setHSV(hue, saturation, 'smooth', speed);
+  } catch (err) {
+    console.error('Error', err);
+  }
 }
