@@ -11,7 +11,7 @@ export async function get(req: Req, res: Res) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(result));
   } catch (err) {
-    console.error(err);
+    console.error('Error', err);
     res.statusCode = 500;
     res.end();
   }

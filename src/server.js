@@ -20,7 +20,7 @@ polka()
     })
   )
   .listen(PORT, (err) => {
-    if (err) console.error(err);
+    if (err) console.error('Error', err);
   });
 
 // clean up and close database connection on exit
@@ -32,7 +32,7 @@ process.on('SIGINT', () => {
     console.log('Server terminated');
     process.exit(0);
   } catch (err) {
-    console.error(err);
+    console.error('Error', err);
     process.exit(1);
   }
 });

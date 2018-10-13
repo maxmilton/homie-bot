@@ -9,7 +9,8 @@ const TRANSITION_SPEED = 1000;
 
 export function discover() {
   return new Promise((resolve, reject) => {
-    const discover = new yl.Discover({ port: 1982, debug: true });
+    // const discover = new yl.Discover({ port: 1982, debug: true });
+    const discover = new yl.Discover({ port: 1982 });
 
     discover
       .start()

@@ -41,8 +41,6 @@
     }),
     methods: {
       add(device, index) {
-        console.log('!! DEVICE', device);
-        
         this.store.devicePut(null, {
           host: device.host,
           port: device.port,
