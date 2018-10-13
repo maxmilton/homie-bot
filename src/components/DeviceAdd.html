@@ -43,7 +43,7 @@
         event.preventDefault();
 
         const data = this.get();
-        this.store.devicePut(data);
+        this.store.devicePut(null, data);
         this.fire('close');
       },
     },

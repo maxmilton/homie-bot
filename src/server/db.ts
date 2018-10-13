@@ -3,7 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import Database from 'better-sqlite3';
-import { DeviceData } from './types';
+import { Device } from './types';
 
 const DB_PATH = process.env.DB_PATH || 'home-control.db';
 const db = new Database(path.join(__dirname, DB_PATH));
@@ -19,11 +19,11 @@ export function dbInit() {
     WHERE type='table' AND name='devices'
   `).get();
 
-  if (!hasTables) {
-    console.log('WARNING: Database appears empty, initialising it.');
-    const sql = fs.readFileSync(path.join(__dirname, './base-data.sql'), 'utf8');
-    db.exec(sql);
-  }
+  if (hasTables) return;
+
+  console.log('INFO: Database appears empty, initialising it.');
+  const sql = fs.readFileSync(path.join(process.cwd(), './static/base-data.sql'), 'utf8');
+  db.exec(sql);
 }
 
 // initialise database
@@ -51,22 +51,24 @@ export function query(sql: string) {
 const devicePutStmt = db.prepare(`
   INSERT OR REPLACE INTO devices(
     rowid,
-    ip,
+    host,
+    port,
     name,
-    type,
-    state
+    state,
+    type
   )
   VALUES (
     @rowid,
-    @ip,
+    @host,
+    @port,
     @name,
-    @type,
-    json(@state)
+    json(@state),
+    @type
   )
 `);
 
-export function devicePut({ ip, name, type, state }: DeviceData, rowid: string) {
-  return devicePutStmt.run({ rowid, ip, name, type, state: JSON.stringify(state) });
+export function devicePut(rowid: string, { host, port, name, state, type }: Device) {
+  return devicePutStmt.run({ rowid, host, port, name, state: JSON.stringify(state), type });
 }
 
 const deviceGetStmt = db.prepare('SELECT rowid, * FROM devices WHERE rowid=?');

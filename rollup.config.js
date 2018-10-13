@@ -1,5 +1,3 @@
-import { readFileSync } from 'fs';
-import path from 'path';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 import commonjs from 'rollup-plugin-commonjs';
@@ -7,43 +5,36 @@ import typescript from 'rollup-plugin-typescript';
 import svelte from 'rollup-plugin-svelte';
 import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
 import preprocessStyle from '@minna-ui/svelte-preprocess-style';
+import { terser } from 'rollup-plugin-terser';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
-import { makeCss, makeHtml } from './rollup-plugins.js';
+import config from 'sapper/config/rollup.js';
+import { makeCss } from './rollup-plugins.js';
 import pkg from './package.json';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
-const watch = { chokidar: true, clearScreen: false };
-const template = readFileSync(path.join(__dirname, '/src/client/template.html'), 'utf8');
 
-export default [
-  // client
-  {
-    watch,
-    input: 'src/client/index.ts',
-    output: {
-      sourcemap: dev,
-      format: 'esm',
-      dir: 'dist/client',
-      entryFileNames: '[name].[hash].js',
-      chunkFileNames: '[name].[hash].js',
-    },
+/** Svelte preprocessors */
+const preprocess = {
+  markup: preprocessMarkup({ level: dev ? 0 : 3 }),
+  style: preprocessStyle(),
+};
+
+export default {
+  client: {
+    input: config.client.input(),
+    output: config.client.output(),
     plugins: [
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
-      // makeCss({ include: 'src/client/css/**/*.css' }),
-      makeCss(),
+      makeCss({ include: 'src/css/**/*.css' }),
       svelte({
         dev,
-        preprocess: {
-          // TODO: Change level `3` to `4` once minna-ui components support it
-          markup: preprocessMarkup({ level: dev ? 0 : 3 }),
-          style: preprocessStyle(),
-        },
-        // FIXME: Enable this
-        // emitCss: true,
+        preprocess,
+        hydratable: true,
+        emitCss: true,
       }),
       resolve(),
       commonjs(),
@@ -51,45 +42,76 @@ export default [
         typescript: require('typescript'), // eslint-disable-line global-require
       }),
 
-      !dev && compiler({
-        externs: 'externs.js',
-        charset: 'UTF-8',
-        compilation_level: 'ADVANCED',
-        // debug: true,
-        // formatting: 'PRETTY_PRINT',
-      }),
-
-      makeHtml({
-        template,
-        fileName: 'index.html',
-        title: 'Home Control',
-        content: '%CSS%\n%JS%',
-      }),
+      !dev && terser({ module: true }),
+      // !dev && compiler({
+      //   externs: [
+      //     require.resolve('google-closure-compiler/contrib/externs/svg.js'),
+      //     path.join(__dirname, 'externs.js'),
+      //   ],
+      //   charset: 'UTF-8',
+      //   compilation_level: 'ADVANCED',
+      //   // language_in: 'ECMASCRIPT_NEXT',
+      //   // language_out: 'STABLE',
+      //   // strict_mode_input: true,
+      //   // use_types_for_optimization: true,
+      //   // warning_level: 'VERBOSE',
+      //   // jscomp_warning: '*',
+      //   // jscomp_error: '*',
+      //   jscomp_off: 'duplicate', // FIXME: Deprecated `methods` var
+      //   // debug: true,
+      //   // formatting: 'PRETTY_PRINT',
+      // }),
     ],
+
+    treeshake: {
+      propertyReadSideEffects: false,
+    },
 
     // temporary, pending Rollup 1.0
     experimentalCodeSplitting: true,
   },
 
-  // server
-  {
-    watch,
-    input: 'src/server/index.ts',
-    output: {
-      sourcemap: dev,
-      format: 'cjs',
-      file: 'dist/server.js',
-    },
+  server: {
+    input: config.server.input(),
+    output: config.server.output(),
     plugins: [
+      replace({
+        'process.browser': false,
+        'process.env.NODE_ENV': JSON.stringify(mode),
+      }),
+      makeCss({ include: 'src/css/**/*.css' }),
+      svelte({
+        dev,
+        preprocess,
+        generate: 'ssr',
+      }),
       resolve(),
       commonjs(),
       typescript({
         typescript: require('typescript'), // eslint-disable-line global-require
       }),
-
-      !dev && compiler(),
     ],
-    /* eslint-disable-next-line global-require */
-    external: Object.keys(pkg.dependencies).concat(require('module').builtinModules),
+    external: Object.keys(pkg.dependencies)
+      .filter(dep => !/^@minna-ui/.test(dep)) // minna-ui packages in dependencies
+      .concat(require('module').builtinModules), // eslint-disable-line global-require
+
+    // temporary, pending Rollup 1.0
+    experimentalCodeSplitting: true,
   },
-];
+
+  serviceworker: {
+    input: config.serviceworker.input(),
+    output: config.serviceworker.output(),
+    plugins: [
+      replace({
+        'process.browser': true,
+        'process.env.NODE_ENV': JSON.stringify(mode),
+      }),
+      resolve(),
+      commonjs(),
+      !dev && compiler({
+        compilation_level: 'ADVANCED',
+      }),
+    ],
+  },
+};

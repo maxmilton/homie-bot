@@ -1,6 +1,7 @@
 // https://github.com/sveltejs/sapper/blob/master/templates/src/server/middleware/types.ts
 
 import { ClientRequest, ServerResponse } from 'http';
+// import * as yl from 'yeelight-awesome';
 
 export interface Req extends ClientRequest {
   url: string;
@@ -23,9 +24,12 @@ export { ServerResponse };
 
 export type Next = () => void;
 
-export type DeviceData = {
-  ip: string;
+export type Device = {
+  host: string;
+  port: number;
   name: string;
   type: number;
   state: object;
 };
+
+// export type CommandCallback = (yeelight: yl.IDevice) => void;

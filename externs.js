@@ -37,9 +37,3 @@ var type;
 
 /** @type {string} */
 var sql;
-
-// navaid global method calls
-// FIXME: Duplicate identifier; not sure why this is breaking the build
-var addEventListener = window.addEventListener;
-var removeEventListener = window.removeEventListener;
-var dispatchEvent = window.dispatchEvent;

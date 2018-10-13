@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": true,
-    "pretty": true,
+    // "pretty": true,
 
     "strict": true,
     "noUnusedLocals": true,
@@ -19,11 +19,14 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
 
-    "baseUrl": "."
+    "baseUrl": ".",
+
+    "outDir": "lib"
   },
   "exclude": [
-    "dist",
-    "node_modules"
+    "__sapper__",
+    "node_modules",
+    "lib"
   ],
   "typeAcquisition": {
     "enable": true
