@@ -19,11 +19,14 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
 
-    "baseUrl": "."
+    "baseUrl": ".",
+
+    "outDir": "lib"
   },
   "exclude": [
     "__sapper__",
-    "node_modules"
+    "node_modules",
+    "lib"
   ],
   "typeAcquisition": {
     "enable": true
