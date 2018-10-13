@@ -4,7 +4,10 @@ import path from 'path';
 import { createFilter } from 'rollup-pluginutils';
 import postcssrc from 'postcss-load-config';
 import postcss from 'postcss';
+import Purgecss from 'purgecss';
 /* eslint-enable */
+
+const dev = process.env.NODE_ENV === 'development';
 
 /**
  * Generic error handler for nodejs callbacks.
@@ -21,11 +24,18 @@ export function catchErr(err) {
  * @param {string|Function} opts.content Page content.
  * @param {Array<string>=} opts.exclude Files to exclude from CSS processing.
  * @param {Array<string>=} opts.include Files to include in CSS processing.
+ * @param {Array<string>=} opts.content Files to parse for CSS classes.
  */
 export function makeCss({
   context = {},
   exclude = [],
   include = ['**/*.css'],
+  content = [
+    '__sapper__/**/*.html',
+    '__sapper__/**/*.js',
+    'src/**/*.html',
+    'src/**/*.js',
+  ],
 } = {}) {
   const filter = createFilter(include, exclude);
 
@@ -44,7 +54,17 @@ export function makeCss({
           this.warn(warn.toString(), { line: warn.line, column: warn.column });
         });
 
-        return result.css;
+        if (dev) return result.css;
+
+        const purgecss = new Purgecss({
+          content,
+          css: [{
+            raw: result.css,
+          }],
+          keyframes: true,
+        });
+
+        return purgecss.purge()[0].css;
       } catch (err) {
         if (err.name === 'CssSyntaxError') {
           process.stderr.write(err.message + err.showSourceCode());
