@@ -3,8 +3,8 @@
     <a href="/" id="logo">Home Control</a>
 
     <!-- Menu items -->
-    <a href="." class="nav-item{segment === undefined ? ' active' : ''}">Home</a>
-    <a href="admin" class="nav-item{segment === 'admin' ? ' active' : ''}">Admin</a>
+    <a href="." class="nav-item{segment === undefined ? ' nav-item-active' : ''}">Home</a>
+    <a href="admin" class="nav-item{segment === 'admin' ? ' nav-item-active' : ''}">Admin</a>
   </nav>
 </header>
 
@@ -27,5 +27,9 @@
   .nav-item {
     padding: 0.5em 1em;
     margin: 0;
+  }
+
+  .nav-item-active {
+    border-bottom: 2px solid $intent-primary;
   }
 </style>

@@ -14,13 +14,13 @@
   ➕ New
 </button>
 
-<button
+<!-- <button
   class="button"
   type="button"
   on:click="$deviceGet()"
 >
   🔁 Refresh
-</button>
+</button> -->
 
 {#if showDiscover}
   <!-- <DeviceDiscover on:close="set({ showDiscover: false })" /> -->
@@ -35,14 +35,14 @@
   {#each $devices as device}
     <div class="card card-hover card-has-button card-device">
       <div class="card-body">
-        <MinnaSwitch
+        <!-- <MinnaSwitch
           bind:value="device.state.on"
           on:change="handleSwitch(event, device)"
-        />
+        /> -->
 
         <h3 class="mv1">{device.name}</h3>
 
-        <div class="muted">{device.ip}</div>
+        <div class="muted">{device.host}:{device.port}</div>
       </div>
       <a href="/device/{device.rowid}" class="card-button">
         Edit
@@ -54,7 +54,7 @@
 </div>
 
 <script>
-  import MinnaSwitch from '@minna-ui/switch';
+  // import MinnaSwitch from '@minna-ui/switch';
   import DeviceDiscover from './DeviceDiscover.html';
   import DeviceAdd from './DeviceAdd.html';
 
@@ -62,7 +62,7 @@
     components: {
       DeviceAdd,
       DeviceDiscover,
-      MinnaSwitch,
+      // MinnaSwitch,
     },
     data: () => ({
       showAddDevice: false,
@@ -71,14 +71,14 @@
     oncreate() {
       this.store.deviceGet();
     },
-    methods: {
-      // TODO: Put this into the store
-      handleSwitch(event, device) {
-        const data = Object.assign({}, device);
-        data.state.on = event;
-        this.store.devicePut(data);
-      },
-    },
+    // methods: {
+    //   // TODO: Put this into the store
+    //   handleSwitch(event, device) {
+    //     const data = Object.assign({}, device);
+    //     data.state.on = event;
+    //     this.store.devicePut(null, data);
+    //   },
+    // },
   };
 </script>
 
