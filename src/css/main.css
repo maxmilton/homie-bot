@@ -101,3 +101,10 @@ $spinner-animate-speed: 0.8s;
     animation: spinner $spinner-animate-speed linear infinite;
   }
 }
+
+/* Utils */
+
+/* TODO: Get rid of this */
+.float-right {
+  float: right;
+}

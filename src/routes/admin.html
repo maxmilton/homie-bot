@@ -8,7 +8,7 @@
     bind:value="sql"
     id="sql"
     class="textarea w100 mono"
-    rows="10"
+    rows="6"
   />
 </div>
 
@@ -23,7 +23,7 @@
     Run DB Query
   </button>
 
-  <button class="button button-clear button-reset red3" type="button" on:click="handleReset()">
+  <button class="button button-clear float-right red3" type="button" on:click="handleReset()">
     Reset DB
   </button>
 </div>
@@ -55,9 +55,3 @@
     },
   };
 </script>
-
-<style type="text/postcss">
-  .button-reset {
-    float: right;
-  }
-</style>
