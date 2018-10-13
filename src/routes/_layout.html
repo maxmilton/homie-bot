@@ -19,6 +19,7 @@
     oncreate() {
       if (process.env.NODE_ENV === 'development') {
         // allow access to store via devtools; e.g. run `store.get()` in console
+        /* eslint-disable-next-line no-restricted-globals */
         self.store = this.store;
       }
     },

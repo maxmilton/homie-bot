@@ -9,12 +9,14 @@
     }),
     methods: {
       increment() {
-        const { value, min, max, step = 10 } = this.get();
+        // const { value, min, max, step = 10 } = this.get();
+        const { value, step = 10 } = this.get();
         this.set({ value: value + step });
         this.fire('change');
       },
       decrement() {
-        const { value, min, max, step = 10 } = this.get();
+        // const { value, min, max, step = 10 } = this.get();
+        const { value, step = 10 } = this.get();
         this.set({ value: value - step });
         this.fire('change');
       },

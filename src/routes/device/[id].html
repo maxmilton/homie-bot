@@ -102,13 +102,13 @@
       },
     },
 
-    async preload({ params, query }) {
+    async preload({ params }) {
       const res = await this.fetch(`/api/device/info/${params.id}`);
 
       if (!res.ok) throw new Error(res.statusText);
 
       return res.json();
-    }
+    },
   };
 </script>
 

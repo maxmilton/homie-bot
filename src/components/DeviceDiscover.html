@@ -40,7 +40,8 @@
       }),
     }),
     methods: {
-      add(device, index) {
+      // add(device, index) {
+      add(device) {
         this.store.devicePut(null, {
           host: device.host,
           port: device.port,
