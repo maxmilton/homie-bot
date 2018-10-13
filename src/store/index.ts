@@ -6,7 +6,6 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
-    // console.log('@@ DISCOVER', await res.json());
     this.set({ discovered: await res.json() });
   }
 
@@ -24,12 +23,12 @@ class AppStore extends Store {
     this.set({ devices });
   }
 
-  async devicePut(data, id) {
+  async devicePut(id, data) {
     // inject default data
-    if (!data.state) {
-      /* eslint-disable-next-line no-param-reassign */
-      data.state = { on: false };
-    }
+    const device = Object.assign({}, data, {
+      state: data.state || {},
+      type: data.type || -1,
+    });
 
     /* eslint-disable-next-line no-param-reassign */
     id = id || data.rowid;
@@ -39,12 +38,12 @@ class AppStore extends Store {
         'Content-Type': 'application/json',
       },
       method: 'PUT',
-      body: JSON.stringify(data),
+      body: JSON.stringify(device),
     });
 
     if (!res.ok) throw new Error(res.statusText);
 
-    // get the new list of devices
+    // update list of devices
     this.deviceGet();
   }
 
@@ -55,7 +54,7 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
-    // get the new list of devices
+    // update list of devices
     this.deviceGet();
   }
 
@@ -71,7 +70,7 @@ class AppStore extends Store {
     if (!res.ok) throw new Error(res.statusText);
 
     const result = await res.json();
-    console.log('DB QUERY RESULT:', result);
+    console.log('[DB] QUERY RESULT:', result);
     this.set({ result });
   }
 
@@ -80,7 +79,7 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
-    // get the new list of devices
+    // update list of devices
     this.deviceGet();
   }
 }
