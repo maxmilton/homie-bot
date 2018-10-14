@@ -1,30 +1,27 @@
-<button
-  class="button"
-  type="button"
-  on:click="set({ showDiscover: !showDiscover})"
->
-  ✨ Auto-discover
-</button>
+<div class="l-df align-col-center">
+  <h1>Devices</h1>
+  <div class="ml-auto">
+    <button
+      class="button"
+      type="button"
+      on:click="set({ showDiscover: !showDiscover})"
+    >
+      Discover
+    </button>
 
-<button
-  class="button"
-  type="button"
-  on:click="set({ showAddDevice: !showAddDevice})"
->
-  ➕ New
-</button>
+    <button
+      class="button"
+      type="button"
+      on:click="set({ showAddDevice: !showAddDevice})"
+    >
+      New
+    </button>
+  </div>
+</div>
 
-<!-- <button
-  class="button"
-  type="button"
-  on:click="$deviceGet()"
->
-  🔁 Refresh
-</button> -->
 
 {#if showDiscover}
-  <!-- <DeviceDiscover on:close="set({ showDiscover: false })" /> -->
-  <DeviceDiscover />
+  <DeviceDiscover on:close="set({ showDiscover: false })" />
 {/if}
 
 {#if showAddDevice}
@@ -35,11 +32,6 @@
   {#each $devices as device}
     <div class="card card-hover card-has-button card-device">
       <div class="card-body">
-        <!-- <MinnaSwitch
-          bind:value="device.state.on"
-          on:change="handleSwitch(event, device)"
-        /> -->
-
         <h3 class="mv1">{device.name}</h3>
 
         <div class="muted">{device.host}:{device.port}</div>
@@ -49,12 +41,11 @@
       </a>
     </div>
   {:else}
-    <p class="w2 lead">😢 You have no registered devices.</p>
+    <p class="w2 lead">😢 No registered devices.</p>
   {/each}
 </div>
 
 <script>
-  // import MinnaSwitch from '@minna-ui/switch';
   import DeviceDiscover from './DeviceDiscover.html';
   import DeviceAdd from './DeviceAdd.html';
 
@@ -62,7 +53,6 @@
     components: {
       DeviceAdd,
       DeviceDiscover,
-      // MinnaSwitch,
     },
     data: () => ({
       showAddDevice: false,
@@ -71,21 +61,5 @@
     oncreate() {
       this.store.deviceGet();
     },
-    // methods: {
-    //   // TODO: Put this into the store
-    //   handleSwitch(event, device) {
-    //     const data = Object.assign({}, device);
-    //     data.state.on = event;
-    //     this.store.devicePut(null, data);
-    //   },
-    // },
   };
 </script>
-
-<style type="text/postcss">
-  /* @import "import.css"; */
-
-  :global(.card-device) .switch {
-    float: right;
-  }
-</style>
