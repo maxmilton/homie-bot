@@ -17,6 +17,7 @@
     "sapper",
     "sqlite",
     "svelte",
+    "web-app",
     "web-ui"
   ],
   "main": "dist/index.js",
