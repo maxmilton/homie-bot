@@ -1,9 +1,6 @@
 #!/bin/sh
 set -euo pipefail
 
-set -o errtrace # trap errors inside functions
-trap 'rm /tmp/homie-bot.pid' ERR
-
 export NODE_ENV=production
 export PORT=8080
 nohup node ./dist/index.js &
@@ -16,3 +13,12 @@ echo ""
 echo "To view logs, run this command:"
 echo "  tail -f ./nohup.out"
 echo ""
+
+err_handler () {
+  [ $? -eq 0 ] && exit
+
+  # clean up
+  rm /tmp/homie-bot.pid
+}
+
+trap err_handler EXIT
