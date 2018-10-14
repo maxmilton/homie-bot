@@ -30,18 +30,17 @@
 
 <div class="dg grid ns-x2 mt4">
   {#each $devices as device}
-    <div class="card card-hover card-has-button card-device">
+    <a href="/device/{device.rowid}" class="card card-hover card-has-button">
       <div class="card-body">
         <h3 class="mv1">{device.name}</h3>
 
-        <div class="muted">{device.host}:{device.port}</div>
+        <div class="muted code">{device.host}:{device.port}</div>
       </div>
-      <a href="/device/{device.rowid}" class="card-button">
-        Edit
+
+      <div class="card-button">Edit</div>
       </a>
-    </div>
   {:else}
-    <p class="w2 lead">😢 No registered devices.</p>
+    <p class="w2 lead tc">😢 No registered devices.</p>
   {/each}
 </div>
 
