@@ -9,3 +9,4 @@ homie-bot.db-shm
 homie-bot.db-wal
 package-lock.json*
 yarn-error.log
+*.tar.xz
