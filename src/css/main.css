@@ -70,6 +70,27 @@ body {
   }
 }
 
+/* Forms */
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+}
+
+/* Tables */
+
+.table-responsive {
+  width: 100vw;
+  margin: -1rem;
+  overflow-x: auto;
+
+  @media $(ns) {
+    width: 100%;
+    margin: unset;
+  }
+}
+
 /* Loading state spinner */
 /* TODO: Consider moving this into minna-ui */
 
