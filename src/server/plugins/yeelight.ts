@@ -68,7 +68,7 @@ export async function getInfo(id: string) {
       on: result[0] === 'on',
     };
   } catch (err) {
-    console.error('Error', err);
+    console.error(err);
   }
 }
 
@@ -80,7 +80,7 @@ export async function toggle(id: string) {
     const { yeelight } = await oneShotCommand(id);
     return yeelight.toggle();
   } catch (err) {
-    console.error('Error', err);
+    console.error(err);
   }
 }
 
@@ -96,7 +96,7 @@ export async function brightness(
     const { yeelight } = await oneShotCommand(id);
     return yeelight.setBright(+value, 'smooth', +speed);
   } catch (err) {
-    console.error('Error', err);
+    console.error(err);
   }
 }
 
@@ -109,6 +109,6 @@ export async function color(id: string, value: string, speed: number | string = 
     const { yeelight } = await oneShotCommand(id);
     return yeelight.setHSV(hue, saturation, 'smooth', +speed);
   } catch (err) {
-    console.error('Error', err);
+    console.error(err);
   }
 }
