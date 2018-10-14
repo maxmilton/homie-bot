@@ -3,7 +3,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 set -o errtrace # trap errors inside functions
-trap 'echo_err "Aborting due to failure."; finish &> /dev/null' ERR
+trap 'finish; echo_err "Aborting due to failure."' ERR
 
 # options
 DIST_FILES=(
