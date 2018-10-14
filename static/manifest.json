@@ -1,8 +1,8 @@
 {
 	"background_color": "#ffffff",
 	"theme_color": "#2965cc",
-	"name": "Home Control",
-	"short_name": "Home Control",
+	"name": "Homie Bot",
+	"short_name": "Homie Bot",
 	"display": "minimal-ui",
 	"start_url": "/",
 	"icons": [
