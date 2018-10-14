@@ -41,7 +41,7 @@ export function oneShotCommand(id: string): Promise<yl.IDevice> {
 
       yeelight.connect();
     } catch (err) {
-      yeelight.disconnect();
+      if (yeelight) yeelight.disconnect();
       reject(err);
     }
   });
@@ -89,8 +89,8 @@ export async function toggle(id: string) {
  */
 export async function brightness(
   id: string,
-  value: number|string,
-  speed: number|string = TRANSITION_SPEED,
+  value: number | string,
+  speed: number | string = TRANSITION_SPEED
 ) {
   try {
     const { yeelight } = await oneShotCommand(id);
@@ -103,11 +103,7 @@ export async function brightness(
 /**
  * Set the device hue colour.
  */
-export async function color(
-  id: string,
-  value: string,
-  speed: number|string = TRANSITION_SPEED,
-) {
+export async function color(id: string, value: string, speed: number | string = TRANSITION_SPEED) {
   try {
     const [hue, saturation] = convert.hex.hsv(value);
     const { yeelight } = await oneShotCommand(id);
