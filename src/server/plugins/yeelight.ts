@@ -34,7 +34,7 @@ export function oneShotCommand(id: string): Promise<yl.IDevice> {
       });
 
       yeelight.on('connected', () => {
-        yeelight.on('commandSuccess', yeelight.disconnect);
+        yeelight.on('commandSuccess', yeelight && yeelight.disconnect);
 
         resolve({ yeelight, device });
       });
