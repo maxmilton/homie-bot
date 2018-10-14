@@ -25,6 +25,7 @@ export function catchErr(err) {
  * @param {Array<string>=} opts.exclude Files to exclude from CSS processing.
  * @param {Array<string>=} opts.include Files to include in CSS processing.
  * @param {Array<string>=} opts.content Files to parse for CSS classes.
+ * @param {Array<string>=} opts.whitelist CSS classes to always keep.
  */
 export function makeCss({
   context = {},
@@ -36,6 +37,7 @@ export function makeCss({
     'src/**/*.html',
     'src/**/*.js',
   ],
+  whitelist = [],
 } = {}) {
   const filter = createFilter(include, exclude);
 
@@ -62,6 +64,7 @@ export function makeCss({
             raw: result.css,
           }],
           keyframes: true,
+          whitelist,
         });
 
         return purgecss.purge()[0].css;

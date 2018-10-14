@@ -20,6 +20,14 @@ const preprocess = {
   style: preprocessStyle(),
 };
 
+const makeCssOpts = {
+  include: 'src/css/**/*.css',
+  whitelist: [
+    // 'nav-item',
+    // 'nav-item-active',
+  ],
+};
+
 export default {
   client: {
     input: config.client.input(),
@@ -29,7 +37,7 @@ export default {
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
-      makeCss({ include: 'src/css/**/*.css' }),
+      makeCss(makeCssOpts),
       svelte({
         dev,
         preprocess,
@@ -79,7 +87,7 @@ export default {
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
-      makeCss({ include: 'src/css/**/*.css' }),
+      makeCss(makeCssOpts),
       svelte({
         dev,
         preprocess,
