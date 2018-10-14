@@ -19,6 +19,24 @@
 {/if}
 
 <div class="form-group">
+  <strong>Presets:</strong>
+  <button
+    class="button button-mini"
+    type="button"
+    on:click="set({ sql: 'SELECT rowid, * FROM devices;' })"
+  >
+    all devices
+  </button>
+  <button
+    class="button button-mini"
+    type="button"
+    on:click="set({ sql: 'UPDATE devices SET name = \"New Name\" WHERE rowid = 1;' })"
+  >
+    update name
+  </button>
+</div>
+
+<div class="form-group">
   <button class="button" type="button" on:click="handleQuery()">
     Run DB Query
   </button>
