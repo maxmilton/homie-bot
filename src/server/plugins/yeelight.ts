@@ -26,8 +26,12 @@ export function discover() {
 export function oneShotCommand(id: string): Promise<yl.IDevice> {
   return new Promise((resolve, reject) => {
     let yeelight: yl.IDevice;
+
     try {
       const device = dbMethods.deviceGet(id);
+
+      if (!device) throw new Error('Device not found in database.');
+
       yeelight = new yl.Yeelight({
         lightIp: device.host,
         lightPort: device.port,
