@@ -1,9 +1,5 @@
 <!--
 
-  FIXME: Brightness should change instantly
-
-  FIXME: Random timeouts -- could it be something to do with using Promise?
-
   TODO: Add way to edit device name, host, port, etc.
 
   TODO: Add nice colour picker
@@ -12,7 +8,7 @@
 
   TODO: Nice brightness slider input
 
-  TODO: Add some preset modes (flow colours, sunrise, sunset) + allow scheduling them
+  TODO: Preset modes (flow colours, sunrise, sunset) + allow scheduling them
 
 -->
 
@@ -22,7 +18,7 @@
 
 <h1>{name}</h1>
 
-<div class="muted">{host}:{port}</div>
+<div class="code">{host}:{port}</div>
 
 <div class="form-group">
   <MinnaSwitch bind:value="on" on:change="toggle()" />
