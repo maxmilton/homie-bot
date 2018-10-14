@@ -63,3 +63,16 @@
     },
   };
 </script>
+
+<style type="text/postcss">
+  @import "import.css";
+
+  .card {
+    background: url("/img/yeelight-color.jpg") right top no-repeat;
+    background-size: contain;
+  }
+
+  .card-button {
+    background: color-mod($card-background-color alpha(0.85));
+  }
+</style>
