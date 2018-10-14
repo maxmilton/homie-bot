@@ -16,11 +16,11 @@
   <title>{name} | Homie Bot</title>
 </svelte:head>
 
-<h1>{name}</h1>
+<h1 class="mb1">{name}</h1>
 
 <div class="code">{host}:{port}</div>
 
-<div class="form-group">
+<div class="form-group mt4">
   <MinnaSwitch bind:value="on" on:change="toggle()" />
 </div>
 
