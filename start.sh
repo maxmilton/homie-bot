@@ -1,6 +1,9 @@
 #!/bin/sh
 set -euo pipefail
 
+set -o errtrace # trap errors inside functions
+trap 'rm /tmp/homie-bot.pid' ERR
+
 export NODE_ENV=production
 export PORT=8080
 nohup node ./dist/index.js &
