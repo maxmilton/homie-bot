@@ -30,7 +30,7 @@
 
 <div class="dg grid ns-x2 mt4">
   {#each $devices as device}
-    <a href="/device/{device.rowid}" class="card card-hover card-has-button">
+    <a href="/device/{device.rowid}" class="card card-hover card-has-button" rel="prefetch">
       <div class="card-body">
         <h3 class="mv1">{device.name}</h3>
 
