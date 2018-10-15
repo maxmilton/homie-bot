@@ -8,10 +8,10 @@ CREATE TABLE devices (
 
 CREATE TABLE presets (
   type TEXT NOT NULL,
-  value TEXT NOT NULL
+  data TEXT NOT NULL
 );
 
-INSERT INTO presets (type, value)
+INSERT INTO presets (type, data)
 VALUES
   ('color', '{"color":"#FF0000","name":"Red"}'),
   ('color', '{"color":"#00FF00","name":"Green"}'),

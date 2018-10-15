@@ -84,7 +84,7 @@ class AppStore extends Store {
 
     const colors = (await res.json()).map((color: PresetColor) => {
       /* eslint-disable-next-line no-param-reassign */
-      color.value = JSON.parse(color.value);
+      color.data = JSON.parse(color.data);
       return color;
     });
 

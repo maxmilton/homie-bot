@@ -89,17 +89,17 @@ const presetPutStmt = db.prepare(`
   INSERT OR REPLACE INTO presets (
     rowid,
     type,
-    value
+    data
   )
   VALUES (
     @rowid,
     @type,
-    json(@value)
+    json(@data)
   )
 `);
 
-export function presetPut(rowid: string | null, type: string, value: object) {
-  return presetPutStmt.run({ rowid, type, value: JSON.stringify(value) });
+export function presetPut(rowid: string | null, type: string, data: object) {
+  return presetPutStmt.run({ rowid, type, data: JSON.stringify(data) });
 }
 
 const presetGetStmt = db.prepare('SELECT rowid, * FROM presets WHERE rowid=?');

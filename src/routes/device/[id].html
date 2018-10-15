@@ -31,11 +31,11 @@
   {#each $colors as color}
     <button
       class="button button-color ttu"
-      style="border-left:1em solid {color.value.color}"
+      style="border-color:{color.data.color}"
       type="button"
-      on:click="setColor(color.value.color)"
+      on:click="setColor(color.data.color)"
     >
-      {color.value.name}
+      {color.data.name}
     </button>
   {:else}
     <p>No color presets found.</p>
