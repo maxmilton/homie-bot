@@ -6,7 +6,7 @@ CREATE TABLE devices(
   type INTERGER NOT NULL
 );
 
--- CREATE TABLE types(
---   type,
---   capabilities
--- );
+CREATE TABLE presets(
+  type TEXT NOT NULL,
+  value TEXT NOT NULL,
+);

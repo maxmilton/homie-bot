@@ -67,7 +67,7 @@ const devicePutStmt = db.prepare(`
   )
 `);
 
-export function devicePut(rowid: string | null, { host, port, name, state, type }: Device) {
+export function devicePut(rowid: string|null, { host, port, name, state, type }: Device) {
   return devicePutStmt.run({ rowid, host, port, name, state: JSON.stringify(state), type });
 }
 
@@ -87,6 +87,44 @@ const deviceDeleteStmt = db.prepare('DELETE FROM devices WHERE rowid=?');
 
 export function deviceDelete(id: string) {
   return deviceDeleteStmt.run(id);
+}
+
+const presetPutStmt = db.prepare(`
+  INSERT OR REPLACE INTO devices(
+    rowid,
+    type
+    value,
+  )
+  VALUES (
+    @rowid,
+    @type
+    json(@value),
+  )
+`);
+
+export function presetPut(rowid: string|null, type: string, value: object) {
+  return presetPutStmt.run({ rowid, type, JSON.stringify(value) });
+}
+
+const presetGetStmt = db.prepare('SELECT rowid, * FROM presets WHERE rowid=?');
+
+export function presetGet(id: string) {
+  return presetGetStmt.get(id);
+}
+
+const presetListTypeStmt = db.prepare('SELECT rowid, * FROM preset WHERE type=?');
+const presetListStmt = db.prepare('SELECT rowid, * FROM preset');
+
+export function presetList(type?: string) {
+  return type
+    ? presetListTypeStmt.all(type)
+    : presetListStmt.all();
+}
+
+const presetDeleteStmt = db.prepare('DELETE FROM presets WHERE rowid=?');
+
+export function presetDelete(id: string) {
+  return presetDeleteStmt.run(id);
 }
 
 export default db;
