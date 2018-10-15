@@ -1,5 +1,5 @@
 import { Store } from 'svelte/store.js';
-import { Device, Req } from '../server/types';
+import { Device, PresetColor, Req } from '../server/types';
 
 class AppStore extends Store {
   async discover() {
@@ -8,20 +8,6 @@ class AppStore extends Store {
     if (!res.ok) throw new Error(res.statusText);
 
     this.set({ discovered: await res.json() });
-  }
-
-  async deviceGet(id?: string) {
-    const res = await fetch(`/api/device${id ? `/${id}` : ''}`);
-
-    if (!res.ok) throw new Error(res.statusText);
-
-    const devices = (await res.json()).map((device: Device) => {
-      /* eslint-disable-next-line no-param-reassign */
-      device.state = JSON.parse(device.state);
-      return device;
-    });
-
-    this.set({ devices });
   }
 
   async devicePut(id: string | null, data: Device) {
@@ -48,6 +34,20 @@ class AppStore extends Store {
     this.deviceGet();
   }
 
+  async deviceGet(id?: string) {
+    const res = await fetch(`/api/device${id ? `/${id}` : ''}`);
+
+    if (!res.ok) throw new Error(res.statusText);
+
+    const devices = (await res.json()).map((device: Device) => {
+      /* eslint-disable-next-line no-param-reassign */
+      device.state = JSON.parse(device.state);
+      return device;
+    });
+
+    this.set({ devices });
+  }
+
   async deviceDelete(id: string) {
     const res = await fetch(`/api/device/${id}`, {
       method: 'DELETE',
@@ -57,6 +57,49 @@ class AppStore extends Store {
 
     // update list of devices
     this.deviceGet();
+  }
+
+  async presetColorPut(id: string | null, data: PresetColor) {
+    /* eslint-disable-next-line no-param-reassign */
+    id = id || data.rowid;
+
+    const res = await fetch(`/api/preset/color${id ? `/${id}` : ''}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) throw new Error(res.statusText);
+
+    // update list of colours
+    this.presetColorGet();
+  }
+
+  async presetColorGet(id?: string) {
+    const res = await fetch(`/api/preset/color${id ? `/${id}` : ''}`);
+
+    if (!res.ok) throw new Error(res.statusText);
+
+    const colors = (await res.json()).map((color: PresetColor) => {
+      /* eslint-disable-next-line no-param-reassign */
+      color.value = JSON.parse(color.value);
+      return color;
+    });
+
+    this.set({ colors });
+  }
+
+  async presetColorDelete(id: string) {
+    const res = await fetch(`/api/preset/color/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!res.ok) throw new Error(res.statusText);
+
+    // update list of colours
+    this.presetColorGet();
   }
 
   async dbQuery(sql: string) {
@@ -88,6 +131,7 @@ class AppStore extends Store {
 const initialState = {
   discovered: [],
   devices: [],
+  colors: [],
   result: '',
 };
 
