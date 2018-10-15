@@ -116,3 +116,28 @@ body {
     animation: spinner $spinner-animate-speed linear infinite;
   }
 }
+
+/* Nav */
+/* XXX: Temporarily put styles in main.css until sapper is fixed */
+
+header {
+  border-bottom: 1px solid color-mod($black alpha(0.1));
+}
+
+.nav {
+  justify-content: flex-end;
+}
+
+#logo { /* stylelint-disable-line selector-max-id */
+  margin-right: auto;
+  font-size: 1.5em;
+}
+
+.nav-item {
+  padding: 0.5em 1em;
+  margin: 0;
+}
+
+.nav-item-active {
+  border-bottom: 2px solid $intent-primary;
+}
