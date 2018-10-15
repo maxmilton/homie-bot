@@ -54,7 +54,6 @@
 
   <label class="label" for="brightness">Brightness</label>
   <input bind:value="brightness" class="range" type="range" list="tickmarks" on:change="setBrightness()">
-  <MinnaInputNumber bind:value="brightness" id="brightness" on:change="setBrightness()" />
 </div>
 
 <button
@@ -67,13 +66,18 @@
 
 <script>
   import MinnaSwitch from '@minna-ui/switch';
-  import MinnaInputNumber from '../../components/MinnaInputNumber.html';
   import * as sapper from '../../../__sapper__/client.js'; // eslint-disable-line import/namespace
 
   export default {
     components: {
       MinnaSwitch,
-      MinnaInputNumber,
+    },
+    data: () => ({
+      colorName: '',
+    }),
+    oncreate() {
+      // get colour presets
+      this.store.presetColorGet();
     },
     methods: {
       async toggle() {
