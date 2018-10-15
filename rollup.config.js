@@ -36,6 +36,7 @@ export default {
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.GIT_RELEASE': JSON.stringify(process.env.GIT_RELEASE),
       }),
       makeCss(makeCssOpts),
       svelte({
@@ -86,6 +87,7 @@ export default {
       replace({
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.GIT_RELEASE': JSON.stringify(process.env.GIT_RELEASE),
       }),
       makeCss(makeCssOpts),
       svelte({
@@ -114,12 +116,14 @@ export default {
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.GIT_RELEASE': JSON.stringify(process.env.GIT_RELEASE),
       }),
       resolve(),
       commonjs(),
-      !dev && compiler({
-        compilation_level: 'ADVANCED',
-      }),
+      !dev
+        && compiler({
+          compilation_level: 'ADVANCED',
+        }),
     ],
   },
 };

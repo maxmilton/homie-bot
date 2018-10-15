@@ -28,8 +28,8 @@
     "stop.sh"
   ],
   "scripts": {
-    "dev": "sapper dev",
-    "build": "NODE_ENV=production sapper build ./dist",
+    "dev": "GIT_RELEASE=$(git describe --always --dirty=\"-dev\") sapper dev",
+    "build": "GIT_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production sapper build ./dist",
     "serve": "NODE_ENV=production PORT=8080 node ./dist",
     "_run": "yarn build && yarn serve",
     "lint": "yarn lint:css && yarn lint:js",
