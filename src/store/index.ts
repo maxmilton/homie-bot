@@ -39,6 +39,7 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
+    // TODO: Handle unpacking JSON on the server
     const devices = (await res.json()).map((device: Device) => {
       /* eslint-disable-next-line no-param-reassign */
       device.state = JSON.parse(device.state);
@@ -82,6 +83,7 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
+    // TODO: Handle unpacking JSON on the server
     const colors = (await res.json()).map((color: PresetColor) => {
       /* eslint-disable-next-line no-param-reassign */
       color.data = JSON.parse(color.data);

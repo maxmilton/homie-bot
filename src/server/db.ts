@@ -14,7 +14,7 @@ db.pragma('journal_mode = WAL');
 /** Populate database with default data */
 export function dbInit() {
   const hasTables = db
-    .prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='devices'`)
+    .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='devices'")
     .get();
 
   if (hasTables) return;
@@ -32,9 +32,7 @@ export function reset() {
   db.pragma('writable_schema = 1');
   db.exec("DELETE FROM sqlite_master WHERE type in ('table', 'index', 'trigger')");
   db.pragma('writable_schema = 0');
-
-  // recover deleted space
-  db.exec('VACUUM');
+  db.exec('VACUUM'); // recover deleted space
 
   dbInit();
 }
@@ -70,6 +68,7 @@ export function devicePut(rowid: string | null, { host, port, name, state, type 
 const deviceGetStmt = db.prepare('SELECT rowid, * FROM devices WHERE rowid=?');
 
 export function deviceGet(id: string) {
+  // TODO: Unpack JSON from 'state' col -- better server side than client side + remove logic in client
   return deviceGetStmt.get(id);
 }
 
@@ -105,6 +104,7 @@ export function presetPut(rowid: string | null, type: string, data: object) {
 const presetGetStmt = db.prepare('SELECT rowid, * FROM presets WHERE rowid=?');
 
 export function presetGet(id: string) {
+  // TODO: Unpack JSON from 'data' col -- better server side than client side + remove logic in client
   return presetGetStmt.get(id);
 }
 
@@ -112,9 +112,7 @@ const presetListTypeStmt = db.prepare('SELECT rowid, * FROM presets WHERE type=?
 const presetListStmt = db.prepare('SELECT rowid, * FROM presets');
 
 export function presetList(type?: string) {
-  return type
-    ? presetListTypeStmt.all(type)
-    : presetListStmt.all();
+  return type ? presetListTypeStmt.all(type) : presetListStmt.all();
 }
 
 const presetDeleteStmt = db.prepare('DELETE FROM presets WHERE rowid=?');
