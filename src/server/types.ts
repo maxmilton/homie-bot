@@ -30,5 +30,14 @@ export type Device = {
   port?: number;
   name?: string;
   type?: number;
-  state?: object|string;
+  state?: object | string;
+};
+
+export type PresetColor = {
+  rowid?: string;
+  type: 'color';
+  value: string | {
+    color: string,
+    name?: string,
+  };
 };
