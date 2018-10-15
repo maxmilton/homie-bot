@@ -13,11 +13,9 @@ db.pragma('journal_mode = WAL');
 
 /** Populate database with default data */
 export function dbInit() {
-  const hasTables = db.prepare(`
-    SELECT name
-    FROM sqlite_master
-    WHERE type='table' AND name='devices'
-  `).get();
+  const hasTables = db
+    .prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='devices'`)
+    .get();
 
   if (hasTables) return;
 
@@ -43,13 +41,11 @@ export function reset() {
 
 export function query(sql: string) {
   const stmt = db.prepare(sql);
-  return stmt.reader
-    ? stmt.all()
-    : stmt.run();
+  return stmt.reader ? stmt.all() : stmt.run();
 }
 
 const devicePutStmt = db.prepare(`
-  INSERT OR REPLACE INTO devices(
+  INSERT OR REPLACE INTO devices (
     rowid,
     host,
     port,
@@ -67,7 +63,7 @@ const devicePutStmt = db.prepare(`
   )
 `);
 
-export function devicePut(rowid: string|null, { host, port, name, state, type }: Device) {
+export function devicePut(rowid: string | null, { host, port, name, state, type }: Device) {
   return devicePutStmt.run({ rowid, host, port, name, state: JSON.stringify(state), type });
 }
 
@@ -90,20 +86,20 @@ export function deviceDelete(id: string) {
 }
 
 const presetPutStmt = db.prepare(`
-  INSERT OR REPLACE INTO devices(
+  INSERT OR REPLACE INTO presets (
     rowid,
-    type
-    value,
+    type,
+    value
   )
   VALUES (
     @rowid,
-    @type
-    json(@value),
+    @type,
+    json(@value)
   )
 `);
 
-export function presetPut(rowid: string|null, type: string, value: object) {
-  return presetPutStmt.run({ rowid, type, JSON.stringify(value) });
+export function presetPut(rowid: string | null, type: string, value: object) {
+  return presetPutStmt.run({ rowid, type, value: JSON.stringify(value) });
 }
 
 const presetGetStmt = db.prepare('SELECT rowid, * FROM presets WHERE rowid=?');
@@ -112,8 +108,8 @@ export function presetGet(id: string) {
   return presetGetStmt.get(id);
 }
 
-const presetListTypeStmt = db.prepare('SELECT rowid, * FROM preset WHERE type=?');
-const presetListStmt = db.prepare('SELECT rowid, * FROM preset');
+const presetListTypeStmt = db.prepare('SELECT rowid, * FROM presets WHERE type=?');
+const presetListStmt = db.prepare('SELECT rowid, * FROM presets');
 
 export function presetList(type?: string) {
   return type
