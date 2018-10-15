@@ -2,13 +2,15 @@
 
   TODO: Add way to edit device name, host, port, etc.
 
+  TODO: Ability to remove colour presets
+
   TODO: Add nice colour picker
 
   TODO: Add scheduled events
 
   TODO: Nice brightness slider input
 
-  TODO: Preset modes (flow colours, sunrise, sunset) + allow scheduling them
+  TODO: Preset flows (flow colours, sunrise, sunset) + allow scheduling them
 
 -->
 
@@ -26,15 +28,25 @@
 
 <div class="form-group">
   <label class="label">Presets</label>
-  <button class="button red3" type="button" on:click="setColor('#ff0000')">RED</button>
-  <button class="button green3" type="button" on:click="setColor('#00ff00')">GREEN</button>
-  <button class="button blue3" type="button" on:click="setColor('#0000ff')">BLUE</button>
-  <button class="button" type="button" on:click="setColor('#ffffff')">WHITE</button>
+  {#each $colors as color}
+    <button
+      class="button button-color ttu"
+      style="border-left:1em solid {color.value.color}"
+      type="button"
+      on:click="setColor(color.value.color)"
+    >
+      {color.value.name}
+    </button>
+  {:else}
+    <p>No color presets found.</p>
+  {/each}
 </div>
 
 <div class="form-group mt4">
   <label class="label" for="color">Color <span class="muted">({color})</span></label>
-  <input bind:value="color" class="button color pa0" type="color" id="color" on:change="setColor()">
+  <input bind:value="color" class="input color pa0" type="color" id="color" on:change="setColor()">
+  <input bind:value="colorName" class="input input-mini" type="text" placeholder="{color}">
+  <button class="button" type="button" on:click="savePresetColor()">Save</button>
 </div>
 
 <div class="form-group mt4">
@@ -52,7 +64,7 @@
     <option value="100" label="100%">
   </datalist>
 
-  <label class="label" for="brightness">Brightness</label>
+  <label class="label" for="brightness">Brightness <span class="muted">({brightness}%)</span></label>
   <input bind:value="brightness" class="range" type="range" list="tickmarks" on:change="setBrightness()">
 </div>
 
@@ -105,9 +117,26 @@
         if (!res.ok) throw new Error(res.statusText);
       },
 
+      savePresetColor() {
+        try {
+          const { color, colorName } = this.get();
+          const name = colorName || color;
+
+          this.store.presetColorPut(null, { color, name });
+        } catch (err) {
+          // TODO: Handle error better
+          console.error(err);
+        }
+      },
+
       async deviceDelete(id) {
-        await this.store.deviceDelete(id);
-        sapper.goto('/');
+        try {
+          await this.store.deviceDelete(id);
+          sapper.goto('/');
+        } catch (err) {
+          // TODO: Handle error better
+          console.error(err);
+        }
       },
     },
 
@@ -122,12 +151,23 @@
 </script>
 
 <style type="text/postcss">
-  .range {
-    width: 16rem;
+  @import "import.css";
+
+  .button-color {
+    padding-left: calc($button-padding-x - 0.25em);
   }
 
   .color {
-    width: 8rem;
-    height: 3rem;
+    width: 7em;
+    height: 2.25em;
+    vertical-align: top;
+  }
+
+  .input-mini {
+    max-width: 10em;
+  }
+
+  .range {
+    width: 100%;
   }
 </style>
