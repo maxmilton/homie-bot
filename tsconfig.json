@@ -1,32 +1,37 @@
 // config for rich intelliSense in VS Code
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2018",
     "module": "esnext",
+    "importHelpers": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    // "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": true,
-    // "pretty": true,
+    "diagnostics": true,
 
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
+    "sourceMap": true,
+
+    "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    "strict": true,
+    "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
 
-    "baseUrl": ".",
-
-    "outDir": "lib"
+    "baseUrl": "."
   },
   "exclude": [
     "__sapper__",
-    "node_modules",
-    "lib"
+    "dist",
+    "node_modules"
   ],
   "typeAcquisition": {
     "enable": true
