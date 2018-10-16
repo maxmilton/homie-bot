@@ -68,14 +68,22 @@ export function devicePut(rowid: string | null, { host, port, name, state, type 
 const deviceGetStmt = db.prepare('SELECT rowid, * FROM devices WHERE rowid=?');
 
 export function deviceGet(id: string) {
-  // TODO: Unpack JSON from 'state' col -- better server side than client side + remove logic in client
-  return deviceGetStmt.get(id);
+  const device = deviceGetStmt.get(id);
+  device.state = JSON.parse(device.state);
+
+  return device;
 }
 
 const deviceListStmt = db.prepare('SELECT rowid, * FROM devices');
 
 export function deviceList() {
-  return deviceListStmt.all();
+  const devices = deviceListStmt.all();
+  return devices.map((device: Device) => {
+    /* eslint-disable-next-line no-param-reassign */
+    device.state = JSON.parse(device.state);
+
+    return device;
+  });
 }
 
 const deviceDeleteStmt = db.prepare('DELETE FROM devices WHERE rowid=?');
@@ -104,15 +112,24 @@ export function presetPut(rowid: string | null, type: string, data: object) {
 const presetGetStmt = db.prepare('SELECT rowid, * FROM presets WHERE rowid=?');
 
 export function presetGet(id: string) {
-  // TODO: Unpack JSON from 'data' col -- better server side than client side + remove logic in client
-  return presetGetStmt.get(id);
+  const preset = presetGetStmt.get(id);
+  preset.data = JSON.parse(preset.data);
+
+  return preset;
 }
 
 const presetListTypeStmt = db.prepare('SELECT rowid, * FROM presets WHERE type=?');
 const presetListStmt = db.prepare('SELECT rowid, * FROM presets');
 
 export function presetList(type?: string) {
-  return type ? presetListTypeStmt.all(type) : presetListStmt.all();
+  const presets = type ? presetListTypeStmt.all(type) : presetListStmt.all();
+
+  return presets.map((preset) => {
+    /* eslint-disable-next-line no-param-reassign */
+    preset.data = JSON.parse(preset.data);
+
+    return preset;
+  });
 }
 
 const presetDeleteStmt = db.prepare('DELETE FROM presets WHERE rowid=?');

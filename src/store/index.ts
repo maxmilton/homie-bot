@@ -39,14 +39,7 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
-    // TODO: Handle unpacking JSON on the server
-    const devices = (await res.json()).map((device: Device) => {
-      /* eslint-disable-next-line no-param-reassign */
-      device.state = JSON.parse(device.state);
-      return device;
-    });
-
-    this.set({ devices });
+    this.set({ devices: await res.json() });
   }
 
   async deviceDelete(id: string) {
@@ -83,14 +76,7 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
-    // TODO: Handle unpacking JSON on the server
-    const colors = (await res.json()).map((color: PresetColor) => {
-      /* eslint-disable-next-line no-param-reassign */
-      color.data = JSON.parse(color.data);
-      return color;
-    });
-
-    this.set({ colors });
+    this.set({ colors: await res.json() });
   }
 
   async presetColorDelete(id: string) {
