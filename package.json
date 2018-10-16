@@ -1,6 +1,6 @@
 {
   "name": "homie-bot",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "🤖 Home automation, yo!",
   "repository": "https://github.com/MaxMilton/homie-bot",
   "bugs": "https://github.com/MaxMilton/homie-bot/issues",
