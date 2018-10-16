@@ -1,10 +1,10 @@
-import { Req, Res } from '../../../server/types.js';
 import * as dbMethods from '../../../server/db.js';
+import { IReq, IRes } from '../../../server/types.js';
 
 /**
  * Reset the database.
  */
-export function get(req: Req, res: Res) {
+export function get(req: IReq, res: IRes) {
   dbMethods.reset();
   res.end('OK');
 }

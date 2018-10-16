@@ -1,15 +1,15 @@
-import resolve from 'rollup-plugin-node-resolve';
-import replace from 'rollup-plugin-replace';
-import commonjs from 'rollup-plugin-commonjs';
-import typescript from 'rollup-plugin-typescript';
-import svelte from 'rollup-plugin-svelte';
+import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
 import preprocessStyle from '@minna-ui/svelte-preprocess-style';
+import commonjs from 'rollup-plugin-commonjs';
+import resolve from 'rollup-plugin-node-resolve';
+import replace from 'rollup-plugin-replace';
+import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
-import compiler from '@ampproject/rollup-plugin-closure-compiler';
+import typescript from 'rollup-plugin-typescript';
 import config from 'sapper/config/rollup.js';
-import { makeCss } from './rollup-plugins.js';
 import pkg from './package.json';
+import { makeCss } from './rollup-plugins.js';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -22,10 +22,6 @@ const preprocess = {
 
 const makeCssOpts = {
   include: 'src/css/**/*.css',
-  whitelist: [
-    // 'nav-item',
-    // 'nav-item-active',
-  ],
 };
 
 export default {
@@ -35,15 +31,15 @@ export default {
     plugins: [
       replace({
         'process.browser': true,
-        'process.env.NODE_ENV': JSON.stringify(mode),
         'process.env.GIT_RELEASE': JSON.stringify(process.env.GIT_RELEASE),
+        'process.env.NODE_ENV': JSON.stringify(mode),
       }),
       makeCss(makeCssOpts),
       svelte({
         dev,
-        preprocess,
-        hydratable: true,
         emitCss: true,
+        hydratable: true,
+        preprocess,
       }),
       resolve(),
       commonjs(),
@@ -86,14 +82,14 @@ export default {
     plugins: [
       replace({
         'process.browser': false,
-        'process.env.NODE_ENV': JSON.stringify(mode),
         'process.env.GIT_RELEASE': JSON.stringify(process.env.GIT_RELEASE),
+        'process.env.NODE_ENV': JSON.stringify(mode),
       }),
       makeCss(makeCssOpts),
       svelte({
         dev,
-        preprocess,
         generate: 'ssr',
+        preprocess,
       }),
       resolve(),
       commonjs(),
@@ -101,7 +97,7 @@ export default {
         typescript: require('typescript'), // eslint-disable-line global-require
       }),
     ],
-    external: Object.keys(pkg.dependencies)
+    external: Object.keys(pkg.dependencies) // tslint:disable-line object-literal-sort-keys
       .filter(dep => !/^@minna-ui/.test(dep)) // minna-ui packages in dependencies
       .concat(require('module').builtinModules), // eslint-disable-line global-require
 
@@ -115,8 +111,8 @@ export default {
     plugins: [
       replace({
         'process.browser': true,
-        'process.env.NODE_ENV': JSON.stringify(mode),
         'process.env.GIT_RELEASE': JSON.stringify(process.env.GIT_RELEASE),
+        'process.env.NODE_ENV': JSON.stringify(mode),
       }),
       resolve(),
       commonjs(),

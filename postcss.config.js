@@ -1,5 +1,7 @@
 // https://github.com/michael-ciniawsky/postcss-load-config
 
+/* tslint:disable object-literal-sort-keys */
+
 'use strict';
 
 /* eslint-disable-next-line import/no-extraneous-dependencies */

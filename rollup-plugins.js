@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { writeFile } from 'fs';
 import path from 'path';
-import { createFilter } from 'rollup-pluginutils';
-import postcssrc from 'postcss-load-config';
 import postcss from 'postcss';
+import postcssrc from 'postcss-load-config';
 import Purgecss from 'purgecss';
+import { createFilter } from 'rollup-pluginutils';
 /* eslint-enable */
 
 const dev = process.env.NODE_ENV === 'development';
@@ -14,7 +14,7 @@ const dev = process.env.NODE_ENV === 'development';
  * @param {Error} err
  */
 export function catchErr(err) {
-  if (err) throw err;
+  if (err) throw err; // tslint:disable-line curly
 }
 
 /**
@@ -45,7 +45,7 @@ export function makeCss({
     name: 'makeCss',
 
     async transform(source, id) {
-      if (!filter(id)) return null;
+      if (!filter(id)) return null; // tslint:disable-line curly
 
       try {
         const ctx = Object.assign({ from: id, to: id, map: true }, context);
@@ -56,7 +56,7 @@ export function makeCss({
           this.warn(warn.toString(), { line: warn.line, column: warn.column });
         });
 
-        if (dev) return result.css;
+        if (dev) return result.css; // tslint:disable-line curly
 
         const purgecss = new Purgecss({
           content,
@@ -108,7 +108,7 @@ export function makeHtml({
   content,
   exclude,
   include = ['**/*.css', '**/*.postcss', '**/*.pcss'],
-  ...options
+  ...options // tslint:disable-line trailing-comma
 }) {
   const filter = createFilter(include, exclude);
   const injectHtml = compileTemplate(template);
@@ -117,7 +117,7 @@ export function makeHtml({
   return {
     name: 'makeHtml',
     transform(source, id) {
-      if (!filter(id)) return null;
+      if (!filter(id)) return null; // tslint:disable-line curly
 
       styles[id] = source;
 
@@ -126,6 +126,7 @@ export function makeHtml({
     async generateBundle(outputOptions, bundle) {
       // combine all style sheets
       let css = '';
+      /* tslint:disable-next-line forin */
       for (const id in styles) { // eslint-disable-line
         css += styles[id] || '';
       }
@@ -142,8 +143,8 @@ export function makeHtml({
 
       // write HTML file
       writeFile(path.join(__dirname, outputOptions.dir, fileName), injectHtml({
-        title,
         content: body,
+        title,
         ...options,
       }).trim(), catchErr);
     },

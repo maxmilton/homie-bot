@@ -4,6 +4,7 @@
  */
 
 /* eslint-disable strict, no-var, no-unused-vars, id-length, prefer-destructuring */
+/* tslint:disable no-empty */
 
 // Svelte quoted method references
 var i = () => {};

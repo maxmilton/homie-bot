@@ -40,9 +40,7 @@
       result: fetch('/api/discover').then(async (res) => {
         if (!res.ok) throw new Error(res.statusText);
 
-        const result = await res.json();
-        console.debug(result);
-        return result;
+        return res.json();
       }),
     }),
     methods: {

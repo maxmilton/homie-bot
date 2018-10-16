@@ -1,10 +1,10 @@
-import { Req, Res } from '../../../../server/types.js';
 import * as dbMethods from '../../../../server/db.js';
+import { IReq, IRes } from '../../../../server/types.js';
 
 /**
  * Get a color preset.
  */
-export function get(req: Req, res: Res) {
+export function get(req: IReq, res: IRes) {
   const result = dbMethods.presetGet(req.params.id);
 
   res.setHeader('Content-Type', 'application/json');
@@ -14,7 +14,7 @@ export function get(req: Req, res: Res) {
 /**
  * Modify an existing color preset.
  */
-export function put(req: Req, res: Res) {
+export function put(req: IReq, res: IRes) {
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(dbMethods.presetPut(req.params.id, 'color', req.body)));
 }
@@ -22,7 +22,7 @@ export function put(req: Req, res: Res) {
 /**
  * Remove a color preset.
  */
-export function del(req: Req, res: Res) {
+export function del(req: IReq, res: IRes) {
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(dbMethods.presetDelete(req.params.id)));
 }

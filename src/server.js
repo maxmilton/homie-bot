@@ -1,10 +1,12 @@
-import sirv from 'sirv';
-import polka from 'polka';
+/* tslint:disable no-console */
+
 import compression from 'compression';
-import { log, parse } from './server/middleware';
-import * as store from './store';
+import polka from 'polka';
+import sirv from 'sirv';
 import * as sapper from '../__sapper__/server.js';
 import db from './server/db';
+import { log, parse } from './server/middleware';
+import * as store from './store';
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
@@ -17,10 +19,10 @@ polka()
     parse,
     sapper.middleware({
       store: store.server,
-    })
+    }),
   )
   .listen(PORT, (err) => {
-    if (err) console.error(err);
+    if (err) console.error(err); // tslint:disable-line curly
   });
 
 // clean up and close database connection on exit

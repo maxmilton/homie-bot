@@ -1,17 +1,18 @@
+/* tslint:disable no-console */
+
 import * as colors from 'colorette';
-import { Next, Req, Res } from './types';
+import { IReq, IRes, Next } from './types';
 
 /**
  * Log server requests.
  */
-export function log(req: Req, res: Res, next: Next) {
+export function log(req: IReq, res: IRes, next: Next) {
   const start = process.hrtime();
 
   function writeLog() {
     const durration = process.hrtime(start);
     const { method, originalUrl, url } = req;
     const { statusCode } = res;
-    /* eslint-disable-next-line no-nested-ternary */
     const color = statusCode >= 400 ? 'red' : statusCode >= 300 ? 'yellow' : 'green';
     const timing = `${(durration[1] / 1e6).toFixed(2)}ms`;
     console.log(`» ${timing} ${colors[color](statusCode)} ${method} ${originalUrl || url}`);
@@ -24,7 +25,7 @@ export function log(req: Req, res: Res, next: Next) {
 /**
  * Parse raw request body data and convert it to JSON.
  */
-export function parse(req: Req, res: Res, next: Next) {
+export function parse(req: IReq, res: IRes, next: Next) {
   let data = '';
   req.on('data', (chunk) => {
     data += chunk;

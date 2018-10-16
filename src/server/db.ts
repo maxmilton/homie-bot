@@ -1,9 +1,11 @@
 // https://github.com/JoshuaWise/better-sqlite3/blob/master/docs/api.md
 
+/* tslint:disable no-console */
+
+import Database from 'better-sqlite3'; // tslint:disable-line import-name
 import fs from 'fs';
 import path from 'path';
-import Database from 'better-sqlite3';
-import { Device } from './types';
+import { IDevice } from './types';
 
 const DB_PATH = process.env.DB_PATH || path.join(process.cwd(), 'homie-bot.db');
 const db = new Database(DB_PATH);
@@ -61,8 +63,8 @@ const devicePutStmt = db.prepare(`
   )
 `);
 
-export function devicePut(rowid: string | null, { host, port, name, state, type }: Device) {
-  return devicePutStmt.run({ rowid, host, port, name, state: JSON.stringify(state), type });
+export function devicePut(rowid: string | null, { host, port, name, state, type }: IDevice) {
+  return devicePutStmt.run({ rowid, host, port, name, type, state: JSON.stringify(state) });
 }
 
 const deviceGetStmt = db.prepare('SELECT rowid, * FROM devices WHERE rowid=?');
@@ -78,8 +80,7 @@ const deviceListStmt = db.prepare('SELECT rowid, * FROM devices');
 
 export function deviceList() {
   const devices = deviceListStmt.all();
-  return devices.map((device: Device) => {
-    /* eslint-disable-next-line no-param-reassign */
+  return devices.map((device: IDevice) => {
     device.state = JSON.parse(device.state);
 
     return device;
@@ -125,7 +126,6 @@ export function presetList(type?: string) {
   const presets = type ? presetListTypeStmt.all(type) : presetListStmt.all();
 
   return presets.map((preset) => {
-    /* eslint-disable-next-line no-param-reassign */
     preset.data = JSON.parse(preset.data);
 
     return preset;

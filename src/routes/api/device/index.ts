@@ -1,10 +1,10 @@
-import { Req, Res } from '../../../server/types.js';
 import * as dbMethods from '../../../server/db.js';
+import { IReq, IRes } from '../../../server/types.js';
 
 /**
  * Get a list of all device data.
  */
-export function get(req: Req, res: Res) {
+export function get(req: IReq, res: IRes) {
   const result = dbMethods.deviceList();
 
   res.setHeader('Content-Type', 'application/json');
@@ -14,7 +14,7 @@ export function get(req: Req, res: Res) {
 /**
  * Add a new device.
  */
-export function put(req: Req, res: Res) {
+export function put(req: IReq, res: IRes) {
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(dbMethods.devicePut(null, req.body)));
 }

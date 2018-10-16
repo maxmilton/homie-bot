@@ -1,10 +1,10 @@
-import { Req, Res } from '../../../server/types.js';
 import * as yeelight from '../../../server/plugins/yeelight.js';
+import { IReq, IRes } from '../../../server/types.js';
 
 /**
  * Run a command against a device.
  */
-function all(req: Req, res: Res) {
+function all(req: IReq, res: IRes) {
   const { id } = req.params;
   const { action, speed, value } = req.query;
   let result;

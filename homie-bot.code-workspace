@@ -6,6 +6,7 @@
 	],
 	"settings": {
 		"typescript.tsdk": "node_modules/typescript/lib",
-		"typescript.surveys.enabled": false
+		"typescript.surveys.enabled": false,
+		"tslint.jsEnable": true
 	}
 }
