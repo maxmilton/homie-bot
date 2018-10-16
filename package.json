@@ -42,7 +42,7 @@
   "dependencies": {
     "better-sqlite3": "^5.0.1",
     "color-convert": "^1.9.3",
-    "colorette": "^1.0.5",
+    "colorette": "^1.0.6",
     "compression": "^1.7.3",
     "polka": "^0.5.1",
     "sirv": "^0.2.2",
@@ -78,7 +78,7 @@
     "rollup-plugin-svelte": "4.3.2",
     "rollup-plugin-terser": "3.0.0",
     "rollup-plugin-typescript": "1.0.0",
-    "sapper": "0.23.1",
+    "sapper": "0.23.2",
     "stylelint": "9.6.0",
     "svelte": "2.13.5",
     "ts-jest": "23.10.4",
