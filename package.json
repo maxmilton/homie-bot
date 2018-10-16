@@ -32,9 +32,10 @@
     "build": "GIT_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production sapper build ./dist",
     "serve": "NODE_ENV=production PORT=8080 node ./dist",
     "_run": "yarn build && yarn serve",
-    "lint": "yarn lint:css && yarn lint:js",
+    "lint": "yarn lint:css && yarn lint:js && yarn lint:ts",
     "lint:css": "stylelint **/*.{css,html} --cache",
     "lint:js": "eslint --ignore-path .gitignore --ext html,js .",
+    "lint:ts": "tslint --exclude .gitignore --project .",
     "test": "yarn lint && JEST_CIRCUS=1 jest --notify --watch",
     "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
   },
@@ -82,6 +83,8 @@
     "svelte": "2.13.5",
     "ts-jest": "23.10.4",
     "tslib": "1.9.3",
+    "tslint": "5.11.0",
+    "tslint-config-airbnb": "5.11.0",
     "typescript": "3.1.3"
   }
 }
