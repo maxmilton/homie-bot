@@ -3,28 +3,23 @@
   "compilerOptions": {
     "target": "es2018",
     "module": "esnext",
-    "importHelpers": true,
     "moduleResolution": "node",
+    "importHelpers": true,
     "allowSyntheticDefaultImports": true,
-    // "esModuleInterop": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": true,
     "diagnostics": true,
 
-    "sourceMap": true,
+    // "sourceMap": true,
 
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
-    "noImplicitThis": true,
     "noUnusedLocals": true,
     // "noUnusedParameters": true,
-    "strict": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
+    "strict": true, // enables a bunch of other options
 
     "baseUrl": "."
   },
