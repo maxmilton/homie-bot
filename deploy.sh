@@ -20,8 +20,8 @@ DIST_FILES=(
   "./stop.sh"
 )
 DEPLOY_FILE=${DEPLOY_FILE:-"hb.tar.xz"}
-REMOTE_SSH=${DEPLOY_FILE:-"pi"}
-REMOTE_PATH=${DEPLOY_FILE:-"~/homie-bot"}
+REMOTE_SSH=${REMOTE_SSH:-"pi"}
+REMOTE_PATH=${REMOTE_PATH:-"~/homie-bot"}
 
 # feedback utilities
 echo_err() { echo -e "\\n\\x1B[1;31mError:\\x1B[0m $1" 1>&2; echo -en "\\a\\n"; exit 2; }
