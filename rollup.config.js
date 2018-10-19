@@ -1,3 +1,4 @@
+import path from 'path';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
 import preprocessStyle from '@minna-ui/svelte-preprocess-style';
@@ -5,7 +6,6 @@ import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 import svelte from 'rollup-plugin-svelte';
-import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
@@ -47,25 +47,14 @@ export default {
         typescript: require('typescript'), // eslint-disable-line global-require
       }),
 
-      !dev && terser({ module: true }),
-      // !dev && compiler({
-      //   externs: [
-      //     require.resolve('google-closure-compiler/contrib/externs/svg.js'),
-      //     path.join(__dirname, 'externs.js'),
-      //   ],
-      //   charset: 'UTF-8',
-      //   compilation_level: 'ADVANCED',
-      //   // language_in: 'ECMASCRIPT_NEXT',
-      //   // language_out: 'STABLE',
-      //   // strict_mode_input: true,
-      //   // use_types_for_optimization: true,
-      //   // warning_level: 'VERBOSE',
-      //   // jscomp_warning: '*',
-      //   // jscomp_error: '*',
-      //   jscomp_off: 'duplicate', // FIXME: Deprecated `methods` var
-      //   // debug: true,
-      //   // formatting: 'PRETTY_PRINT',
-      // }),
+      !dev && compiler({
+        charset: 'UTF-8',
+        compilation_level: 'SIMPLE', // TODO: Use ADVANCED once feature is ready https://git.io/fxwrR
+        externs: [
+          require.resolve('google-closure-compiler/contrib/externs/svg.js'),
+          path.join(__dirname, 'externs.js'),
+        ],
+      }),
     ],
 
     treeshake: {
@@ -116,10 +105,10 @@ export default {
       }),
       resolve(),
       commonjs(),
-      !dev
-        && compiler({
-          compilation_level: 'ADVANCED',
-        }),
+
+      !dev && compiler({
+        compilation_level: 'ADVANCED',
+      }),
     ],
   },
 };
