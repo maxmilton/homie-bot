@@ -7,7 +7,7 @@
 
 # Homie Bot
 
-&#x1F916; Home automation, yo!
+🤖 Home automation, yo!
 
 TODO: Come up with a better short project description.
 
