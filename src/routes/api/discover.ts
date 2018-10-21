@@ -24,6 +24,7 @@ export async function get(req: IReq, res: IRes) {
     res.statusCode = 500;
 
     if (err.message.startsWith('send ENETUNREACH')) {
+      // FIXME: This error message is not displayed on the web client
       res.end('Network on server is unreachable.');
       return;
     }
