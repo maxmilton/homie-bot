@@ -296,6 +296,11 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.15.1.tgz#e2fc73cce203ae348112503e72a91dedcf88e70e"
   integrity sha512-vXcIMTSocVR70qj4nOoSI1k08/f5QvT8+Phtt58eZ17TPa2rdOxODK5WKhA/xIr/KkCjhZxqC8IBp6qIsB+V8Q==
 
+"@minna-ui/css@^0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.16.0.tgz#222f571d57e8064ec998e5378fc2f8ce4d9adbb0"
+  integrity sha512-XPJgiHla7dnO4+F6PVb1Psw6HvRv0XeAc5KOA/uLB1DS3ux06oJ7E8DQjj9udrNIipcBBCrKZsMwyA9jh4XJxA==
+
 "@minna-ui/eslint-config@0.15.0":
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.15.0.tgz#7067a68cea3208b7afe3260bc0efa43c892ff7a9"
@@ -365,12 +370,12 @@
     postcss-load-config "^2.0.0"
     postcss-selector-parser "^5.0.0-rc.3"
 
-"@minna-ui/switch@0.15.1":
-  version "0.15.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/switch/-/switch-0.15.1.tgz#f013284ae80b1ff6092aa2689d44b1e5aedc0015"
-  integrity sha512-bbx/7ktHsVdP5vlxwGlLFVz1Fat0jajoMit5n9AQrU+0AL3b8UJH9aPTkP2j9apDeI6Jvs96mY70GgV14dPp2Q==
+"@minna-ui/switch@0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/switch/-/switch-0.16.0.tgz#7087bb2427084c008eb4f57e930676ffaff4c050"
+  integrity sha512-KP03e2tV5XSUGkvdS/GmYk03wey3JMz6NMSX3GQ8LZtojK3o5UTkxkq2ssFiaDMxzVopYAfpBQooT0l4wA4J/Q==
   dependencies:
-    "@minna-ui/css" "^0.15.1"
+    "@minna-ui/css" "^0.16.0"
 
 "@minna-ui/tabs@0.15.1":
   version "0.15.1"
