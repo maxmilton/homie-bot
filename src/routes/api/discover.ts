@@ -11,8 +11,23 @@ export async function get(req: IReq, res: IRes) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(result));
   } catch (err) {
-    console.error('Error', err); // tslint:disable-line no-console
+    // TODO: Change all server console statements to be like this one
+    console.error('[API/DISCOVER] Error', err); // tslint:disable-line no-console
+
+    // FIXME: Figure out what the correct err.message is for no devices discovered
+    // if (err.message === '????') {
+    //   // no devices found so respond with an empty array
+    //   res.end('[]');
+    //   return;
+    // }
+
     res.statusCode = 500;
+
+    if (err.message.startsWith('send ENETUNREACH')) {
+      res.end('Network on server is unreachable.');
+      return;
+    }
+
     res.end();
   }
 }

@@ -21,7 +21,7 @@ export function dbInit() {
 
   if (hasTables) return;
 
-  console.log('INFO: Database appears empty, initialising it.');
+  console.log('[DB] Database appears empty, initialising it.');
   const sql = fs.readFileSync(path.join(process.cwd(), './static/base-data.sql'), 'utf8');
   db.exec(sql);
 }
