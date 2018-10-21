@@ -9,7 +9,8 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
-    this.set({ discovered: await res.json() });
+    const discovered = await res.json();
+    this.set({ discovered });
   }
 
   public async devicePut(id: string | null, data: IDevice) {
@@ -39,7 +40,8 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
-    this.set({ devices: await res.json() });
+    const devices = await res.json();
+    this.set({ devices });
   }
 
   public async deviceDelete(id: string) {
@@ -74,7 +76,8 @@ class AppStore extends Store {
 
     if (!res.ok) throw new Error(res.statusText);
 
-    this.set({ colors: await res.json() });
+    const colors = await res.json();
+    this.set({ colors });
   }
 
   public async presetColorDelete(id: string) {
