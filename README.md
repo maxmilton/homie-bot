@@ -7,6 +7,10 @@
 
 # Homie Bot
 
+&#x1F916; Home automation, yo!
+
+TODO: Come up with a better short project description.
+
 TODO: Write me.
 
 My setup involves running this on a raspberry pi 3 with an Alpine Linux OS. See Alpine install instructions: <https://wiki.alpinelinux.org/wiki/Raspberry_Pi>.
