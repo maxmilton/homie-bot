@@ -1,4 +1,4 @@
-import path from 'path';
+// import path from 'path';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
 import preprocessStyle from '@minna-ui/svelte-preprocess-style';
@@ -14,14 +14,14 @@ import { makeCss } from './rollup-plugins.js';
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 
+const makeCssOpts = {
+  include: ['src/css/**/*.css'],
+};
+
 /** Svelte preprocessors */
 const preprocess = {
   markup: preprocessMarkup({ level: dev ? 0 : 3 }),
   style: preprocessStyle(),
-};
-
-const makeCssOpts = {
-  include: 'src/css/**/*.css',
 };
 
 export default {
@@ -47,19 +47,17 @@ export default {
         typescript: require('typescript'), // eslint-disable-line global-require
       }),
 
-      !dev && compiler({
-        charset: 'UTF-8',
-        compilation_level: 'SIMPLE', // TODO: Use ADVANCED once feature is ready https://git.io/fxwrR
-        externs: [
-          require.resolve('google-closure-compiler/contrib/externs/svg.js'),
-          path.join(__dirname, 'externs.js'),
-        ],
-      }),
+      // TODO: Use ADVANCED mode once dynamic import is supported https://git.io/fxwrR
+      // FIXME: Breaks export; wait until fixed upstream
+      // !dev && compiler({
+      //   charset: 'UTF-8',
+      //   compilation_level: 'SIMPLE',
+      // }),
     ],
 
-    treeshake: {
-      propertyReadSideEffects: false,
-    },
+    // treeshake: {
+    //   propertyReadSideEffects: false,
+    // },
 
     // temporary, pending Rollup 1.0
     experimentalCodeSplitting: true,
@@ -100,7 +98,6 @@ export default {
     plugins: [
       replace({
         'process.browser': true,
-        'process.env.GIT_RELEASE': JSON.stringify(process.env.GIT_RELEASE),
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
       resolve(),

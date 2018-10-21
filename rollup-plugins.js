@@ -22,9 +22,9 @@ export function catchErr(err) {
  * @param {object} opts
  * @param {object=} opts.context Base PostCSS options.
  * @param {string|Function} opts.content Page content.
- * @param {(Array<string>|string)=} opts.exclude Files to exclude from CSS processing.
- * @param {(Array<string>|string)=} opts.include Files to include in CSS processing.
- * @param {(Array<string>|string)=} opts.content Files to parse for CSS classes.
+ * @param {Array<string>=} opts.exclude Files to exclude from CSS processing.
+ * @param {Array<string>=} opts.include Files to include in CSS processing.
+ * @param {Array<string>=} opts.content Files to parse for CSS classes.
  * @param {Array<string>=} opts.whitelist CSS classes to always keep.
  */
 export function makeCss({
