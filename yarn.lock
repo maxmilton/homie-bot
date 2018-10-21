@@ -296,6 +296,11 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.15.1.tgz#e2fc73cce203ae348112503e72a91dedcf88e70e"
   integrity sha512-vXcIMTSocVR70qj4nOoSI1k08/f5QvT8+Phtt58eZ17TPa2rdOxODK5WKhA/xIr/KkCjhZxqC8IBp6qIsB+V8Q==
 
+"@minna-ui/css@^0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.16.0.tgz#222f571d57e8064ec998e5378fc2f8ce4d9adbb0"
+  integrity sha512-XPJgiHla7dnO4+F6PVb1Psw6HvRv0XeAc5KOA/uLB1DS3ux06oJ7E8DQjj9udrNIipcBBCrKZsMwyA9jh4XJxA==
+
 "@minna-ui/eslint-config@0.15.0":
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.15.0.tgz#7067a68cea3208b7afe3260bc0efa43c892ff7a9"
@@ -335,12 +340,12 @@
     postcss-use "^3.0.0"
     resolve "^1.8.1"
 
-"@minna-ui/select@0.15.1":
-  version "0.15.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/select/-/select-0.15.1.tgz#270473a7688589e44f1cffa4e244ad175d57879c"
-  integrity sha512-NVmmwfaB6gVO1tAnmiSAJ9Bq2ZawAK0ASb+rLyNzAKF6HoRgwwcCAgb9TmVvpbsQFZF7GPG3uM5neGUB6c6ncw==
+"@minna-ui/select@0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/select/-/select-0.16.0.tgz#ad495288c77a108e88fa59938e49f7941aaa4133"
+  integrity sha512-WNkRdJFSyO27K6RjdVmSzwbqdMZhTDLXwr8oV8qIiTE99RwwZR7sRc7HyLfHMcspurduYJCNCzfs4zJR1mKtnQ==
   dependencies:
-    "@minna-ui/css" "^0.15.1"
+    "@minna-ui/css" "^0.16.0"
 
 "@minna-ui/stylelint-config@0.15.0":
   version "0.15.0"
