@@ -342,12 +342,14 @@
   dependencies:
     "@minna-ui/css" "^0.15.1"
 
-"@minna-ui/stylelint-config@0.15.0":
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.15.0.tgz#ac9efa62dafe1310251824dab0319c288e65e464"
-  integrity sha512-BFtW05iLB8LS6oV/trkus+SaMcHVlbl6I/oE4oeEIdHz/WekBWHSgQh50NbkVu6+JalHzFryJlq5mGxZRvf13A==
+"@minna-ui/stylelint-config@0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.16.0.tgz#6ed8cfb40778509d2ce30afb22683020c6e765de"
+  integrity sha512-LnzpfMYeoc6Va64mytgWBuCfyBEcTYVpxbzsKiI6eGzH4sJs9bfuIEoTrEcqWtZ/Tr/GZYqVTPUx0s34bqkLJQ==
   dependencies:
+    stylelint-a11y "^1.1.8"
     stylelint-config-standard "^18.2.0"
+    stylelint-high-performance-animation "^1.1.1"
     stylelint-order "^1.0.0"
 
 "@minna-ui/svelte-preprocess-markup@0.15.0":
@@ -6357,6 +6359,11 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
+stylelint-a11y@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/stylelint-a11y/-/stylelint-a11y-1.1.8.tgz#a641096ccdec918b34d9db5a8973d4d2678aefb3"
+  integrity sha512-qqUaRHln8julnia/S0la1nqXgatU8Lk2gt6Y3K+l2fI/Rb/4LvlpQKYjV35vuse8iRnUhK2MoIXrF2/J1Z/1PQ==
+
 stylelint-config-recommended@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-2.1.0.tgz#f526d5c771c6811186d9eaedbed02195fee30858"
@@ -6368,6 +6375,11 @@ stylelint-config-standard@^18.2.0:
   integrity sha512-07x0TaSIzvXlbOioUU4ORkCIM07kyIuojkbSVCyFWNVgXMXYHfhnQSCkqu+oHWJf3YADAnPGWzdJ53NxkoJ7RA==
   dependencies:
     stylelint-config-recommended "^2.1.0"
+
+stylelint-high-performance-animation@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/stylelint-high-performance-animation/-/stylelint-high-performance-animation-1.1.1.tgz#769c75d5caeaa9692efd576aa0779cc367efc1c1"
+  integrity sha512-u8lZnmJLxIJJGgcMDMiSeIuEptLWGRatP5qtfzEzeKVttz+1nFqtdGwi7tORfq9s3oARkJ6ui4l7w/sEmurz8Q==
 
 stylelint-order@^1.0.0:
   version "1.0.0"

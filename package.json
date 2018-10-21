@@ -55,7 +55,7 @@
     "@minna-ui/jest-config": "0.15.0",
     "@minna-ui/postcss-config": "0.15.0",
     "@minna-ui/select": "0.15.1",
-    "@minna-ui/stylelint-config": "0.15.0",
+    "@minna-ui/stylelint-config": "0.16.0",
     "@minna-ui/svelte-preprocess-markup": "0.15.0",
     "@minna-ui/svelte-preprocess-style": "0.15.0",
     "@minna-ui/switch": "0.15.1",
