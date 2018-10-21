@@ -52,7 +52,7 @@
     "@ampproject/rollup-plugin-closure-compiler": "0.8.2",
     "@minna-ui/css": "0.15.1",
     "@minna-ui/eslint-config": "0.15.0",
-    "@minna-ui/jest-config": "0.15.0",
+    "@minna-ui/jest-config": "0.16.0",
     "@minna-ui/postcss-config": "0.15.0",
     "@minna-ui/select": "0.15.1",
     "@minna-ui/stylelint-config": "0.15.0",
