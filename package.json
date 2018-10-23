@@ -42,11 +42,11 @@
   "dependencies": {
     "better-sqlite3": "^5.0.1",
     "color-convert": "^1.9.3",
-    "colorette": "^1.0.6",
+    "colorette": "^1.0.7",
     "compression": "^1.7.3",
     "polka": "^0.5.1",
     "sirv": "^0.2.2",
-    "yeelight-awesome": "^1.0.8"
+    "yeelight-awesome": "^1.0.11"
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.8.2",
@@ -79,7 +79,7 @@
     "rollup-plugin-typescript": "1.0.0",
     "sapper": "0.23.3",
     "stylelint": "9.6.0",
-    "svelte": "2.14.1",
+    "svelte": "2.14.2",
     "ts-jest": "23.10.4",
     "tslib": "1.9.3",
     "tslint": "5.11.0",
