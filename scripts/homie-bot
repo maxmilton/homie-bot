@@ -1,0 +1,17 @@
+#!/sbin/openrc-run
+
+export NODE_ENV=production
+APP_DIR=/var/homie-bot
+LOGFILE=/var/log/${RC_SVCNAME}.log
+
+command="/usr/bin/node"
+command_args="${APP_DIR}/dist/index.js"
+command_background=true
+command_user="homie-bot:homie-bot"
+pidfile="/run/${RC_SVCNAME}.pid"
+start_stop_daemon_args="--chdir ${APP_DIR} --stdout ${LOGFILE} --stderr ${LOGFILE}"
+
+depend() {
+  need net
+  need localmount
+}
