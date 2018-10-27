@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:recommended", "tslint-config-airbnb"],
+  "extends": ["tslint:latest", "tslint-config-airbnb"],
   "rules": {},
   // "jsRules": true,
   "jsRules": { // FIXME: Remove this and replace with above line once new tslint version is released
