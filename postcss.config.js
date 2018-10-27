@@ -1,13 +1,13 @@
 // https://github.com/michael-ciniawsky/postcss-load-config
 
+/* tslint:disable object-literal-sort-keys */
+
 'use strict';
 
-const minnaUi = require('@minna-ui/postcss-config');
-
 module.exports = {
-  parser: 'postcss-scss',
+  syntax: 'postcss-scss',
   map: true,
-  plugins: [
-    minnaUi({ debug: true }),
-  ],
+  plugins: {
+    '@minna-ui/postcss-config': { debug: true },
+  },
 };
