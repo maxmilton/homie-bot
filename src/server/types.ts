@@ -26,17 +26,22 @@ export type Next = () => void;
 
 export interface IDevice {
   rowid?: string;
-  host?: string;
-  port?: number;
+  host: string;
+  port: number;
   name?: string;
   type?: number;
   state?: object | string;
 }
 
-export interface IPresetColor {
+interface IPreset {
   rowid?: string;
+  type: string;
+  value: string | object;
+}
+
+export interface IPresetColor extends IPreset {
   type: 'color';
-  value: string | {
+  value: {
     color: string,
     name?: string,
   };
