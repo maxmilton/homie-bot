@@ -14,8 +14,8 @@ trap 'finish; echo_err "Aborting due to failure."' ERR
 
 # options
 DIST_FILES=(
-  "./dist"
-  "./static"
+  "../dist"
+  "../static"
   "./start.sh"
   "./stop.sh"
 )
@@ -32,7 +32,7 @@ echo_info() { echo -e "\\n$1\\n" >&1; }
 
 # check linting and tests are passing
 yarn run lint || echo_err "Linting failed"
-yarn run test-ci || echo_err "Running tests suite failed"
+# yarn run test-ci || echo_err "Running tests suite failed"
 
 # run build ("build" = requires server on backend | "export" = static site)
 yarn run build || echo_err "Build failed"
