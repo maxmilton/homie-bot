@@ -78,7 +78,7 @@
     "rollup-plugin-svelte": "4.3.2",
     "rollup-plugin-typescript": "1.0.0",
     "sapper": "0.24.0",
-    "stylelint": "9.7.0",
+    "stylelint": "9.8.0",
     "svelte": "2.15.0",
     "ts-jest": "23.10.4",
     "tslib": "1.9.3",
