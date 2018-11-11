@@ -12,12 +12,16 @@ var m = () => {};
 
 // Svelte store data key names
 /** @type {Array} */
+var $colors;
+/** @type {Array} */
+var colors;
+/** @type {Array} */
 var $devices;
 /** @type {Array} */
 var devices;
-/** @type {Array} */
+/** @type {string} */
 var $result;
-/** @type {Array} */
+/** @type {string} */
 var result;
 // var $deviceGet = () => {};
 // var $devicePut = () => {};
