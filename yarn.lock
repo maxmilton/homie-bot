@@ -291,7 +291,12 @@
     reflect-metadata "^0.1.12"
     tslib "^1.8.1"
 
-"@minna-ui/css@0.16.0", "@minna-ui/css@^0.16.0":
+"@minna-ui/css@0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.17.0.tgz#e38283831035c8f9bf2f6bd75d5575db31733ee9"
+  integrity sha512-wDz4JZy/kUFJ4ICVHU8yuVGpBQxqZz3q6k+7TksXvIsI3f2cp1g2WtMrPCLTd3U6xP6BEEH7u2AAp+FuITu9hw==
+
+"@minna-ui/css@^0.16.0":
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.16.0.tgz#222f571d57e8064ec998e5378fc2f8ce4d9adbb0"
   integrity sha512-XPJgiHla7dnO4+F6PVb1Psw6HvRv0XeAc5KOA/uLB1DS3ux06oJ7E8DQjj9udrNIipcBBCrKZsMwyA9jh4XJxA==
