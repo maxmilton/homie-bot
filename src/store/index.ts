@@ -1,5 +1,6 @@
 /* tslint:disable no-console */
 
+/* tslint:disable-next-line no-submodule-imports no-implicit-dependencies */
 import { Store } from 'svelte/store.js';
 import { IDevice, IPresetColor, IReq } from '../server/types';
 
