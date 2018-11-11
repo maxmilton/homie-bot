@@ -211,10 +211,10 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.17.0.tgz#e38283831035c8f9bf2f6bd75d5575db31733ee9"
   integrity sha512-wDz4JZy/kUFJ4ICVHU8yuVGpBQxqZz3q6k+7TksXvIsI3f2cp1g2WtMrPCLTd3U6xP6BEEH7u2AAp+FuITu9hw==
 
-"@minna-ui/eslint-config@0.17.0":
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.17.0.tgz#988e858e0fae9e64c204571d9390636775972e07"
-  integrity sha512-SoD6h4GKIjDPzM2uul9JicK9O5icNw64pslIdzBP+IWRq5uazA8GFE9ZgluGVoiNSMt6jDVUhCUkjtk1og3+Vg==
+"@minna-ui/eslint-config@0.17.1":
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.17.1.tgz#f6ac3098ed0a9ba215d5df99945545ff3dc6870a"
+  integrity sha512-5RIw97V3GaVH6Qm46C1r8lW7G+lqorXi39jRsP+TMPxBUCuHI44try5DkGmCedwHRACtcfGkxf8bsWycwuAhZg==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-plugin-html "^4.0.6"
