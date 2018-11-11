@@ -3,12 +3,3 @@
  */
 
 /* $use-global-border-box: true; */
-
-/* Loading state spinner */
-/* TODO: Consider moving this into minna-ui */
-
-$spinner-size: 24px;
-$spinner-size-offset: calc(-1 * ($spinner-size / 2));
-$spinner-color: $intent-primary;
-$spinner-background-color: $gray5;
-$spinner-animate-speed: 0.8s;

@@ -85,34 +85,8 @@ body {
   margin: -1rem;
   overflow-x: auto;
 
-  @media $(ns) {
+  @media $ns {
     width: 100%;
     margin: unset;
-  }
-}
-
-/* Loading state spinner */
-/* TODO: Consider moving this into minna-ui */
-
-@keyframes spinner {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.loading { /* stylelint-disable-line selector-max-id */
-  display: inline-block;
-  width: $spinner-size;
-  height: $spinner-size;
-
-  &::before { /* stylelint-disable-line selector-max-id */
-    position: absolute;
-    width: $spinner-size;
-    height: $spinner-size;
-    content: "";
-    border: 3px solid $spinner-background-color;
-    border-top-color: $spinner-color;
-    border-radius: 50%;
-    animation: spinner $spinner-animate-speed linear infinite;
   }
 }
