@@ -1,14 +1,14 @@
 /**
- * @fileoverview Closure Compiler externs to support building Svelte components.
+ * @fileoverview Closure Compiler externs declarations.
  * @externs
  */
 
-/* eslint-disable strict, no-var, no-unused-vars, id-length, prefer-destructuring */
+/* eslint-disable strict, no-var, no-unused-vars, id-length */
 /* tslint:disable no-empty */
 
 // Svelte quoted method references
-var i = () => {};
-var m = () => {};
+var i;
+var m;
 
 // Svelte store data key names
 /** @type {Array} */

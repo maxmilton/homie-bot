@@ -4,9 +4,7 @@ node_modules
 /test/coverage/
 *.bak
 .stylelintcache
-homie-bot.db
-homie-bot.db-shm
-homie-bot.db-wal
+homie-bot.db*
 package-lock.json*
 yarn-error.log
 *.tar.xz
