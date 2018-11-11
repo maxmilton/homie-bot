@@ -1,15 +1,14 @@
-// import path from 'path';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
-import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
-import preprocessStyle from '@minna-ui/svelte-preprocess-style';
+import { makeCss, preMarkup, preStyle } from 'minna-ui';
+// import path from 'path';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 import svelte from 'rollup-plugin-svelte';
+import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
-import { makeCss } from './rollup-plugins.js';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -20,8 +19,8 @@ const makeCssOpts = {
 
 /** Svelte preprocessors */
 const preprocess = {
-  markup: preprocessMarkup({ level: dev ? 0 : 3 }),
-  style: preprocessStyle(),
+  markup: preMarkup({ level: dev ? 0 : 3 }),
+  style: preStyle(),
 };
 
 export default {
@@ -47,17 +46,21 @@ export default {
         typescript: require('typescript'), // eslint-disable-line global-require
       }),
 
+      // FIXME: Replace terser with closure compiler once it supports import
+      !dev && terser({
+        module: true,
+      }),
       // TODO: Use ADVANCED mode once dynamic import is supported https://git.io/fxwrR
       // FIXME: Breaks export; wait until fixed upstream
       // !dev && compiler({
       //   charset: 'UTF-8',
       //   compilation_level: 'SIMPLE',
+      //   externs: [
+      //     require.resolve('google-closure-compiler/contrib/externs/svg.js'),
+      //     path.join(__dirname, 'externs.js'),
+      //   ],
       // }),
     ],
-
-    // treeshake: {
-    //   propertyReadSideEffects: false,
-    // },
 
     // temporary, pending Rollup 1.0
     experimentalCodeSplitting: true,
