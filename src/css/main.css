@@ -1,5 +1,5 @@
 @import "import.css";
-@import "@minna-ui/css/src";
+@import "minna-ui";
 
 body {
   text-rendering: optimizeLegibility;

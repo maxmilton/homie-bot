@@ -23,7 +23,7 @@
 <div class="code">{host}:{port}</div>
 
 <div class="form-group mt4">
-  <MinnaSwitch bind:value="on" on:change="toggle()" />
+  <Switch bind:value="on" on:change="toggle()" />
 </div>
 
 <div class="form-group">
@@ -77,12 +77,12 @@
 </button>
 
 <script>
-  import MinnaSwitch from '@minna-ui/switch';
+  import { Switch } from 'minna-ui';
   import * as sapper from '../../../__sapper__/client.js'; // eslint-disable-line import/namespace
 
   export default {
     components: {
-      MinnaSwitch,
+      Switch,
     },
     data: () => ({
       colorName: '',

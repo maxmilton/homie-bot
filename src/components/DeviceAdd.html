@@ -9,7 +9,7 @@
   <div class="form-group">
     <label class="label" for="type">Type</label>
     <!-- TODO: Make the device types come from the backend -->
-    <MinnaSelect
+    <Select
       bind:value="type"
       id="type"
       items="{[{ id: '1', text: 'YeeLight Colour' }]}"
@@ -27,11 +27,11 @@
 </form>
 
 <script>
-  import MinnaSelect from '@minna-ui/select';
+  import { Select } from 'minna-ui';
 
   export default {
     components: {
-      MinnaSelect,
+      Select,
     },
     data: () => ({
       ip: '192.168.1.100',

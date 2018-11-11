@@ -1,4 +1,6 @@
-/* README: Import this file into components for access to CSS variables */
+/**
+ * README: Import this file into components for access to variables and mixins.
+ */
 
-@import "@minna-ui/css/src/import.css";
+@import "minna-ui/import.css";
 @import "./_variables.css";
