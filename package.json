@@ -53,7 +53,7 @@
     "@minna-ui/css": "0.16.0",
     "@minna-ui/eslint-config": "0.16.0",
     "@minna-ui/jest-config": "0.16.0",
-    "@minna-ui/postcss-config": "0.16.0",
+    "@minna-ui/postcss-config": "0.17.0",
     "@minna-ui/select": "0.16.0",
     "@minna-ui/stylelint-config": "0.16.0",
     "@minna-ui/svelte-preprocess-markup": "0.16.0",
