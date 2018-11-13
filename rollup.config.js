@@ -51,14 +51,16 @@ export default {
         module: true,
       }),
       // TODO: Use ADVANCED mode once dynamic import is supported https://git.io/fxwrR
-      // FIXME: Breaks export; wait until fixed upstream
+      // FIXME: Breaks export; wait until fixed upstream; or may be something related to ts
       // !dev && compiler({
       //   charset: 'UTF-8',
-      //   compilation_level: 'SIMPLE',
+      //   // compilation_level: 'SIMPLE',
+      //   compilation_level: 'ADVANCED',
       //   externs: [
       //     require.resolve('google-closure-compiler/contrib/externs/svg.js'),
       //     path.join(__dirname, 'externs.js'),
       //   ],
+      //   jscomp_off: '*', // FIXME: Svelte errors
       // }),
     ],
 
