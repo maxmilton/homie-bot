@@ -2,7 +2,7 @@
 /* tslint:disable no-console */
 
 /**
- * FIXME: This feels a bit crap button CSS in the server. Can it be just on the
+ * FIXME: This feels a bit crap putting CSS in the server. Can it be just on the
  * client but still with auto rebuilds and even auto hot reloading?
  */
 // global CSS must come first
