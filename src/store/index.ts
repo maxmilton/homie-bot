@@ -16,10 +16,13 @@ class AppStore extends Store {
 
   public async devicePut(id: string | null, data: IDevice) {
     // inject default data
-    const device = {...data, ...{
-      state: data.state || {},
-      type: data.type || -1,
-    }};
+    const device = {
+      ...data,
+      ...{
+        state: data.state || {},
+        type: data.type || -1,
+      },
+    };
 
     /* tslint:disable-next-line no-parameter-reassignment */
     id = id || data.rowid;

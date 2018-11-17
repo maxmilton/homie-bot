@@ -42,7 +42,7 @@ interface IPreset {
 export interface IPresetColor extends IPreset {
   type: 'color';
   value: {
-    color: string,
-    name?: string,
+    color: string;
+    name?: string;
   };
 }

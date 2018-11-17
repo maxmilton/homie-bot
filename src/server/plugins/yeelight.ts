@@ -109,7 +109,11 @@ export async function brightness(
 /**
  * Set the device hue colour.
  */
-export async function color(id: string, value: string, speed: number | string = TRANSITION_SPEED) {
+export async function color(
+  id: string,
+  value: string,
+  speed: number | string = TRANSITION_SPEED,
+) {
   try {
     const [hue, saturation] = colorConvert.hex.hsv(value);
     const { yeelight } = await oneShotCommand(id);

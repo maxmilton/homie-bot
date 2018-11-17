@@ -16,13 +16,18 @@ db.pragma('journal_mode = WAL');
 /** Populate database with default data */
 export function dbInit() {
   const hasTables = db
-    .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='devices'")
+    .prepare(
+      "SELECT name FROM sqlite_master WHERE type='table' AND name='devices'",
+    )
     .get();
 
   if (hasTables) return;
 
   console.log('[DB] Database appears empty, initialising it.');
-  const sql = fs.readFileSync(path.join(process.cwd(), './static/base-data.sql'), 'utf8');
+  const sql = fs.readFileSync(
+    path.join(process.cwd(), './static/base-data.sql'),
+    'utf8',
+  );
   db.exec(sql);
 }
 
@@ -32,7 +37,9 @@ dbInit();
 /** Remove all database tables and populate with base data */
 export function reset() {
   db.pragma('writable_schema = 1');
-  db.exec("DELETE FROM sqlite_master WHERE type in ('table', 'index', 'trigger')");
+  db.exec(
+    "DELETE FROM sqlite_master WHERE type in ('table', 'index', 'trigger')",
+  );
   db.pragma('writable_schema = 0');
   db.exec('VACUUM'); // recover deleted space
 
@@ -63,8 +70,18 @@ const devicePutStmt = db.prepare(`
   )
 `);
 
-export function devicePut(rowid: string | null, { host, port, name, state, type }: IDevice) {
-  return devicePutStmt.run({ rowid, host, port, name, type, state: JSON.stringify(state) });
+export function devicePut(
+  rowid: string | null,
+  { host, port, name, state, type }: IDevice,
+) {
+  return devicePutStmt.run({
+    rowid,
+    host,
+    port,
+    name,
+    type,
+    state: JSON.stringify(state),
+  });
 }
 
 const deviceGetStmt = db.prepare('SELECT rowid, * FROM devices WHERE rowid=?');
@@ -119,13 +136,15 @@ export function presetGet(id: string) {
   return preset;
 }
 
-const presetListTypeStmt = db.prepare('SELECT rowid, * FROM presets WHERE type=?');
+const presetListTypeStmt = db.prepare(
+  'SELECT rowid, * FROM presets WHERE type=?',
+);
 const presetListStmt = db.prepare('SELECT rowid, * FROM presets');
 
 export function presetList(type?: string) {
   const presets = type ? presetListTypeStmt.all(type) : presetListStmt.all();
 
-  return presets.map((preset) => {
+  return presets.map(preset => {
     preset.data = JSON.parse(preset.data);
 
     return preset;

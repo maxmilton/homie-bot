@@ -31,10 +31,11 @@ export function log(req: IReq, res: IRes, next: Next) {
     const duration = process.hrtime(start);
     const { method, originalUrl, url } = req;
     const { statusCode } = res;
+    /* prettier-ignore */
     const color = statusCode >= 400 ? 'red' : statusCode >= 300 ? 'yellow' : 'green';
     const timing = `${+(duration[1] / 1e6).toFixed(2)}ms`;
     const size = humanizeSize(byteLength);
-    /* tslint:disable-next-line max-line-length */
+    /* prettier-ignore */
     console.log(`» ${timing} ${colors[color](statusCode)} ${method} ${originalUrl || url} ${colors.cyan(size)}`);
   }
   res.on('finish', writeLog);
@@ -47,7 +48,7 @@ export function log(req: IReq, res: IRes, next: Next) {
  */
 export function parse(req: IReq, res: IRes, next: Next) {
   let data = '';
-  req.on('data', (chunk) => {
+  req.on('data', chunk => {
     data += chunk;
   });
   req.on('end', () => {
