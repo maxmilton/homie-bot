@@ -3,8 +3,9 @@
 'use strict';
 
 module.exports = {
-  extends: ['@minna-ui/eslint-config'],
   root: true,
+
+  extends: ['@minna-ui/eslint-config'],
   rules: {
     // Svelte components are in devDeps
     // TODO: Ideally this should be available as part of @minna-ui/eslint-config

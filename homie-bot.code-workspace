@@ -6,8 +6,10 @@
   ],
   "settings": {
     "editor.formatOnSave": true,
+    "eslint.autoFixOnSave": true,
+    "tslint.autoFixOnSave": true,
+    "tslint.jsEnable": true,
     "typescript.tsdk": "node_modules/typescript/lib",
-    "typescript.surveys.enabled": false,
-    "tslint.jsEnable": true
+    "typescript.surveys.enabled": false
   }
 }

@@ -10,8 +10,8 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": true,
-    // "diagnostics": true,
 
+    // "diagnostics": true,
     // "sourceMap": true,
 
     // "noEmitOnError": true,
@@ -23,11 +23,7 @@
 
     "baseUrl": "."
   },
-  "exclude": [
-    "__sapper__",
-    "dist",
-    "node_modules"
-  ],
+  "exclude": ["__sapper__", "dist", "node_modules"],
   "typeAcquisition": {
     "enable": true
   }
