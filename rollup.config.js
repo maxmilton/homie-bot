@@ -47,21 +47,23 @@ export default {
       }),
 
       // FIXME: Replace terser with closure compiler once it supports import
-      !dev && terser({
-        module: true,
-      }),
+      !dev
+        && terser({
+          module: true,
+        }),
       // TODO: Use ADVANCED mode once dynamic import is supported https://git.io/fxwrR
       // FIXME: Breaks export; wait until fixed upstream; or may be something related to ts
-      // !dev && compiler({
-      //   charset: 'UTF-8',
-      //   // compilation_level: 'SIMPLE',
-      //   compilation_level: 'ADVANCED',
-      //   externs: [
-      //     require.resolve('google-closure-compiler/contrib/externs/svg.js'),
-      //     path.join(__dirname, 'externs.js'),
-      //   ],
-      //   jscomp_off: '*', // FIXME: Svelte errors
-      // }),
+      // !dev &&
+      //   compiler({
+      //     charset: 'UTF-8',
+      //     // compilation_level: 'SIMPLE',
+      //     compilation_level: 'ADVANCED',
+      //     externs: [
+      //       require.resolve('google-closure-compiler/contrib/externs/svg.js'),
+      //       path.join(__dirname, 'externs.js'),
+      //     ],
+      //     jscomp_off: '*', // FIXME: Svelte errors
+      //   }),
     ],
 
     // temporary, pending Rollup 1.0
@@ -108,9 +110,10 @@ export default {
       resolve(),
       commonjs(),
 
-      !dev && compiler({
-        compilation_level: 'ADVANCED',
-      }),
+      !dev
+        && compiler({
+          compilation_level: 'ADVANCED',
+        }),
     ],
   },
 };
