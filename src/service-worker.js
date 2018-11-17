@@ -1,9 +1,12 @@
 /* eslint-env serviceworker */
 /* eslint no-restricted-globals: 1 */
-/* eslint-disable function-paren-newline, camelcase */
 
-/* eslint-disable-next-line no-unused-vars */
-import { timestamp, files, shell, routes } from '../__sapper__/service-worker.js';
+import {
+  timestamp,
+  files,
+  shell,
+  // routes,
+} from '../__sapper__/service-worker.js';
 
 const ASSETS = `cache${timestamp}`;
 
@@ -27,7 +30,8 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     self.caches.keys().then(async (keys) => {
       // delete old caches
-      for (const key of keys) { // eslint-disable-line no-restricted-syntax
+      /* eslint-disable-next-line no-restricted-syntax */
+      for (const key of keys) {
         if (key !== ASSETS) {
           await self.caches.delete(key); // eslint-disable-line no-await-in-loop
         }
@@ -39,7 +43,9 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET' || event.request.headers.has('range')) return; // tslint:disable-line curly
+  if (event.request.method !== 'GET' || event.request.headers.has('range')) {
+    return;
+  } // tslint:disable-line curly
 
   const url = new URL(event.request.url);
 
@@ -48,7 +54,12 @@ self.addEventListener('fetch', (event) => {
 
   // ignore dev server requests
   /* tslint:disable-next-line curly */
-  if (url.hostname === self.location.hostname && url.port !== self.location.port) return;
+  if (
+    url.hostname === self.location.hostname
+    && url.port !== self.location.port
+  ) {
+    return;
+  }
 
   // always serve static files and Rollup-generated assets from cache
   if (url.host === self.location.host && cached.has(url.pathname)) {
@@ -73,19 +84,17 @@ self.addEventListener('fetch', (event) => {
   // cache if the user is offline. (If the pages never change, you
   // might prefer a cache-first approach to a network-first one.)
   event.respondWith(
-    self.caches
-      .open(`offline${timestamp}`)
-      .then(async (cache) => {
-        try {
-          const response = await fetch(event.request);
-          cache.put(event.request, response.clone());
-          return response;
-        } catch (err) {
-          const response = await cache.match(event.request);
-          if (response) return response; // tslint:disable-line curly
+    self.caches.open(`offline${timestamp}`).then(async (cache) => {
+      try {
+        const response = await fetch(event.request);
+        cache.put(event.request, response.clone());
+        return response;
+      } catch (err) {
+        const response = await cache.match(event.request);
+        if (response) return response; // tslint:disable-line curly
 
-          throw err;
-        }
-      }),
+        throw err;
+      }
+    }),
   );
 });
