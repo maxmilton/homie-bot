@@ -59,7 +59,7 @@
     "eslint": "5.9.0",
     "jest": "23.6.0",
     "minna-ui": "0.17.1",
-    "postcss": "7.0.5",
+    "postcss": "7.0.6",
     "postcss-scss": "2.0.0",
     "prettier": "1.15.2",
     "purgecss": "1.1.0",
