@@ -75,10 +75,10 @@ export function devicePut(
   { host, port, name, state, type }: IDevice,
 ) {
   return devicePutStmt.run({
-    rowid,
     host,
-    port,
     name,
+    port,
+    rowid,
     type,
     state: JSON.stringify(state),
   });

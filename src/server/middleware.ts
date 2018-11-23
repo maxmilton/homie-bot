@@ -22,6 +22,7 @@ export function log(req: IReq, res: IRes, next: Next) {
   const write = res.write.bind(res);
   let byteLength = 0;
 
+  // monkey patch to calculate response byte size
   res.write = function writeFn(data) {
     if (data) byteLength += data.length;
     write(...arguments);
@@ -36,6 +37,7 @@ export function log(req: IReq, res: IRes, next: Next) {
     const timing = `${+(duration[1] / 1e6).toFixed(2)}ms`;
     const size = humanizeSize(byteLength);
     /* prettier-ignore */
+    /* tslint:disable-next-line max-line-length */
     console.log(`» ${timing} ${colors[color](statusCode)} ${method} ${originalUrl || url} ${colors.cyan(size)}`);
   }
   res.on('finish', writeLog);
