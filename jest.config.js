@@ -7,12 +7,12 @@
 module.exports = {
   preset: '@minna-ui/jest-config',
   transform: {
-    '^.+\\.[jt]s$': 'ts-jest',
-    // '^.+\\.m?js$': 'babel-jest',
+    '^.+\\.js$': 'babel-jest',
+    '^.+\\.ts$': 'ts-jest/preprocessor.js',
     '^.+\\.(html|svg)$': '@minna-ui/jest-config/lib/svelte-transform.js',
     '^.+\\.css$': '@minna-ui/jest-config/lib/null-transform.js',
   },
-  testRegex: '(/__tests__/.*|(\\.|/)test)\\.ts$',
+  testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|js)$',
   collectCoverageFrom: ['src/**/*.{js,html,ts}'],
   globals: {
     'ts-jest': {

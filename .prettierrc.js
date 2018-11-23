@@ -11,14 +11,8 @@ module.exports = {
     {
       files: '*.html',
       options: {
-        insertPragma: true,
+        htmlWhitespaceSensitivity: 'ignore',
         requirePragma: true,
-      },
-    },
-    {
-      files: '*.md',
-      options: {
-        proseWrap: 'never',
       },
     },
   ],
