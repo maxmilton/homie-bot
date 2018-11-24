@@ -1,0 +1,13 @@
+{
+  "editor.formatOnSave": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.enable": true,
+  "eslint.validate": ["html", "javascript", "markdown"],
+  "javascript.implicitProjectConfig.checkJs": true,
+  "tslint.autoFixOnSave": true,
+  "tslint.jsEnable": true,
+  "typescript.format.enable": true,
+  "typescript.format.insertSpaceAfterConstructor": true,
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
