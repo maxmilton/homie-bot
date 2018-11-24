@@ -2,18 +2,4 @@
 
 'use strict';
 
-module.exports = {
-  endOfLine: 'lf',
-  singleQuote: true,
-  trailingComma: 'all',
-
-  overrides: [
-    {
-      files: '*.html',
-      options: {
-        htmlWhitespaceSensitivity: 'ignore',
-        requirePragma: true,
-      },
-    },
-  ],
-};
+module.exports = require('@minna-ui/prettier-config')();

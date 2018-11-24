@@ -1,33 +1,3 @@
 {
-  "extends": [
-    "tslint:latest",
-    "tslint-config-airbnb"
-    // "tslint-config-prettier"
-  ],
-  "rulesDirectory": ["tslint-plugin-prettier"],
-  "rules": {
-    "curly": [true, "ignore-same-line"],
-    "object-literal-sort-keys": [
-      true,
-      "ignore-case",
-      "match-declaration-order",
-      "shorthand-first"
-    ],
-    "prettier": true
-  },
-  // "jsRules": true,
-  // FIXME: Remove this and replace with above once new tslint version is released
-  "jsRules": {
-    "curly": [true, "ignore-same-line"],
-    "quotemark": [true, "single", "avoid-escape", "avoid-template"]
-  },
-  "linterOptions": {
-    "exclude": [
-      "node_modules/**",
-      "__sapper__/**",
-      "dist/**",
-      "test/coverage/**",
-      "package.json"
-    ]
-  }
+  "extends": ["@minna-ui/tslint-config"]
 }
