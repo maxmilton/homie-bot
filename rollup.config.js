@@ -36,9 +36,9 @@ export default {
       makeCss(makeCssOpts),
       svelte({
         dev,
+        preprocess,
         emitCss: true,
         hydratable: true,
-        preprocess,
       }),
       resolve(),
       commonjs(),
@@ -82,8 +82,8 @@ export default {
       makeCss(makeCssOpts),
       svelte({
         dev,
-        generate: 'ssr',
         preprocess,
+        generate: 'ssr',
       }),
       resolve(),
       commonjs(),

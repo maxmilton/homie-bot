@@ -6,11 +6,11 @@
 /* eslint-disable strict, no-var, no-unused-vars, id-length */
 /* tslint:disable no-empty */
 
-// Svelte quoted method references
+// svelte quoted method references
 var i;
 var m;
 
-// Svelte store data key names
+// svelte store data key names
 /** @type {Array} */
 var $colors;
 /** @type {Array} */
@@ -29,7 +29,7 @@ var result;
 // var $dbQuery = () => {};
 // var $dbReset = () => {};
 
-// Object keys for backend server requests
+// object keys for backend server requests
 // var name;
 /** @type {string} */
 var ip;

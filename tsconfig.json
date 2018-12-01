@@ -3,7 +3,7 @@
 {
   "extends": "@minna-ui/ts-config",
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "declaration": true,
     "diagnostics": true, // ?
     "emitDecoratorMetadata": true,

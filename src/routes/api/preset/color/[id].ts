@@ -16,7 +16,9 @@ export function get(req: IReq, res: IRes) {
  */
 export function put(req: IReq, res: IRes) {
   res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify(dbMethods.presetPut(req.params.id, 'color', req.body)));
+  res.end(
+    JSON.stringify(dbMethods.presetPut(req.params.id, 'color', req.body)),
+  );
 }
 
 /**
