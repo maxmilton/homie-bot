@@ -47,8 +47,8 @@ export default {
       }),
 
       // FIXME: Replace terser with closure compiler once it supports import
-      !dev
-        && terser({
+      !dev &&
+        terser({
           module: true,
         }),
       // TODO: Use ADVANCED mode once dynamic import is supported https://git.io/fxwrR
@@ -110,8 +110,8 @@ export default {
       resolve(),
       commonjs(),
 
-      !dev
-        && compiler({
+      !dev &&
+        compiler({
           compilation_level: 'ADVANCED',
         }),
     ],

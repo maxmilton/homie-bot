@@ -29,7 +29,7 @@ polka()
       store: store.server,
     }),
   )
-  .listen(PORT, (err) => {
+  .listen(PORT, err => {
     if (err) console.error(err); // tslint:disable-line curly
   });
 
