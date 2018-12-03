@@ -25,6 +25,7 @@ export function log(req: IReq, res: IRes, next: Next) {
   // monkey patch to calculate response byte size
   res.write = function writeFn(data) {
     if (data) byteLength += data.length;
+    // @ts-ignore
     write(...arguments);
   };
 
