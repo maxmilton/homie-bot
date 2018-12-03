@@ -16,10 +16,7 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.{js,html,ts}'],
   globals: {
     'ts-jest': {
-      tsConfig: 'tsconfig.json', // TODO: Check this line helps
-      // isolatedModules: true,
-      // diagnostics: false,
-      // babelConfig: true,
+      diagnostics: false, // FIXME: Enable this once types are stable
     },
   },
 };
