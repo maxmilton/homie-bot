@@ -8,7 +8,7 @@ module.exports = {
   preset: '@minna-ui/jest-config',
   transform: {
     '^.+\\.js$': 'babel-jest',
-    '^.+\\.ts$': 'ts-jest/preprocessor.js',
+    '^.+\\.ts$': 'ts-jest',
     '^.+\\.(html|svg)$': '@minna-ui/jest-config/lib/svelte-transform.js',
     '^.+\\.css$': '@minna-ui/jest-config/lib/null-transform.js',
   },
