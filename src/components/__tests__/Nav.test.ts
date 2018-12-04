@@ -1,14 +1,14 @@
 /* tslint:disable no-unused-expression */
 
-import indexHtml from '../../src/routes/index.html';
+import NavHtml from '../Nav.html';
 
-describe('index route', () => {
+describe('Nav component', () => {
   it('renders correctly', () => {
     expect.assertions(3);
     const spy = jest.spyOn(global.console, 'error');
     function wrapper() {
       const target = document.createElement('div');
-      new indexHtml({ target });
+      new NavHtml({ target });
       expect(target.innerHTML).toMatchSnapshot();
     }
     expect(wrapper).not.toThrow();

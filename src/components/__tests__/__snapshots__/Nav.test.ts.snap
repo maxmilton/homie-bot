@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav component renders correctly 1`] = `
+"<header class=\\"mb4\\"><nav class=\\"con dfc nav\\"><a href=\\"/\\" id=\\"logo\\">🏠🤖</a>
+
+    
+    <a href=\\".\\" class=\\"nav-item nav-item-active\\">Home</a>
+    <a href=\\"admin\\" class=\\"nav-item\\">Admin</a></nav></header>"
+`;
