@@ -6,7 +6,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "sapper: dev server",
+      "name": "sapper: dev",
       "program": "${workspaceFolder}/node_modules/sapper/dist/cli.js",
       "args": ["dev"],
       "autoAttachChildProcesses": true
