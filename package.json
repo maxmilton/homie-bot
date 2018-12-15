@@ -41,7 +41,7 @@
     "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
   },
   "dependencies": {
-    "better-sqlite3": "^5.0.1",
+    "better-sqlite3": "^5.2.0",
     "color-convert": "^1.9.3",
     "colorette": "^1.0.7",
     "compression": "^1.7.3",
