@@ -7488,10 +7488,10 @@ yargs@^12.0.1:
     y18n "^3.2.1 || ^4.0.0"
     yargs-parser "^11.1.1"
 
-yeelight-awesome@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/yeelight-awesome/-/yeelight-awesome-1.0.11.tgz#e1827b099f500c7a4df47a17ffafdb54ac68aedf"
-  integrity sha512-YqtqkkFlrtEt7uNHFzLA/FYHOO6pmhMi6/ORzZ3PV/jDj9zllSSHiljloJwPnoQsDO8Enwja3rF8CfGybfHhng==
+yeelight-awesome@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/yeelight-awesome/-/yeelight-awesome-1.0.12.tgz#96825b68d6a506d29bcbd4e8f721c5d75fbeb1ed"
+  integrity sha512-6DeUBlG2goUKiOAAa/c9OJct5VZIALzITL2OfjDXsOyBEIrmEXd1H26UKuOyTIQTdjnoQOS8KktFR9c/ODxIjg==
   dependencies:
     "@types/portscanner" "^2.1.0"
     ip "^1.1.5"

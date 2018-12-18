@@ -47,7 +47,7 @@
     "compression": "^1.7.3",
     "polka": "^0.5.1",
     "sirv": "^0.2.2",
-    "yeelight-awesome": "^1.0.11"
+    "yeelight-awesome": "^1.0.12"
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.9.0-beta.7",
