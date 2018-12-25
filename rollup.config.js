@@ -25,6 +25,16 @@ const preprocess = {
   style: preStyle(),
 };
 
+// FIXME: Replace terser with closure compiler once it supports import correctly
+const nameCache = {};
+const terserOpts = {
+  nameCache,
+  ecma: 8,
+  module: true,
+  numWorkers: 1,
+  toplevel: true,
+};
+
 export default {
   client: {
     input: config.client.input(),
@@ -48,23 +58,21 @@ export default {
         typescript: require('typescript'), // eslint-disable-line global-require
       }),
 
-      // FIXME: Replace terser with closure compiler once it supports import
-      !dev &&
-        terser({
-          module: true,
-        }),
+      // FIXME: Replace terser with closure compiler once it supports import correctly
+      !dev && terser(terserOpts),
       // TODO: Use ADVANCED mode once dynamic import is supported https://git.io/fxwrR
       // FIXME: Breaks export; wait until fixed upstream; or may be something related to ts
       // !dev &&
       //   compiler({
-      //     charset: 'UTF-8',
-      //     // compilation_level: 'SIMPLE',
-      //     compilation_level: 'ADVANCED',
-      //     externs: [
-      //       require.resolve('google-closure-compiler/contrib/externs/svg.js'),
-      //       path.join(__dirname, 'externs.js'),
-      //     ],
-      //     jscomp_off: '*', // FIXME: Svelte errors
+      //     // externs: [
+      //     //   require.resolve('google-closure-compiler/contrib/externs/svg.js'),
+      //     //   path.join(__dirname, 'externs.js'),
+      //     // ],
+
+      //     // charset: 'UTF-8',
+      //     compilation_level: 'SIMPLE',
+      //     // compilation_level: 'ADVANCED',
+      //     // jscomp_off: '*', // FIXME: Svelte errors
       //   }),
     ],
 
