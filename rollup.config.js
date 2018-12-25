@@ -1,5 +1,5 @@
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
-import { makeCss, preMarkup, preStyle } from 'minna-ui';
+import { gitDescribe, postcss, preMarkup, preStyle } from 'minna-ui';
 // import path from 'path';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
@@ -13,7 +13,9 @@ import pkg from './package.json';
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 
-const makeCssOpts = {
+const appRelease = gitDescribe();
+
+const postcssOpts = {
   include: ['src/css/**/*.css'],
 };
 
@@ -30,10 +32,10 @@ export default {
     plugins: [
       replace({
         'process.browser': true,
-        'process.env.GIT_RELEASE': JSON.stringify(process.env.GIT_RELEASE),
+        'process.env.GIT_RELEASE': JSON.stringify(appRelease),
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
-      makeCss(makeCssOpts),
+      postcss(postcssOpts),
       svelte({
         dev,
         preprocess,
@@ -76,10 +78,10 @@ export default {
     plugins: [
       replace({
         'process.browser': false,
-        'process.env.GIT_RELEASE': JSON.stringify(process.env.GIT_RELEASE),
+        'process.env.GIT_RELEASE': JSON.stringify(appRelease),
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
-      makeCss(makeCssOpts),
+      postcss(postcssOpts),
       svelte({
         dev,
         preprocess,
