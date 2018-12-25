@@ -11,6 +11,7 @@ const units = ['B', 'kB', 'MB', 'GB', 'TB'];
  */
 function humanizeSize(bytes: number): string {
   const index = Math.floor(Math.log(bytes) / Math.log(1024));
+  if (index < 0) return '';
   return `${+(bytes / 1024 ** index).toFixed(2)} ${units[index]}`;
 }
 
@@ -41,8 +42,8 @@ export function log(req: IReq, res: IRes, next: Next) {
     /* tslint:disable-next-line max-line-length */
     console.log(`» ${timing} ${colors[color](statusCode)} ${method} ${originalUrl || url} ${colors.cyan(size)}`);
   }
-  res.on('finish', writeLog);
-  res.on('error', writeLog);
+  res.once('finish', writeLog);
+  res.once('error', writeLog);
   next();
 }
 
@@ -54,7 +55,7 @@ export function parse(req: IReq, res: IRes, next: Next) {
   req.on('data', chunk => {
     data += chunk;
   });
-  req.on('end', () => {
+  req.once('end', () => {
     req.rawBody = data;
     const contentType = req.headers['content-type'];
     if (contentType && contentType.indexOf('application/json') === 0) {
