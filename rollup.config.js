@@ -75,9 +75,6 @@ export default {
       //     // jscomp_off: '*', // FIXME: Svelte errors
       //   }),
     ],
-
-    // temporary, pending Rollup 1.0
-    experimentalCodeSplitting: true,
   },
 
   server: {
@@ -104,9 +101,6 @@ export default {
     external: Object.keys(pkg.dependencies) // tslint:disable-line object-literal-sort-keys
       .filter(dep => !/^@minna-ui/.test(dep)) // minna-ui packages in dependencies
       .concat(require('module').builtinModules), // eslint-disable-line global-require
-
-    // temporary, pending Rollup 1.0
-    experimentalCodeSplitting: true,
   },
 
   serviceworker: {
