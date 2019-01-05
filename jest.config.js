@@ -12,8 +12,9 @@ module.exports = {
     '^.+\\.(html|svg)$': '@minna-ui/jest-config/lib/svelte-transform.js',
     '^.+\\.css$': '@minna-ui/jest-config/lib/null-transform.js',
   },
-  testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|js)$',
-  collectCoverageFrom: ['src/**/*.{js,html,ts}'],
+  testRegex: '(/__tests__/.*|\\.(test|spec))\\.[jt]s$',
+  moduleFileExtensions: ['html', 'js', 'json', 'ts'],
+  collectCoverageFrom: ['src/**/*.{html,js,ts}'],
   globals: {
     'ts-jest': {
       diagnostics: false, // FIXME: Enable this once types are stable
