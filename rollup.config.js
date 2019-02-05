@@ -4,6 +4,7 @@ import { gitDescribe, postcss, preMarkup, preStyle } from 'minna-ui';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
+import sucrase from 'rollup-plugin-sucrase';
 import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript';
@@ -25,16 +26,6 @@ const preprocess = {
   style: preStyle(),
 };
 
-// FIXME: Replace terser with closure compiler once it supports import correctly
-const nameCache = {};
-const terserOpts = {
-  nameCache,
-  ecma: 8,
-  module: true,
-  numWorkers: 1,
-  toplevel: true,
-};
-
 export default {
   client: {
     input: config.client.input(),
@@ -52,14 +43,29 @@ export default {
         emitCss: true,
         hydratable: true,
       }),
-      resolve(),
-      commonjs(),
-      typescript({
-        typescript: require('typescript'), // eslint-disable-line global-require
+      resolve({
+        // extensions: ['.js', '.ts'],
       }),
+      commonjs({
+        include: ['node_modules/**'],
+      }),
+      !dev
+        ? typescript({
+            exclude: ['*.css', 'node_modules/**'],
+            include: 'src/**',
+            typescript: require('typescript'), // eslint-disable-line global-require
+          })
+        : sucrase({
+            exclude: ['**/*.css', '*.css'],
+            transforms: ['typescript'],
+          }),
 
       // FIXME: Replace terser with closure compiler once it supports import correctly
-      !dev && terser(terserOpts),
+      !dev &&
+        terser({
+          ecma: 8,
+          module: true,
+        }),
       // TODO: Use ADVANCED mode once dynamic import is supported https://git.io/fxwrR
       // FIXME: Breaks export; wait until fixed upstream; or may be something related to ts
       // !dev &&
@@ -86,17 +92,29 @@ export default {
         'process.env.GIT_RELEASE': JSON.stringify(appRelease),
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
-      postcss(postcssOpts),
+      // postcss(postcssOpts),
       svelte({
         dev,
         preprocess,
         generate: 'ssr',
       }),
-      resolve(),
-      commonjs(),
-      typescript({
-        typescript: require('typescript'), // eslint-disable-line global-require
+      resolve({
+        extensions: ['.js', '.ts'],
       }),
+      commonjs({
+        include: ['node_modules/**'],
+      }),
+      !dev
+        ? typescript({
+            exclude: ['node_modules/**'],
+            include: 'src/**',
+            typescript: require('typescript'), // eslint-disable-line global-require
+          })
+        : sucrase({
+            exclude: ['node_modules/**'],
+            include: 'src/**',
+            transforms: ['typescript'],
+          }),
     ],
     external: Object.keys(pkg.dependencies) // tslint:disable-line object-literal-sort-keys
       .filter(dep => !/^@minna-ui/.test(dep)) // minna-ui packages in dependencies
