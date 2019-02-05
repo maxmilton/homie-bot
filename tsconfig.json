@@ -4,11 +4,8 @@
   "extends": "@minna-ui/ts-config",
   "compilerOptions": {
     "baseUrl": ".",
-    "declaration": true,
-    "diagnostics": true, // ?
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "importHelpers": true,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "outDir": "dist"
   }
 }
