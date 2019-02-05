@@ -70,7 +70,7 @@
     "rollup-plugin-replace": "2.1.0",
     "rollup-plugin-svelte": "5.0.1",
     "rollup-plugin-sucrase": "2.1.0",
-    "rollup-plugin-terser": "4.0.3",
+    "rollup-plugin-terser": "4.0.4",
     "rollup-plugin-typescript": "1.0.0",
     "sapper": "0.24.2",
     "stylelint": "9.10.1",
