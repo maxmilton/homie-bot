@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "better-sqlite3": "^5.4.0",
-    "color-convert": "^1.9.3",
+    "color-convert": "^2.0.0",
     "colorette": "^1.0.7",
     "compression": "^1.7.3",
     "polka": "^0.5.1",
