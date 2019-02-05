@@ -24,19 +24,18 @@
   "files": [
     "dist",
     "static",
-    "start.sh",
-    "stop.sh"
+    "scripts"
   ],
   "scripts": {
-    "dev": "sapper dev",
+    "dev": "NODE_ENV=development sapper dev",
     "build": "NODE_ENV=production sapper build ./dist",
     "serve": "NODE_ENV=production node ./dist",
     "_run": "yarn build && yarn serve",
     "lint": "yarn lint:css && yarn lint:js && yarn lint:ts && yarn lint:md",
-    "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html,md}",
-    "lint:js": "eslint --ignore-path .gitignore --ext html,js,md .",
+    "lint:css": "stylelint '**/*.{css,html,md}'",
+    "lint:js": "eslint --ext html,js,md .",
     "lint:ts": "tslint --project tsconfig.json",
-    "lint:md": "markdownlint --ignore **/node_modules/** .",
+    "lint:md": "remark --frail --quiet .",
     "test": "yarn lint && JEST_CIRCUS=1 jest --notify --watch",
     "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
   },
@@ -116,7 +115,7 @@
         "error",
         {
           "devDependencies": true
-  }
+        }
       ]
     }
   },
