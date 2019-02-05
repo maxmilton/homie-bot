@@ -82,5 +82,81 @@
     "tslint-config-prettier": "1.17.0",
     "tslint-plugin-prettier": "2.0.1",
     "typescript": "3.2.4"
+  },
+  "browserslist": {
+    "production": [
+      "extends @minna-ui/browserslist-config/modern"
+    ],
+    "development": [
+      "extends @minna-ui/browserslist-config/dev"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@minna-ui/jest-config/babel-preset.js"
+    ]
+  },
+  "postcss": {
+    "map": true,
+    "syntax": "postcss-scss",
+    "plugins": {
+      "@minna-ui/postcss-config": {
+        "debug": true
+      }
+    }
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@minna-ui/eslint-config"
+    ],
+    "rules": {
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": true
   }
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "__sapper__/**",
+    "dist/**",
+    "test/coverage/**"
+  ],
+  "stylelint": {
+    "extends": "@minna-ui/stylelint-config",
+    "ignoreFiles": [
+      "__sapper__/**",
+      "dist/**",
+      "test/coverage/**"
+    ]
+  },
+  "remarkConfig": {
+    "plugins": [
+      "@minna-ui/remarklint-config"
+    ]
+  },
+  "jest": {
+    "preset": "@minna-ui/jest-config",
+    "collectCoverageFrom": [
+      "src/**/*.{html,js,ts}"
+    ]
+  },
+  "renovate": {
+    "extends": [
+      "@wearegenki"
+    ]
+  },
+  "engines": {
+    "node": ">11.0.0",
+    "yarn": ">1.12.0"
+  },
+  "os": [
+    "!win32",
+    "darwin",
+    "freebsd",
+    "linux",
+    "openbsd"
+  ]
 }
