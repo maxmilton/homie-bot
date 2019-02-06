@@ -4,8 +4,6 @@
   "extends": "@minna-ui/ts-config",
   "compilerOptions": {
     "baseUrl": ".",
-    "importHelpers": true,
-    "noUnusedParameters": false,
-    "outDir": "dist"
+    "noUnusedParameters": false
   }
 }
