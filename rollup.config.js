@@ -4,7 +4,6 @@ import { gitDescribe, postcss, preMarkup, preStyle } from 'minna-ui';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
-import sucrase from 'rollup-plugin-sucrase';
 import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript';
@@ -43,22 +42,13 @@ export default {
         emitCss: true,
         hydratable: true,
       }),
-      resolve({
-        // extensions: ['.js', '.ts'],
+      // resolve(),
+      // commonjs({
+      //   include: ['node_modules/**'],
+      // }),
+      typescript({
+        typescript: require('typescript'), // eslint-disable-line global-require
       }),
-      commonjs({
-        include: ['node_modules/**'],
-      }),
-      !dev
-        ? typescript({
-            exclude: ['*.css', 'node_modules/**'],
-            include: 'src/**',
-            typescript: require('typescript'), // eslint-disable-line global-require
-          })
-        : sucrase({
-            exclude: ['**/*.css', '*.css'],
-            transforms: ['typescript'],
-          }),
 
       // FIXME: Replace terser with closure compiler once it supports import correctly
       !dev &&
@@ -96,25 +86,16 @@ export default {
       svelte({
         dev,
         preprocess,
+        css: false, // ????
         generate: 'ssr',
       }),
-      resolve({
-        extensions: ['.js', '.ts'],
+      // resolve(),
+      // commonjs({
+      //   include: ['node_modules/**'],
+      // }),
+      typescript({
+        typescript: require('typescript'), // eslint-disable-line global-require
       }),
-      commonjs({
-        include: ['node_modules/**'],
-      }),
-      !dev
-        ? typescript({
-            exclude: ['node_modules/**'],
-            include: 'src/**',
-            typescript: require('typescript'), // eslint-disable-line global-require
-          })
-        : sucrase({
-            exclude: ['node_modules/**'],
-            include: 'src/**',
-            transforms: ['typescript'],
-          }),
     ],
     external: Object.keys(pkg.dependencies) // tslint:disable-line object-literal-sort-keys
       .filter(dep => !/^@minna-ui/.test(dep)) // minna-ui packages in dependencies
