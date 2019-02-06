@@ -6,7 +6,7 @@
  * client but still with auto rebuilds and even auto hot reloading?
  */
 // global CSS must come first
-import './css/main.css';
+// import './css/main.css';
 
 import compression from 'compression';
 import polka from 'polka';
