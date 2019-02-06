@@ -96,7 +96,7 @@
   },
   "babel": {
     "presets": [
-      "@minna-ui/jest-config/babel-preset.js"
+      "@minna-ui/jest-config/babel-preset"
     ]
   },
   "postcss": {
@@ -141,10 +141,7 @@
     ]
   },
   "jest": {
-    "preset": "@minna-ui/jest-config",
-    "collectCoverageFrom": [
-      "src/**/*.{html,js,ts}"
-    ]
+    "preset": "@minna-ui/jest-config"
   },
   "renovate": {
     "extends": [
@@ -154,12 +151,5 @@
   "engines": {
     "node": ">11.0.0",
     "yarn": ">1.12.0"
-  },
-  "os": [
-    "!win32",
-    "darwin",
-    "freebsd",
-    "linux",
-    "openbsd"
-  ]
+  }
 }
