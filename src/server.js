@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* tslint:disable no-console */
 
 /**
  * FIXME: This feels a bit crap putting CSS in the server. Can it be just on the
@@ -11,9 +10,9 @@
 import compression from 'compression';
 import polka from 'polka';
 import sirv from 'sirv';
+import { log, parse } from '@wearegenki/node-utils';
 import * as sapper from '../__sapper__/server.js';
 import db from './server/db';
-import { log, parse } from './server/middleware';
 import * as store from './store';
 
 const { PORT, NODE_ENV } = process.env;
@@ -29,8 +28,8 @@ polka()
       store: store.server,
     }),
   )
-  .listen(PORT, err => {
-    if (err) console.error(err); // tslint:disable-line curly
+  .listen(PORT, (err) => {
+    if (err) console.error(err);
   });
 
 // clean up and close database connection on exit
