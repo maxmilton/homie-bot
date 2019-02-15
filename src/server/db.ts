@@ -1,8 +1,6 @@
 // https://github.com/JoshuaWise/better-sqlite3/blob/master/docs/api.md
 
-/* tslint:disable no-console */
-
-import Database from 'better-sqlite3'; // tslint:disable-line import-name
+import Database from 'better-sqlite3';
 import fs from 'fs';
 import path from 'path';
 import { IDevice } from './types';
@@ -144,7 +142,7 @@ const presetListStmt = db.prepare('SELECT rowid, * FROM presets');
 export function presetList(type?: string) {
   const presets = type ? presetListTypeStmt.all(type) : presetListStmt.all();
 
-  return presets.map(preset => {
+  return presets.map((preset) => {
     preset.data = JSON.parse(preset.data);
 
     return preset;

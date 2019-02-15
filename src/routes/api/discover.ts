@@ -12,7 +12,7 @@ export async function get(req: IReq, res: IRes) {
     res.end(JSON.stringify(result));
   } catch (err) {
     // TODO: Change all server console statements to be like this one
-    console.error('[API/DISCOVER] Error', err); // tslint:disable-line no-console
+    console.error('[API/DISCOVER] Error', err);
 
     // FIXME: Figure out what the correct err.message is for no devices discovered
     // if (err.message === '????') {

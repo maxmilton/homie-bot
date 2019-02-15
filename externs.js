@@ -4,7 +4,6 @@
  */
 
 /* eslint-disable strict, no-var, no-unused-vars, id-length */
-/* tslint:disable no-empty */
 
 // svelte quoted method references
 var i;

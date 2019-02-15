@@ -1,5 +1,3 @@
-/* tslint:disable no-unused-expression */
-
 import NavHtml from '../Nav.html';
 
 describe('Nav component', () => {

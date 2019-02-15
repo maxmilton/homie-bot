@@ -15,7 +15,7 @@ const ASSETS = `cache${timestamp}`;
 const toCache = shell.concat(files);
 const cached = new Set(toCache);
 
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
   event.waitUntil(
     self.caches
       .open(ASSETS)
@@ -26,9 +26,9 @@ self.addEventListener('install', event => {
   );
 });
 
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    self.caches.keys().then(async keys => {
+    self.caches.keys().then(async (keys) => {
       // delete old caches
       /* eslint-disable-next-line no-restricted-syntax */
       for (const key of keys) {
@@ -42,18 +42,17 @@ self.addEventListener('activate', event => {
   );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET' || event.request.headers.has('range')) {
     return;
-  } // tslint:disable-line curly
+  }
 
   const url = new URL(event.request.url);
 
   // don't try to handle e.g. data: URIs
-  if (!url.protocol.startsWith('http')) return; // tslint:disable-line curly
+  if (!url.protocol.startsWith('http')) return;
 
   // ignore dev server requests
-  /* tslint:disable-next-line curly */
   if (
     url.hostname === self.location.hostname &&
     url.port !== self.location.port
@@ -77,21 +76,20 @@ self.addEventListener('fetch', event => {
   }
   */
 
-  /* tslint:disable-next-line curly */
   if (event.request.cache === 'only-if-cached') return;
 
   // for everything else, try the network first, falling back to
   // cache if the user is offline. (If the pages never change, you
   // might prefer a cache-first approach to a network-first one.)
   event.respondWith(
-    self.caches.open(`offline${timestamp}`).then(async cache => {
+    self.caches.open(`offline${timestamp}`).then(async (cache) => {
       try {
         const response = await fetch(event.request);
         cache.put(event.request, response.clone());
         return response;
       } catch (err) {
         const response = await cache.match(event.request);
-        if (response) return response; // tslint:disable-line curly
+        if (response) return response;
 
         throw err;
       }

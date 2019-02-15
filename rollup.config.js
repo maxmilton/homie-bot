@@ -97,7 +97,7 @@ export default {
         typescript: require('typescript'), // eslint-disable-line global-require
       }),
     ],
-    external: Object.keys(pkg.dependencies) // tslint:disable-line object-literal-sort-keys
+    external: Object.keys(pkg.dependencies)
       .filter(dep => !/^@minna-ui/.test(dep)) // minna-ui packages in dependencies
       .concat(require('module').builtinModules), // eslint-disable-line global-require
   },

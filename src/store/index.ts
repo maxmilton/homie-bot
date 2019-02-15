@@ -1,6 +1,3 @@
-/* tslint:disable no-console */
-
-/* tslint:disable-next-line no-submodule-imports no-implicit-dependencies */
 import { Store } from 'svelte/store.js';
 import { IDevice, IPresetColor, IReq } from '../server/types';
 
@@ -24,7 +21,6 @@ class AppStore extends Store {
       },
     };
 
-    /* tslint:disable-next-line no-parameter-reassignment */
     id = id || data.rowid;
 
     const res = await fetch(`/api/device${id ? `/${id}` : ''}`, {
@@ -60,7 +56,6 @@ class AppStore extends Store {
   }
 
   public async presetColorPut(id: string | null, data: IPresetColor) {
-    /* tslint:disable-next-line no-parameter-reassignment */
     id = id || data.rowid;
 
     const res = await fetch(`/api/preset/color${id ? `/${id}` : ''}`, {
@@ -128,4 +123,4 @@ const initialState = {
 
 export const server = (req: IReq) => new AppStore(initialState);
 
-export const client = data => new AppStore(data);
+export const client = (data) => new AppStore(data);

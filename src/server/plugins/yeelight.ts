@@ -1,7 +1,5 @@
 // https://github.com/samuraitruong/yeelight/blob/master/src/yeelight.ts
 
-/* tslint:disable no-console */
-
 import colorConvert from 'color-convert';
 import * as yl from 'yeelight-awesome';
 import * as dbMethods from '../db';
