@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.8.5",
-    "@babel/preset-typescript": "7.1.0",
+    "@babel/preset-typescript": "7.3.3",
     "@types/better-sqlite3": "5.2.2",
     "@types/color-convert": "1.9.0",
     "@types/node": "10.12.26",
