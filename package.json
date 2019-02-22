@@ -55,7 +55,7 @@
     "@babel/preset-typescript": "7.1.0",
     "@types/better-sqlite3": "5.2.2",
     "@types/color-convert": "1.9.0",
-    "@types/node": "10.12.26",
+    "@types/node": "10.12.27",
     "@wearegenki/renovate-config": "1.0.0",
     "chokidar": "2.1.1",
     "codecov": "3.2.0",
