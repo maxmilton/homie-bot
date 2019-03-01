@@ -4,6 +4,7 @@
   import { createEventDispatcher } from 'svelte';
   // import { Select } from 'minna-ui';
   import Select from '@minna-ui/select/src/Select.svelte';
+  import { devicePut } from '../store';
 
   export let ip = '192.168.1.100';
   export let name = 'My Light';
@@ -11,11 +12,14 @@
 
   const dispatch = createEventDispatcher();
 
+  // TODO: Load device types from backend
+  const types = [{ id: '1', text: 'YeeLight Colour' }];
+
   function handleSubmit(event) {
     event.preventDefault();
 
-    const data = this.get();
-    this.store.devicePut(null, data);
+    devicePut(null, { ip, name, type });
+
     dispatch('close');
   }
 </script>
@@ -30,11 +34,10 @@
 
   <div class="form-group">
     <label class="label" for="type">Type</label>
-    <!-- TODO: Make the device types come from the backend -->
     <Select
       bind:value="{type}"
       id="type"
-      items="{[{ id: '1', text: 'YeeLight Colour' }]}"
+      items="{types}"
       filterable="{false}"
     />
   </div>
