@@ -1,10 +1,10 @@
-import * as dbMethods from '../../../server/db.js';
-import { IReq, IRes } from '../../../server/types.js';
+import * as dbMethods from '../../../server/db';
+import { IReq, IRes } from '../../../server/types';
 
 /**
  * Get device data.
  */
-export function get(req: IReq, res: IRes) {
+export function get(req: IReq, res: IRes): void {
   const result = dbMethods.deviceGet(req.params.id);
 
   res.setHeader('Content-Type', 'application/json');
@@ -14,7 +14,7 @@ export function get(req: IReq, res: IRes) {
 /**
  * Update an existing device.
  */
-export function put(req: IReq, res: IRes) {
+export function put(req: IReq, res: IRes): void {
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(dbMethods.devicePut(req.params.id, req.body)));
 }
@@ -22,7 +22,7 @@ export function put(req: IReq, res: IRes) {
 /**
  * Remove a device.
  */
-export function del(req: IReq, res: IRes) {
+export function del(req: IReq, res: IRes): void {
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(dbMethods.deviceDelete(req.params.id)));
 }

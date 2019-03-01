@@ -1,10 +1,10 @@
-import * as yeelight from '../../server/plugins/yeelight.js';
-import { IReq, IRes } from '../../server/types.js';
+import * as yeelight from '../../server/plugins/yeelight';
+import { IReq, IRes } from '../../server/types';
 
 /**
  * Find devices on the local network.
  */
-export async function get(req: IReq, res: IRes) {
+export async function get(req: IReq, res: IRes): Promise<void> {
   try {
     const result = await yeelight.discoverDevices();
 
