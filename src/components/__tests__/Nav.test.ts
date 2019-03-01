@@ -1,4 +1,4 @@
-import NavHtml from '../Nav.html';
+import NavHtml from '../Nav.svelte';
 
 describe('Nav component', () => {
   it('renders correctly', () => {
