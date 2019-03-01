@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/camelcase, global-require */
+
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { gitDescribe, postcss, preMarkup, preStyle } from 'minna-ui';
 // import path from 'path';
@@ -38,26 +40,25 @@ export default {
       postcss(postcssOpts),
       svelte({
         dev,
-        preprocess,
         emitCss: true,
         hydratable: true,
+        preprocess,
       }),
-      // resolve(),
-      // commonjs({
-      //   include: ['node_modules/**'],
-      // }),
+      resolve(),
+      commonjs({
+        extensions: ['.mjs', '.js', '.svelte'],
+        include: ['node_modules/**'],
+      }),
       typescript({
-        typescript: require('typescript'), // eslint-disable-line global-require
+        typescript: require('typescript'),
       }),
 
-      // FIXME: Replace terser with closure compiler once it supports import correctly
+      // FIXME: Replace terser with closure compiler once it supports `import`
       !dev &&
         terser({
           ecma: 8,
           module: true,
         }),
-      // TODO: Use ADVANCED mode once dynamic import is supported https://git.io/fxwrR
-      // FIXME: Breaks export; wait until fixed upstream; or may be something related to ts
       // !dev &&
       //   compiler({
       //     // externs: [
@@ -82,24 +83,26 @@ export default {
         'process.env.GIT_RELEASE': JSON.stringify(appRelease),
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
-      // postcss(postcssOpts),
+      postcss(postcssOpts),
       svelte({
-        dev,
-        preprocess,
         css: false, // ????
+        dev,
         generate: 'ssr',
+        preprocess,
       }),
-      // resolve(),
-      // commonjs({
-      //   include: ['node_modules/**'],
-      // }),
+      resolve(),
+      commonjs({
+        extensions: ['.mjs', '.js', '.svelte'],
+        include: ['node_modules/**'],
+      }),
       typescript({
-        typescript: require('typescript'), // eslint-disable-line global-require
+        typescript: require('typescript'),
       }),
     ],
+    // eslint-disable-next-line sort-keys
     external: Object.keys(pkg.dependencies)
-      .filter(dep => !/^@minna-ui/.test(dep)) // minna-ui packages in dependencies
-      .concat(require('module').builtinModules), // eslint-disable-line global-require
+      .filter((dep) => !/^@minna-ui/.test(dep)) // minna-ui packages in dependencies
+      .concat(require('module').builtinModules),
   },
 
   serviceworker: {
@@ -111,7 +114,13 @@ export default {
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
       resolve(),
-      commonjs(),
+      commonjs({
+        extensions: ['.mjs', '.js', '.svelte'],
+        include: ['node_modules/**'],
+      }),
+      typescript({
+        typescript: require('typescript'),
+      }),
 
       !dev &&
         compiler({
