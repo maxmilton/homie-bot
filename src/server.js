@@ -4,16 +4,16 @@
  * FIXME: This feels a bit crap putting CSS in the server. Can it be just on the
  * client but still with auto rebuilds and even auto hot reloading?
  */
-// global CSS must come first
-// import './css/main.css';
+// global CSS
+import './css/main.css';
 
 import compression from 'compression';
 import polka from 'polka';
 import sirv from 'sirv';
-import { log, parse } from '@wearegenki/node-utils';
-import * as sapper from '../__sapper__/server.js';
+import { log } from '@wearegenki/node-utils/lib/middleware/log';
+import { parse } from '@wearegenki/node-utils/lib/middleware/parse';
+import * as sapper from '@sapper/server'; // eslint-disable-line
 import db from './server/db';
-import * as store from './store';
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
@@ -24,9 +24,7 @@ polka()
     compression({ threshold: 0 }),
     sirv('static', { dev }),
     parse,
-    sapper.middleware({
-      store: store.server,
-    }),
+    sapper.middleware(),
   )
   .listen(PORT, (err) => {
     if (err) console.error(err);
@@ -34,7 +32,7 @@ polka()
 
 // clean up and close database connection on exit
 process.on('SIGINT', () => {
-  console.log('\nINFO: Closing database connection.');
+  console.log('\nClosing database connection...');
 
   try {
     db.close();

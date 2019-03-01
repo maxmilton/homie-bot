@@ -6,7 +6,7 @@ import {
   files,
   shell,
   // routes,
-} from '../__sapper__/service-worker.js';
+} from '@sapper/service-worker'; // eslint-disable-line
 
 const ASSETS = `cache${timestamp}`;
 
