@@ -2,10 +2,14 @@
   "css.validate": false,
   "editor.formatOnSave": true,
   "eslint.enable": true,
-  "eslint.validate": ["html", "javascript", "javascriptreact", "markdown"],
+  "eslint.validate": [
+    { "language": "html", "autoFix": true },
+    { "language": "javascript", "autoFix": true },
+    { "language": "markdown", "autoFix": true },
+    { "language": "typescript", "autoFix": true }
+  ],
   "files.associations": {
     "*.css": "scss",
-    "*.pcss": "scss",
     "*.svelte": "html"
   },
   "files.eol": "\n",
@@ -28,6 +32,5 @@
     "typescript"
   ],
   "spellright.spellContext": "body code comments strings",
-  "stylelint.enable": true,
-  "tslint.jsEnable": true
+  "stylelint.enable": true
 }
