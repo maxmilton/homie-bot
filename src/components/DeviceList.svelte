@@ -1,10 +1,26 @@
+<!-- @format -->
+
+<script>
+  import { onMount } from 'svelte';
+  import { devices, deviceGet } from '../store';
+  import DeviceDiscover from './DeviceDiscover.svelte';
+  import DeviceAdd from './DeviceAdd.svelte';
+
+  export let showAddDevice = false;
+  export let showDiscover = false;
+
+  onMount(() => {
+    deviceGet();
+  });
+</script>
+
 <div class="l-df align-col-center">
   <h1>Devices</h1>
   <div class="ml-auto">
     <button
       class="button"
       type="button"
-      on:click="set({ showDiscover: !showDiscover})"
+      on:click="{() => showDiscover = !showDiscover}"
     >
       Discover
     </button>
@@ -12,7 +28,7 @@
     <button
       class="button"
       type="button"
-      on:click="set({ showAddDevice: !showAddDevice})"
+      on:click="{() => showAddDevice = !showAddDevice}"
     >
       New
     </button>
@@ -21,11 +37,11 @@
 
 
 {#if showDiscover}
-  <DeviceDiscover on:close="set({ showDiscover: false })" />
+  <DeviceDiscover on:close="{() => showDiscover = false}" />
 {/if}
 
 {#if showAddDevice}
-  <DeviceAdd on:close="set({ showAddDevice: false })" />
+  <DeviceAdd on:close="{() => showAddDevice = false}" />
 {/if}
 
 <div class="dg grid ns-x2 mt4">
@@ -43,25 +59,6 @@
     <p class="w2 lead tc">😢 No registered devices.</p>
   {/each}
 </div>
-
-<script>
-  import DeviceDiscover from './DeviceDiscover.html';
-  import DeviceAdd from './DeviceAdd.html';
-
-  export default {
-    components: {
-      DeviceAdd,
-      DeviceDiscover,
-    },
-    data: () => ({
-      showAddDevice: false,
-      showDiscover: false,
-    }),
-    oncreate() {
-      this.store.deviceGet();
-    },
-  };
-</script>
 
 <style type="text/postcss">
   @import 'import.css';

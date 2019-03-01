@@ -1,5 +1,6 @@
-<!--
+<!-- @format -->
 
+<!--
   TODO: Add way to edit device name, host, port, etc.
 
   TODO: Ability to remove colour presets
@@ -11,8 +12,90 @@
   TODO: Nice brightness slider input
 
   TODO: Preset flows (flow colours, sunrise, sunset) + allow scheduling them
-
 -->
+
+<script context="module">
+  // eslint-disable-next-line consistent-return
+  export async function preload({ params }) {
+    const res = await this.fetch(`/api/device/info/${params.id}`);
+
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+
+    this.error(res.status, res.statusText);
+  }
+</script>
+
+<script>
+  // import { Switch } from 'minna-ui';
+  import Switch from '@minna-ui/switch/src/Switch.svelte';
+  import { onMount } from 'svelte';
+  import * as sapper from '@sapper/app'; // eslint-disable-line
+  import { colors, deviceDelete, presetColorGet, presetColorPut } from '../../store';
+
+  export let params;
+  export let id;
+  export let on;
+  export let brightness;
+  export let name;
+  export let host;
+  export let port;
+  export let color;
+
+  console.log('!!! HMM', params, id, brightness);
+
+  let colorName = '';
+
+  onMount(() => {
+    // get colour presets
+    presetColorGet();
+  });
+
+  async function toggle() {
+    const res = await fetch(`/api/command/${id}?action=toggle`);
+
+    if (!res.ok) throw new Error(res.statusText);
+  }
+
+  async function setBrightness() {
+    const res = await fetch(`/api/command/${id}?action=brightness&value=${brightness}`);
+
+    if (!res.ok) throw new Error(res.statusText);
+  }
+
+  async function setColor(value) {
+    let hex = value || color;
+    hex = hex[0] === '#' ? hex.slice(1) : hex;
+
+    // update UI with new colour
+    if (value) color = value;
+
+    const res = await fetch(`/api/command/${id}?action=color&value=${hex}`);
+
+    if (!res.ok) throw new Error(res.statusText);
+  }
+
+  function savePresetColor() {
+    try {
+      presetColorPut(null, { color, name: colorName || color });
+    } catch (err) {
+      // TODO: Handle error better
+      console.error(err);
+    }
+  }
+
+  async function deviceRemove(id) {
+    try {
+      await deviceDelete(id);
+      sapper.goto('/');
+    } catch (err) {
+      // TODO: Handle error better
+      console.error(err);
+    }
+  }
+</script>
 
 <svelte:head>
   <title>{name} | Homie Bot</title>
@@ -23,7 +106,7 @@
 <div class="code">{host}:{port}</div>
 
 <div class="form-group mt4">
-  <Switch bind:value="on" on:change="toggle()" />
+  <Switch bind:value="{on}" on:change="{toggle}" />
 </div>
 
 <div class="form-group">
@@ -33,7 +116,7 @@
       class="button button-color ttu"
       style="border-color:{color.data.color};"
       type="button"
-      on:click="setColor(color.data.color)"
+      on:click="{() => setColor(color.data.color)}"
     >
       {color.data.name}
     </button>
@@ -44,9 +127,9 @@
 
 <div class="form-group mt4">
   <label class="label" for="color">Color{' '}<span class="muted">({color})</span></label>
-  <input bind:value="color" class="input color pa0" type="color" id="color" on:change="setColor()">
-  <input bind:value="colorName" class="input input-mini" type="text" placeholder="{color}">
-  <button class="button" type="button" on:click="savePresetColor()">Save</button>
+  <input bind:value="{color}" class="input color pa0" type="color" id="color" on:change="{setColor}">
+  <input bind:value="{colorName}" class="input input-mini" type="text" placeholder="{color}">
+  <button class="button" type="button" on:click="{savePresetColor}">Save</button>
 </div>
 
 <div class="form-group mt4">
@@ -65,90 +148,16 @@
   </datalist>
 
   <label class="label" for="brightness">Brightness{' '}<span class="muted">({brightness}%)</span></label>
-  <input bind:value="brightness" class="range" type="range" list="tickmarks" on:change="setBrightness()">
+  <input bind:value="{brightness}" class="range" type="range" list="tickmarks" on:change="{setBrightness}">
 </div>
 
 <button
   class="button button-clear red3"
   type="button"
-  on:click="deviceDelete(params.id)"
+  on:click="{() => deviceRemove(params.id)}"
 >
   Delete Device
 </button>
-
-<script>
-  import { Switch } from 'minna-ui';
-  import * as sapper from '../../../__sapper__/client.js'; // eslint-disable-line import/namespace
-
-  export default {
-    components: {
-      Switch,
-    },
-    data: () => ({
-      colorName: '',
-    }),
-    oncreate() {
-      // get colour presets
-      this.store.presetColorGet();
-    },
-    methods: {
-      async toggle() {
-        const { id } = this.get().params;
-        const res = await fetch(`/api/command/${id}?action=toggle`);
-        if (!res.ok) throw new Error(res.statusText);
-      },
-
-      async setBrightness() {
-        const { params: { id }, brightness } = this.get();
-        const res = await fetch(`/api/command/${id}?action=brightness&value=${brightness}`);
-        if (!res.ok) throw new Error(res.statusText);
-      },
-
-      async setColor(value) {
-        const { params: { id }, color } = this.get();
-        let hex = value || color;
-        hex = hex[0] === '#' ? hex.slice(1) : hex;
-
-        // update UI with new colour
-        if (value) this.set({ color: value });
-
-        const res = await fetch(`/api/command/${id}?action=color&value=${hex}`);
-
-        if (!res.ok) throw new Error(res.statusText);
-      },
-
-      savePresetColor() {
-        try {
-          const { color, colorName } = this.get();
-          const name = colorName || color;
-
-          this.store.presetColorPut(null, { color, name });
-        } catch (err) {
-          // TODO: Handle error better
-          console.error(err);
-        }
-      },
-
-      async deviceDelete(id) {
-        try {
-          await this.store.deviceDelete(id);
-          sapper.goto('/');
-        } catch (err) {
-          // TODO: Handle error better
-          console.error(err);
-        }
-      },
-    },
-
-    async preload({ params }) {
-      const res = await this.fetch(`/api/device/info/${params.id}`);
-
-      if (!res.ok) throw new Error(res.statusText);
-
-      return res.json();
-    },
-  };
-</script>
 
 <style type="text/postcss">
   @import 'import.css';

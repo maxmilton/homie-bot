@@ -1,3 +1,28 @@
+<!-- @format -->
+
+<script>
+  import { createEventDispatcher } from 'svelte';
+  import { devicePut } from '../store';
+
+  const dispatch = createEventDispatcher();
+
+  const result = fetch('/api/discover').then(async (res) => {
+    if (!res.ok) throw new Error(res.statusText);
+
+    return res.json();
+  });
+
+  async function add(device) {
+    devicePut(null, {
+      host: device.host,
+      name: 'New Device',
+      port: device.port,
+    });
+
+    dispatch('close');
+  }
+</script>
+
 {#await result}
   <p class="lead tc"><span class="spinner pr2 mr2" /> Searching...</p>
 {:then devices}
@@ -14,7 +39,7 @@
       <tbody>
         {#each devices as device}
           <tr>
-            <td><button class="button" type="button" on:click="add(device)">Add</button></td>
+            <td><button class="button" type="button" on:click="{() => add(device)}">Add</button></td>
             <td>{device.name || '??'}</td>
             <td>{device.host}</td>
             <td>{device.port}</td>
@@ -33,26 +58,3 @@
     <strong>ERROR:</strong> {err}
   </div>
 {/await}
-
-<script>
-  export default {
-    data: () => ({
-      result: fetch('/api/discover').then(async (res) => {
-        if (!res.ok) throw new Error(res.statusText);
-
-        return res.json();
-      }),
-    }),
-    methods: {
-      async add(device) {
-        this.store.devicePut(null, {
-          host: device.host,
-          port: device.port,
-          name: 'New Device',
-        });
-
-        this.fire('close');
-      },
-    },
-  };
-</script>

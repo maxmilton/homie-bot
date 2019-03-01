@@ -1,10 +1,26 @@
+<!-- @format -->
+
+<script>
+  export let segment;
+</script>
+
 <header class="mb4">
   <nav class="con dfc nav">
     <a href="/" id="logo">🏠🤖</a>
 
     <!-- Menu items -->
-    <a href="." class="nav-item{segment === undefined ? ' nav-item-active' : ''}">Home</a>
-    <a href="admin" class="nav-item{segment === 'admin' ? ' nav-item-active' : ''}">Admin</a>
+    <a
+      href="/"
+      class="nav-item {segment === undefined ? 'nav-item-active' : ''}"
+    >
+      Home
+    </a>
+    <a
+      href="admin"
+      class="nav-item {segment === 'admin' ? 'nav-item-active' : ''}"
+    >
+      Admin
+    </a>
   </nav>
 </header>
 
@@ -25,7 +41,8 @@
     justify-content: flex-end;
   }
 
-  #logo { /* stylelint-disable-line selector-max-id */
+  #logo {
+    /* stylelint-disable-line selector-max-id */
     margin-right: auto;
     font-size: 1.5em;
   }

@@ -1,3 +1,12 @@
+<!-- @format -->
+
+<script>
+  export let status;
+  export let error;
+
+  const dev = process.env.NODE_ENV === 'development';
+</script>
+
 <svelte:head>
   <title>{status} Error | Homie Bot</title>
 </svelte:head>
@@ -8,17 +17,11 @@
   <p class="lead pb3">{error.message}.</p>
 
   {#if dev && error.stack}
-    <pre>{error.stack}</pre>
+  <pre>{error.stack}</pre>
   {/if}
 
   <a href="/" class="button button-main">Go to home</a>
-  <button class="button ns-ml3" type="button" onclick="history.back()">Go back</button>
+  <button class="button ns-ml3" type="button" onclick="history.back()">
+    Go back
+  </button>
 </div>
-
-<script>
-  export default {
-    helpers: {
-      dev: process.env.NODE_ENV === 'development',
-    },
-  };
-</script>
