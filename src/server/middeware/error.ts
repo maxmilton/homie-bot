@@ -1,9 +1,9 @@
-import { IReq, IRes } from '../types';
+import { IReq, IRes, Next } from '../types';
 
 /**
  * Handle errors and end the request.
  */
-export function error(req: IReq, res: IRes): void {
+export function error(req: IReq, res: IRes, next: Next): void {
   res.error = (err: Error, origin = ''): void => {
     // eslint-disable-next-line no-param-reassign
     err.message = origin ? `${origin} ${err.message}` : err.message;
@@ -20,4 +20,6 @@ export function error(req: IReq, res: IRes): void {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({ error: err.message }));
   };
+
+  next();
 }
