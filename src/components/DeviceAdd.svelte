@@ -6,7 +6,8 @@
   import Select from '@minna-ui/select/src/Select.svelte';
   import { devicePut } from '../store';
 
-  export let ip = '192.168.1.100';
+  export let host = '192.168.1.100';
+  export let port = '55443';
   export let name = 'My Light';
   export let type = '1';
 
@@ -18,7 +19,7 @@
   function handleSubmit(event) {
     event.preventDefault();
 
-    devicePut(null, { ip, name, type });
+    devicePut(null, { host, name, port, type });
 
     dispatch('close');
   }
@@ -42,9 +43,16 @@
     />
   </div>
 
-  <div class="form-group">
-    <label class="label" for="ip">IP Address</label>
-    <input bind:value="{ip}" id="ip" class="input" type="text">
+  <div class="dg x2">
+    <div class="form-group">
+      <label class="label" for="host">IP Address</label>
+      <input bind:value="{host}" id="host" class="input" type="text">
+    </div>
+
+    <div class="form-group">
+      <label class="label" for="port">Port</label>
+      <input bind:value="{port}" id="port" class="input" type="text">
+    </div>
   </div>
 
   <button class="button" type="submit">Add Device</button>

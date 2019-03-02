@@ -41,10 +41,7 @@ export async function devicePut(id: string | null, data: IDevice): Promise<void>
   // inject default data
   const device = {
     ...data,
-    ...{
-      state: data.state || {},
-      type: data.type || -1,
-    },
+    state: data.state || {},
   };
 
   // eslint-disable-next-line no-param-reassign
