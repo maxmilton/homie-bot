@@ -5,16 +5,26 @@ import { IReq, IRes } from '../../../server/types';
  * Get a list of all device data.
  */
 export function get(req: IReq, res: IRes): void {
-  const result = dbMethods.deviceList();
+  try {
+    const result = dbMethods.deviceList();
 
-  res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify(result));
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result));
+  } catch (err) {
+    res.error(err, '[api/device]');
+  }
 }
 
 /**
  * Add a new device.
  */
 export function put(req: IReq, res: IRes): void {
-  res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify(dbMethods.devicePut(null, req.body)));
+  try {
+    const result = dbMethods.devicePut(null, req.body);
+
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result));
+  } catch (err) {
+    res.error(err, '[api/device]');
+  }
 }

@@ -14,12 +14,14 @@ import { log } from '@wearegenki/node-utils/lib/middleware/log';
 import { parse } from '@wearegenki/node-utils/lib/middleware/parse';
 import * as sapper from '@sapper/server'; // eslint-disable-line
 import db from './server/db';
+import { error } from './server/middeware/error';
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 
 polka()
   .use(
+    error,
     log,
     compression({ threshold: 0 }),
     sirv('static', { dev }),

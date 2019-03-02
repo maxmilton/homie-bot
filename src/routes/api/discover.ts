@@ -11,9 +11,6 @@ export async function get(req: IReq, res: IRes): Promise<void> {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(result));
   } catch (err) {
-    // TODO: Change all server console statements to be like this one
-    console.error('[API/DISCOVER] Error', err);
-
     // FIXME: Figure out what the correct err.message is for no devices discovered
     // if (err.message === '????') {
     //   // no devices found so respond with an empty array
@@ -21,14 +18,12 @@ export async function get(req: IReq, res: IRes): Promise<void> {
     //   return;
     // }
 
-    res.statusCode = 500;
-
+    // use a more user friendly error message
     if (err.message.startsWith('send ENETUNREACH')) {
-      // FIXME: This error message is not displayed on the web client
-      res.end('Network on server is unreachable.');
-      return;
+      err.origMessage = err.message;
+      err.message = 'Network on server is unreachable';
     }
 
-    res.end();
+    res.error(err, '[api/discover]');
   }
 }

@@ -13,10 +13,13 @@ export interface IReq extends ClientRequest {
   query: Record<string, string>;
   headers: Record<string, string>;
   rawBody: string;
-  body: object;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body: any;
 }
 
 export interface IRes extends ServerResponse {
+  error: (err: Error, origin?: string) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   write: (data: any) => void;
 }
 
