@@ -6,7 +6,7 @@
   import Select from '@minna-ui/select/src/Select.svelte';
   import { devicePut } from '../store';
 
-  export let host = '192.168.1.100';
+  export let host = '192.168.1.110';
   export let port = '55443';
   export let name = 'My Light';
   export let type = '1';
