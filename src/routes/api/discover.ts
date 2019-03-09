@@ -11,7 +11,7 @@ export async function get(req: IReq, res: IRes): Promise<void> {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(result));
   } catch (err) {
-    // FIXME: Figure out what the correct err.message is for no devices discovered
+    // FIXME: What's the message is for no devices discovered?
     // if (err.message === '????') {
     //   // no devices found so respond with an empty array
     //   res.end('[]');
