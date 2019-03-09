@@ -7,7 +7,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 import svelte from 'rollup-plugin-svelte';
-import { terser } from 'rollup-plugin-terser';
+// import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
@@ -23,7 +23,7 @@ const postcssOpts = {
 
 /** Svelte preprocessors */
 const preprocess = {
-  markup: preMarkup({ level: dev ? 0 : 3 }),
+  markup: preMarkup(),
   style: preStyle(),
 };
 
@@ -54,23 +54,23 @@ export default {
       }),
 
       // FIXME: Replace terser with closure compiler once it supports `import`
-      !dev &&
-        terser({
-          ecma: 8,
-          module: true,
-        }),
       // !dev &&
-      //   compiler({
-      //     // externs: [
-      //     //   require.resolve('google-closure-compiler/contrib/externs/svg.js'),
-      //     //   path.join(__dirname, 'externs.js'),
-      //     // ],
-
-      //     // charset: 'UTF-8',
-      //     compilation_level: 'SIMPLE',
-      //     // compilation_level: 'ADVANCED',
-      //     // jscomp_off: '*', // FIXME: Svelte errors
+      //   terser({
+      //     ecma: 8,
+      //     module: true,
       //   }),
+      !dev &&
+        compiler({
+          // externs: [
+          //   require.resolve('google-closure-compiler/contrib/externs/svg.js'),
+          //   path.join(__dirname, 'externs.js'),
+          // ],
+
+          // charset: 'UTF-8',
+          compilation_level: 'SIMPLE',
+          // compilation_level: 'ADVANCED',
+          // jscomp_off: '*', // FIXME: Svelte errors
+        }),
     ],
   },
 
