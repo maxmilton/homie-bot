@@ -36,7 +36,13 @@ export interface IDevice {
   state?: object | string;
 }
 
-interface IPreset {
+export interface IDeviceInfo extends IDevice {
+  brightness: string;
+  color: string;
+  on: boolean;
+}
+
+export interface IPreset {
   rowid?: string;
   type: string;
   value: string | object;
