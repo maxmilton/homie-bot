@@ -35,7 +35,6 @@
     "lint:md": "remark --frail --quiet .",
     "lint:css": "stylelint '**/*.{css,html,js,md,svelte,ts}'",
     "lint:js": "eslint --ext html,js,md,svelte,ts .",
-    "lint:ts": "tslint --project tsconfig.json || true",
     "lint:types": "tsc --noEmit || true",
     "pretest": "yarn lint",
     "test": "JEST_CIRCUS=1 jest --notify --watch",
@@ -104,15 +103,15 @@
   },
   "browserslist": {
     "production": [
-      "extends @minna-ui/browserslist-config/modern"
+      "extends @minna-ui/browserslist-config/lib/modern"
     ],
     "development": [
-      "extends @minna-ui/browserslist-config/dev"
+      "extends @minna-ui/browserslist-config/lib/dev"
     ]
   },
   "babel": {
     "presets": [
-      "@minna-ui/jest-config/babel-preset"
+      "@minna-ui/jest-config/lib/babel-preset"
     ]
   },
   "postcss": {
@@ -127,16 +126,9 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@minna-ui/eslint-config"
-    ],
-    "rules": {
-      "import/no-extraneous-dependencies": [
-        "error",
-        {
-          "devDependencies": true
-        }
-      ]
-    }
+      "@minna-ui/eslint-config",
+      "@minna-ui/eslint-config/lib/svelte"
+    ]
   },
   "eslintIgnore": [
     "__sapper__/**",
@@ -153,7 +145,7 @@
   },
   "remarkConfig": {
     "plugins": [
-      "@minna-ui/remarklint-config"
+      "@minna-ui/remark-config"
     ]
   },
   "jest": {
@@ -165,7 +157,7 @@
     ]
   },
   "engines": {
-    "node": ">11.0.0",
+    "node": ">10.0.0",
     "yarn": ">1.12.0"
   }
 }
