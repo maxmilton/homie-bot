@@ -21,4 +21,4 @@ My setup involves running this on a raspberry pi 3 with an Alpine Linux OS. See 
 
 ---
 
-© 2018 [Max Milton](https://maxmilton.com)
+© 2019 [Max Milton](https://maxmilton.com)
