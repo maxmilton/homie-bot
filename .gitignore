@@ -1,9 +1,9 @@
-node_modules
+.???_homie-bot.db*
+*.log
+*.tar.xz
 /__sapper__/
 /dist/
 /test/coverage/
-*.bak
-homie-bot.db*
+homie-bot.db
+node_modules/
 package-lock.json*
-yarn-error.log
-*.tar.xz
