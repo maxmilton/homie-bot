@@ -1,9 +1,0 @@
-// https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
-
-{
-  "extends": "@minna-ui/ts-config",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "noUnusedParameters": false
-  }
-}
