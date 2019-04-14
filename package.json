@@ -94,41 +94,37 @@
     ]
   },
   "postcss": {
-    "map": true,
-    "syntax": "postcss-scss",
     "plugins": {
-      "@minna-ui/postcss-config": {
+      "minna-ui/postcss": {
         "unsafe": true
       }
-    }
+  },
+    "syntax": "postcss-scss"
   },
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@minna-ui/eslint-config",
-      "@minna-ui/eslint-config/lib/svelte"
+      "./node_modules/minna-tools/eslint.js"
     ]
   },
   "eslintIgnore": [
     "__sapper__/**",
-    "dist/**",
     "test/coverage/**"
   ],
   "stylelint": {
-    "extends": "@minna-ui/stylelint-config",
+    "extends": "minna-tools/stylelint",
     "ignoreFiles": [
       "__sapper__/**",
-      "dist/**",
       "test/coverage/**"
     ]
   },
   "remarkConfig": {
     "plugins": [
-      "@minna-ui/remark-config"
+      "minna-tools/remark"
     ]
   },
   "jest": {
-    "preset": "@minna-ui/jest-config"
+    "preset": "minna-tools"
   },
   "renovate": {
     "extends": [
@@ -137,6 +133,6 @@
   },
   "engines": {
     "node": ">10.0.0",
-    "yarn": ">1.12.0"
+    "yarn": ">1.15.0"
   }
 }
