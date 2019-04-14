@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { IDevice, IPreset } from './types';
 
-const DB_PATH = process.env.DB_PATH || path.join(process.cwd(), 'homie-bot.db');
+const DB_PATH = process.env.DB_PATH || path.join(process.cwd(), '.db/homie-bot.db');
 const db = new Database(DB_PATH);
 
 // use write-ahead logging mode for better performance

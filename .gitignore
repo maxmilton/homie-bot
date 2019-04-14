@@ -1,9 +1,7 @@
-.???_homie-bot.db*
+.db
 *.log
 *.tar.xz
 /__sapper__/
-/dist/
 /test/coverage/
-homie-bot.db
 node_modules/
 package-lock.json*

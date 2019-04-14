@@ -28,8 +28,8 @@
   ],
   "scripts": {
     "dev": "NODE_ENV=development sapper dev",
-    "build": "NODE_ENV=production sapper build ./dist",
-    "serve": "NODE_ENV=production node ./dist",
+    "build": "NODE_ENV=production sapper build",
+    "serve": "NODE_ENV=production node ./__sapper__/build",
     "_run": "yarn build && yarn serve",
     "lint": "run-s lint:*",
     "lint:md": "remark --frail --quiet .",
@@ -98,7 +98,7 @@
       "minna-ui/postcss": {
         "unsafe": true
       }
-  },
+    },
     "syntax": "postcss-scss"
   },
   "eslintConfig": {
