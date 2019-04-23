@@ -6400,6 +6400,14 @@ sirv@^0.2.2:
     mime "^2.3.1"
     tiny-glob "^0.2.0"
 
+sirv@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/sirv/-/sirv-0.4.0.tgz#531bafb86806135bac7ac053cb19efa42a0347e9"
+  integrity sha512-k/dcRW7Ry2VgERDiLyyq3peGZEnqP2EcTcG5646QjoLwz7lnDA50i20m/3Rn7J4FLtimyoKQsG4E2BItctwjhg==
+  dependencies:
+    "@polka/url" "^0.5.0"
+    mime "^2.3.1"
+
 sisteransi@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.0.tgz#77d9622ff909080f1c19e5f4a1df0c1b0a27b88c"
