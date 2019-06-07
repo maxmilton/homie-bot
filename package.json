@@ -47,7 +47,7 @@
     "colorette": "^1.0.7",
     "compression": "^1.7.3",
     "polka": "^0.5.2",
-    "sirv": "^0.2.2",
+    "sirv": "^0.4.2",
     "yeelight-awesome": "^1.0.12"
   },
   "devDependencies": {
