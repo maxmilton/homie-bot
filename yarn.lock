@@ -405,10 +405,10 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@wearegenki/node-utils@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@wearegenki/node-utils/-/node-utils-0.0.1.tgz#8b19a5efb248f31e3e65ebb82c33c5dc9c0e9575"
-  integrity sha512-uwPyvnaFiKPYTeU98XEeF9Be7l12RI7g8CmZ4U+yqflhMKEMqlvZd6sj5UmQLQNxe6Y1EUQhBB1mbGMaHqdUog==
+"@wearegenki/node-utils@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@wearegenki/node-utils/-/node-utils-0.2.0.tgz#33008cc096c06b83d3f230f054ca9ee4158022eb"
+  integrity sha512-bBzbdd7jj/Gn+6e0kW78aieFIMP/5hHUxGeUTQ7DoYnQiUMBHckuovWGs0IoM6jcYQN39zSExk2XNDp9/gCuCw==
   dependencies:
     colorette "^1.0.7"
 
