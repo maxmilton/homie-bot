@@ -339,10 +339,10 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-0.5.0.tgz#b21510597fd601e5d7c95008b76bf0d254ebfd31"
   integrity sha512-oZLYFEAzUKyi3SKnXvj32ZCEGH6RDnao7COuCVhDydMS9NrCSVXhM79VaKyP5+Zc33m0QXEd2DN3UkU7OsHcfw==
 
-"@types/better-sqlite3@5.2.2":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@types/better-sqlite3/-/better-sqlite3-5.2.2.tgz#72e9e8adb47f4087bbe31c2d13581c1bf3012a6b"
-  integrity sha512-521elE5qUplSLZYYR/h0P6J5saY+IYXs5na8eSmiqukiVrkxyJJC0PYrIfvTe+fYTiYbPa2w3/AeYfoGVv/hSA==
+"@types/better-sqlite3@5.4.0":
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/@types/better-sqlite3/-/better-sqlite3-5.4.0.tgz#ab7336ccc2e31bd88247016c675cfcb01df99787"
+  integrity sha512-nzm7lJ7l3jBmGUbtkL8cdOMhPkN6Pw2IM+b0V7iIKba+YKiLrjkIy7vVLsBIVnd7+lgzBzrHsXZxCaFTcmw5Ow==
   dependencies:
     "@types/integer" "*"
 
