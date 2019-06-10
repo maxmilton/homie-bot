@@ -6290,10 +6290,10 @@ sane@^3.0.0:
   optionalDependencies:
     fsevents "^1.2.3"
 
-sapper@0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/sapper/-/sapper-0.25.0.tgz#cdda18588d063e10ef464aa77d19669eb01481d4"
-  integrity sha512-qnGPJVYxnGbYnjA4Wu5dHmrr/lsfl/4GfnPTns5O3yOEOcfCPnuTgNtE1juzPzQqG5GUZCyTQ/k5YrpoS1M9fw==
+sapper@0.25.1:
+  version "0.25.1"
+  resolved "https://registry.yarnpkg.com/sapper/-/sapper-0.25.1.tgz#084cedf694b7073f1633de913b17a0b2ab012e5c"
+  integrity sha512-YTZQ0gwIUNtdywkaUUJ2SmHe7Poqi1zjGjRqce3dA0qyho0mj9QGBpcBlrXVWiLnjM/vqtHp+tQWC4uG1HmoyA==
   dependencies:
     html-minifier "^3.5.20"
     shimport "0.0.11"
