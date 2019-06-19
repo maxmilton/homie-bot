@@ -75,7 +75,7 @@
     "rollup-plugin-terser": "4.0.4",
     "rollup-plugin-typescript": "1.0.1",
     "sapper": "0.25.0",
-    "stylelint": "9.10.1",
+    "stylelint": "10.1.0",
     "svelte": "2.16.1",
     "tslib": "1.9.3",
     "tslint": "5.12.1",
