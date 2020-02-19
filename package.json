@@ -57,7 +57,7 @@
     "@wearegenki/node-utils": "0.0.1",
     "@wearegenki/renovate-config": "1.0.0",
     "chokidar": "2.1.1",
-    "codecov": "3.2.0",
+    "codecov": "3.6.5",
     "eslint": "5.14.0",
     "jest": "24.1.0",
     "minna-ui": "0.21.0",
