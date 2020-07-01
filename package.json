@@ -51,7 +51,7 @@
     "yeelight-awesome": "^1.0.12"
   },
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.8.5",
+    "@ampproject/rollup-plugin-closure-compiler": "0.26.0",
     "@types/better-sqlite3": "5.2.2",
     "@types/color-convert": "1.9.0",
     "@wearegenki/node-utils": "0.0.1",
