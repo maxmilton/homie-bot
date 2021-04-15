@@ -54,7 +54,7 @@
     "@ampproject/rollup-plugin-closure-compiler": "0.8.5",
     "@types/better-sqlite3": "5.2.2",
     "@types/color-convert": "1.9.0",
-    "@wearegenki/node-utils": "0.0.1",
+    "@wearegenki/node-utils": "0.5.6",
     "@wearegenki/renovate-config": "1.0.0",
     "chokidar": "2.1.1",
     "codecov": "3.2.0",
